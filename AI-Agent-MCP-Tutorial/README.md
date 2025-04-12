@@ -9,7 +9,7 @@ It probably won't work on the first run, especially without a good architectural
 - Install [Visual Studio Code](https://code.visualstudio.com/)
 - Enable VS Code [Agent Mode](https://code.visualstudio.com/blogs/2025/04/07/agentMode)
 
-- Install Postgres and create a table, create and/or import sample data. You can use [Docker Postgres](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin) and a sample Docker Compose can be found under folder `postgresql-pgadmin`
+- Install Postgres and create a table, create and/or import sample data. You can use [Docker Postgres](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin) and a sample Docker Compose can be found under the folder `postgresql-pgadmin`
 
 In this tutorial, I used: 
 
@@ -19,9 +19,9 @@ $docker run --name macpostgres -e POSTGRES_PASSWORD=xY7pQ1mR2z -d postgres
 
 You can use `create_insert_employees.sql` to create the table and populate sample data
 
-Put the connection string to `.env` and added to the prompt contexts.
+Put the connection string to `.env` and add it to the prompt contexts when needed.
 
-MCP Server Configuration
+MCP Server Configuration looks like:
 ```json
 {
   "mcpServers": {
@@ -37,8 +37,8 @@ MCP Server Configuration
 }
 ```
 
-- (Refer to prompt.md) Setup environment with the help of Agent Mode. A sample reponse can be found at `Prompt1-Response-Sample-Grok.md`
-- Feed the Agent with the list of features (or user stories) you want to implement, grab a coffee (this can take a while)
+- (Refer to `Prompt.md`) Setup the development environment with the help of the Agent. A sample response can be found at `Prompt1-Response-Sample-Grok.md`
+- Feed the Agent with the list of features (or user stories) you want to implement, grab a coffee (this can take a !)
 - Boom! It is done. Happy fixing with AI- Generated codes.
 
 # Agent in Action
