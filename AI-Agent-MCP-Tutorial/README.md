@@ -23,3 +23,8 @@ Put the connection string to `.env` and added to the prompt contexts.
 - (Refer to prompt.md) Setup environment with the help of Agent Mode. A sample reponse can be found at `Prompt1-Response-Sample-Grok.md`
 - Feed the Agent with the list of features (or user stories) you want to implement, grab a coffee (this can take a while)
 - Boom! It is done. Happy fixing with AI- Generated codes.
+
+# Agent in Action
+(implementing VS Agent Mode to generate JS code)
+
+![implementing VS Agent Mode to generate JS code)](VS-CodeAgent-Mode.png)
