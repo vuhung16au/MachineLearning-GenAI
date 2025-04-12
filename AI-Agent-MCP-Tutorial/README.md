@@ -8,6 +8,23 @@ It probably won't work on the first run, especially without a good architectural
 
 - Install [Visual Studio Code](https://code.visualstudio.com/)
 - Enable VS Code [Agent Mode](https://code.visualstudio.com/blogs/2025/04/07/agentMode)
+
+
+MCP Server Configuration
+```json
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://admin:xY7pQ1mR2z@localhost:5432/postgres"
+      ]
+    }
+  }
+}
+```
 - Install Postgres and create a table, create and/or import sample data. You can use [Docker Postgres](https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin) and a sample Docker Compose can be found under folder `postgresql-pgadmin`
 
 In this tutorial, I used: 
