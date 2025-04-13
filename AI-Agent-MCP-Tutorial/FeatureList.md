@@ -33,5 +33,3 @@ Below is a list of features for your program, which consists of a Flask backend 
 - **Error Handling**: Both frontend and backend handle errors gracefully, showing meaningful messages to users.
 - **Loading Indicators**: Visual feedback during API calls keeps users informed of ongoing processes.
 - **Data Persistence**: Ensures data integrity and availability across sessions via the database.
-
-This feature set provides a robust foundation for an employee management system, balancing functionality and user experience. Let me know if you’d like to expand or modify any of these features!
