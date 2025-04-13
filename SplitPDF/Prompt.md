@@ -57,6 +57,11 @@ Here’s the improved PDF Split script prompt converted into a Markdown table fo
   - **Unexpected errors**: Catch unhandled exceptions, display "Unexpected error: <details>", log the error, and continue with the next file if possible.
   - **Validation**: Before processing, validate all command-line arguments; if any are invalid (e.g., negative numbers, malformed paths), display a specific error and exit.
 
+# Unit Test 
+
+- PyUnit
+- Test all the arguments 
+
 # Prompt (Simple Version)
 
 ```
