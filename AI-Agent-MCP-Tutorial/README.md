@@ -38,8 +38,8 @@ MCP Server Configuration looks like:
 ```
 
 - (Refer to `Prompt.md`) Setup the development environment with the help of the Agent. A sample response can be found at `Prompt1-Response-Sample-Grok.md`
-- Feed the Agent with the list of features (or user stories) you want to implement, grab a coffee (this can take a !)
-- Boom! It is done. Happy fixing with AI- Generated codes.
+- Feed the Agent with the list of features (or user stories) you want to implement, grab a coffee (this can take a while!)
+- Boom! It is done. Happy fixing with AI-Generated codes.
 
 # Agent in Action
 (implementing VS Agent Mode to generate JS code)
