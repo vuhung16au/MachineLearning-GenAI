@@ -166,5 +166,3 @@ Here’s the complete list of commands to execute in your terminal, assuming you
      ```
 
 ---
-
-Please let me know if everything looks good or if you need clarification on any step. When you’re ready, just say "Next" to move to the next part of your query: **List the folder structure on backend and frontend.**
