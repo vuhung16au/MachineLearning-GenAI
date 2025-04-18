@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Method for √2</title>
+    <link rel="stylesheet" href="newton.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Newton's Method for Calculating √2</h1>
+        
+        <div class="explanation">
+            <p>Newton's method uses the formula: x<sub>n+1</sub> = x<sub>n</sub> - f(x<sub>n</sub>)/f'(x<sub>n</sub>)</p>
+            <p>For √2, we use: f(x) = x² - 2 and f'(x) = 2x</p>
+            <p>Therefore: x<sub>n+1</sub> = x<sub>n</sub> - (x<sub>n</sub>² - 2)/(2x<sub>n</sub>)</p>
+        </div>
+        
+        <div class="visualization">
+            <canvas id="graph" width="600" height="400"></canvas>
+            <div class="controls">
+                <label for="initialGuess">Initial Guess (x₀):</label>
+                <input type="number" id="initialGuess" value="1.5" step="0.1">
+                <button id="reset">Reset</button>
+                <button id="nextIteration">Next Iteration</button>
+                <button id="runAll">Run All Iterations</button>
+            </div>
+        </div>
+        
+        <div class="results">
+            <h2>Iteration Results</h2>
+            <table id="iterationTable">
+                <thead>
+                    <tr>
+                        <th>Iteration</th>
+                        <th>x<sub>n</sub></th>
+                        <th>f(x<sub>n</sub>)</th>
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Iteration results will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="current-approximation">
+            <h3>Current approximation of √2:</h3>
+            <p id="currentApproximation">-</p>
+            <p>Actual value of √2 ≈ 1.4142135623730951</p>
+        </div>
+    </div>
+    
+    <script src="newton.js"></script>
+</body>
+</html>

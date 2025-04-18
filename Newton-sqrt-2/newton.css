@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #2c3e50;
+}
+
+.explanation {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.explanation p {
+    margin: 8px 0;
+}
+
+.visualization {
+    margin-bottom: 20px;
+}
+
+canvas {
+    display: block;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+input, button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#reset {
+    background-color: #e74c3c;
+}
+
+#reset:hover {
+    background-color: #c0392b;
+}
+
+#runAll {
+    background-color: #2ecc71;
+}
+
+#runAll:hover {
+    background-color: #27ae60;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.current-approximation {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e8f6f3;
+    border-radius: 5px;
+}
+
+#currentApproximation {
+    font-size: 24px;
+    font-weight: bold;
+    color: #16a085;
+}
