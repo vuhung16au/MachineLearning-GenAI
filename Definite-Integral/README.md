@@ -2,6 +2,19 @@
 
 This project visualizes Riemann sum approximations of definite integrals using matplotlib animations.
 
+# How to Use the Web Application
+1. Open the `index.html` file in a web browser.
+2. The simulation will start automatically when the page loads.
+3. You can input an "error threshold" to control the precision of the approximation.
+4. Click the "Start" button to begin the simulation.
+5. Click the "Stop" button to halt the simulation.
+6. Click the "Reset" button to reset the simulation.
+7. The simulation will stop automatically when the error is less than the specified threshold or when the maximum number of iterations is reached.
+8. The elapsed time of the program will be displayed.
+9. The mathematical explanation of the Riemann sum will be shown below the "Start Calculation" button.
+10. The status of the simulation will be displayed in a table format, with the "error" value in red and the "Riemann Sum" in yellow.
+
+
 ## How to Run Python Code
 
 ### Setting up a Virtual Environment
