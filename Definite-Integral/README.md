@@ -62,7 +62,7 @@ When you're done, you can deactivate the virtual environment:
 deactivate
 ```
 
-**Mathematical Explanation using Markdown and LaTeX:**
+# **Mathematical Explanation using Markdown and LaTeX:**
 
 We want to calculate the definite integral:
 
