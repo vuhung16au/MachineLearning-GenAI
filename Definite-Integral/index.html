@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Riemann Sum Animation</title>
+    <link rel="stylesheet" href="./integral.css">
+    <style>
+        /* Fallback styles in case CSS doesn't load */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        canvas {
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+    </style>
+    <!-- Add MathJax for rendering LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Riemann Sum Visualization</h1>
+    <canvas id="integralCanvas" width="600" height="400"></canvas>
+    <div id="info">Click the button to start the calculation</div>
+    
+    <div style="margin: 10px 0; display: flex; gap: 20px; align-items: center;">
+        <div>
+            <label for="errorThreshold">Error Threshold:</label>
+            <input type="number" id="errorThreshold" min="0.0001" max="0.9999" step="0.0001" value="0.01">
+        </div>
+        <div>
+            <label for="maxIterations">Max Iterations:</label>
+            <input type="number" id="maxIterations" min="1" max="1000" step="1" value="200">
+        </div>
+    </div>
+    
+    <div class="button-container">
+        <button id="startButton">Start calculation</button>
+        <button id="stopButton" disabled>Stop</button>
+        <button id="resetButton" disabled>Reset</button>
+    </div>
+    
+    <div id="mathBackground" class="math-container">
+        <h2>Mathematical Background</h2>
+        <p>We want to calculate the definite integral:</p>
+        
+        <p>\[ \int_{0}^{1} x^2 \, dx \]</p>
+        
+        <h3>What is a Riemann Sum?</h3>
+        
+        <p>A Riemann sum is a method for approximating the definite integral of a function by dividing the area under the curve into simple shapes (usually rectangles) whose areas are easy to calculate.</p>
+        
+        <p>The process involves:</p>
+        <ol>
+            <li>Dividing the interval \([a, b]\) into \(n\) subintervals of equal width \(\Delta x = \frac{b-a}{n}\)</li>
+            <li>Evaluating the function at a sample point in each subinterval (e.g., left endpoint, right endpoint, or midpoint)</li>
+            <li>Multiplying each function value by the width of the subinterval \(\Delta x\)</li>
+            <li>Summing these products to get the total approximate area</li>
+        </ol>
+        
+        <p>Mathematically, for a function \(f(x)\) on an interval \([a, b]\), the Riemann sum using right endpoints is:</p>
+        
+        <p>\[ \sum_{i=1}^{n} f(x_i) \Delta x \]</p>
+        
+        <p>where \(x_i = a + i\Delta x\) is the right endpoint of the \(i\)-th subinterval.</p>
+        
+        <p>As the number of subintervals \(n\) increases (and thus \(\Delta x\) decreases), the Riemann sum approaches the exact value of the definite integral:</p>
+        
+        <p>Using the definition of the definite integral with right endpoints:</p>
+        
+        <p>\[ \int_{a}^{b} f(x) \, dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i) \Delta x \]</p>
+        
+        <p>For our problem, \(f(x) = x^2\), \(a = 0\), and \(b = 1\).</p>
+        
+        <ol>
+            <li>
+                <p><strong>Width of the subintervals:</strong></p>
+                <p>\[ \Delta x = \frac{b - a}{n} = \frac{1 - 0}{n} = \frac{1}{n} \]</p>
+            </li>
+            <li>
+                <p><strong>Right endpoints of the subintervals:</strong></p>
+                <p>The \(i\)-th subinterval is \([x_{i-1}, x_i]\), where \(x_i = a + i \Delta x\).</p>
+                <p>\[ x_i = 0 + i \left(\frac{1}{n}\right) = \frac{i}{n} \]</p>
+            </li>
+            <li>
+                <p><strong>Evaluate the function at the right endpoints:</strong></p>
+                <p>\[ f(x_i) = f\left(\frac{i}{n}\right) = \left(\frac{i}{n}\right)^2 = \frac{i^2}{n^2} \]</p>
+            </li>
+            <li>
+                <p><strong>Form the Riemann sum:</strong></p>
+                <p>\[ \sum_{i=1}^{n} f(x_i) \Delta x = \sum_{i=1}^{n} \left(\frac{i^2}{n^2}\right) \left(\frac{1}{n}\right) = \sum_{i=1}^{n} \frac{i^2}{n^3} = \frac{1}{n^3} \sum_{i=1}^{n} i^2 \]</p>
+            </li>
+            <li>
+                <p><strong>Use the formula for the sum of the first \(n\) squares:</strong></p>
+                <p>\[ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} \]</p>
+            </li>
+            <li>
+                <p><strong>Substitute the sum back into the Riemann sum:</strong></p>
+                <p>\[ \frac{1}{n^3} \sum_{i=1}^{n} i^2 = \frac{1}{n^3} \cdot \frac{n(n+1)(2n+1)}{6} = \frac{n(2n^2 + 3n + 1)}{6n^3} = \frac{2n^3 + 3n^2 + n}{6n^3} \]</p>
+            </li>
+            <li>
+                <p><strong>Take the limit as \(n \to \infty\):</strong></p>
+                <p>\[ \int_{0}^{1} x^2 \, dx = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \lim_{n \to \infty} \frac{2 + \frac{3}{n} + \frac{1}{n^2}}{6} = \frac{2 + 0 + 0}{6} = \frac{2}{6} = \frac{1}{3} \]</p>
+            </li>
+        </ol>
+        
+        <p>Thus, the definite integral of \(f(x) = x^2\) from \(0\) to \(1\) is \(\frac{1}{3}\). The animation above visually shows how the sum of the areas of the rectangles approaches this value as the number of subintervals \(n\) increases.</p>
+    </div>
+    
+    <script src="./integral.js"></script>
+</body>
+</html>
