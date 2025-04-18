@@ -102,3 +102,9 @@ For our problem, $f(x) = x^2$, $a = 0$, and $b = 1$.
     $$
 
 Thus, the definite integral of $f(x) = x^2$ from $0$ to $1$ is $\frac{1}{3}$. The animation will visually show how the sum of the areas of the rectangles approaches this value as the number of subintervals $n$ increases.
+
+# References
+
+- [Riemann Sum - Wikipedia](https://en.wikipedia.org/wiki/Riemann_sum)
+- [Definite Integral - Wikipedia](https://en.wikipedia.org/wiki/Definite_integral)
+- [Integral Calculus - Wikipedia](https://en.wikipedia.org/wiki/Integral_calculus)
