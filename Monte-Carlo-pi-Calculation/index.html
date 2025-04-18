@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Pi Calculation</title>
+    <link rel="stylesheet" href="monte-carlo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Monte Carlo Method for Calculating π</h1>
+        
+        <div class="controls">
+            <label for="errorThreshold">Error Threshold:</label>
+            <input type="number" id="errorThreshold" min="0.0000001" max="1" step="0.0001" value="0.0001">
+            <button id="startButton">Start Simulation</button>
+        </div>
+        
+        <div class="simulation-container">
+            <div class="canvas-container">
+                <canvas id="simulationCanvas" width="500" height="500"></canvas>
+                <div class="point-info">
+                    <h3>Current Point</h3>
+                    <div class="coordinate-box">
+                        <p>X: <span id="pointX">0</span></p>
+                        <p>Y: <span id="pointY">0</span></p>
+                        <p>Distance: <span id="pointDistance">0</span></p>
+                        <p>Status: <span id="pointStatus">N/A</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="stats-table">
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Points inside circle:</td>
+                    <td id="pointsInside">0</td>
+                </tr>
+                <tr>
+                    <td>Total points:</td>
+                    <td id="totalPoints">0</td>
+                </tr>
+                <tr>
+                    <td>Current π estimate:</td>
+                    <td id="piEstimate">0</td>
+                </tr>
+                <tr>
+                    <td>Error:</td>
+                    <td id="piError">0</td>
+                </tr>
+                <tr>
+                    <td>Iterations:</td>
+                    <td id="iterations">0</td>
+                </tr>
+                <tr>
+                    <td>Actual π:</td>
+                    <td id="actualPi">3.14159265359</td>
+                </tr>
+                <tr>
+                    <td>Elapsed time:</td>
+                    <td id="elapsedTime">calculating...</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="explanation">
+            <h2>How it works:</h2>
+            <p>1. A square with a circle inscribed within it is drawn</p>
+            <p>2. Random points are placed inside the square</p>
+            <p>3. The ratio of points inside the circle to total points ≈ π/4</p>
+            <p>4. Multiply this ratio by 4 to estimate π</p>
+            <p>5. The simulation stops when the error is less than the specified threshold</p>
+        </div>
+        
+        <div class="math-explanation">
+            <h2>Mathematical Explanation of the Monte Carlo Method</h2>
+            <p>The Monte Carlo method for estimating π relies on the relationship between areas and probability:</p>
+            
+            <h3>Geometric Basis:</h3>
+            <p>Consider a square with side length 2r and a circle with radius r centered within it:</p>
+            <ul>
+                <li>Area of square = (2r)² = 4r²</li>
+                <li>Area of circle = πr²</li>
+                <li>Ratio of areas = (πr²)/(4r²) = π/4</li>
+            </ul>
+            
+            <h3>Probabilistic Interpretation:</h3>
+            <p>When we randomly place points in the square:</p>
+            <ul>
+                <li>The probability of a point falling inside the circle equals the ratio of areas: π/4</li>
+                <li>If we place N points randomly, approximately (π/4)·N points will fall inside the circle</li>
+                <li>If we count n points inside the circle, then n/N ≈ π/4</li>
+                <li>Therefore, π ≈ 4·(n/N)</li>
+            </ul>
+            
+            <h3>Error Analysis:</h3>
+            <p>The accuracy of this estimation improves as N increases. The error decreases proportionally to 1/√N, which means:</p>
+            <ul>
+                <li>To reduce the error by a factor of 10, we need to increase the number of points by a factor of 100</li>
+                <li>The convergence rate follows the Law of Large Numbers from probability theory</li>
+                <li>With this simulation generating one point at a time, we can observe the gradual convergence towards π</li>
+            </ul>
+        </div>
+    </div>
+    <script src="monte-carlo.js"></script>
+</body>
+</html>
