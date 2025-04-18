@@ -67,7 +67,7 @@ deactivate
 We want to calculate the definite integral:
 
 $$
-\int_{0}^{1} x^2 \, dx
+\int_{0}^{1} x^2 dx
 $$
 
 Using the definition of the definite integral with right endpoints:
@@ -86,7 +86,8 @@ $$
 
 2.  **Right endpoints of the subintervals:**
 
-The $i$-th subinterval is $[x_{i-1}, x_i]$, where $x_i = a + i \Delta x$.
+The $i$-th subinterval is $$[x_{i-1}, x_i]$$, where $$x_i = a + i \Delta x$$.
+
 $$
 x_i = 0 + i \left(\frac{1}{n}\right) = \frac{i}{n}
 $$
@@ -118,7 +119,7 @@ $$
 7.  **Take the limit as $n \to \infty$:**
 
 $$
-\int_{0}^{1} x^2 \, dx = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \lim_{n \to \infty} \frac{2 + \frac{3}{n} + \frac{1}{n^2}}{6} = \frac{2 + 0 + 0}{6} = \frac{2}{6} = \frac{1}{3}
+\int_{0}^{1} x^2 dx = \lim_{n \to \infty} \frac{2n^3 + 3n^2 + n}{6n^3} = \lim_{n \to \infty} \frac{2 + \frac{3}{n} + \frac{1}{n^2}}{6} = \frac{2 + 0 + 0}{6} = \frac{2}{6} = \frac{1}{3}
 $$
 
 Thus, the definite integral of $f(x) = x^2$ from $0$ to $1$ is $\frac{1}{3}$. The animation will visually show how the sum of the areas of the rectangles approaches this value as the number of subintervals $n$ increases.
