@@ -73,7 +73,7 @@ function initAnimation() {
     const b = 1;
     const defaultMaxIterations = 200;
     let currentFrame = 0;
-    const exactValue = 1/3; // Exact value of the integral of x^2 from 0 to 1
+    let exactValue; // Will be calculated based on current function when possible
     const defaultErrorThreshold = 0.01;
     
     // Variables for timing
@@ -82,14 +82,89 @@ function initAnimation() {
     let isPaused = false;
     let animationTimeout = null;
     
+    // Function definition (fixed to x^2 since we removed the input)
+    let currentFunctionText = 'x^2';
+    let currentFunction;
+    
+    function parseFunction(expression) {
+        // Replace LaTeX-style math with JavaScript syntax
+        let jsExpression = expression
+            .replace(/\\sqrt\{([^}]*)\}/g, 'Math.sqrt($1)')  // \sqrt{x} -> Math.sqrt(x)
+            .replace(/\\sqrt([a-z])/g, 'Math.sqrt($1)')     // \sqrt x -> Math.sqrt(x)
+            .replace(/\\sin\{([^}]*)\}/g, 'Math.sin($1)')    // \sin{x} -> Math.sin(x)
+            .replace(/\\sin([a-z])/g, 'Math.sin($1)')       // \sin x -> Math.sin(x)
+            .replace(/\\cos\{([^}]*)\}/g, 'Math.cos($1)')    // \cos{x} -> Math.cos(x)
+            .replace(/\\cos([a-z])/g, 'Math.cos($1)')       // \cos x -> Math.cos(x)
+            .replace(/\\tan\{([^}]*)\}/g, 'Math.tan($1)')    // \tan{x} -> Math.tan(x)
+            .replace(/\\tan([a-z])/g, 'Math.tan($1)')       // \tan x -> Math.tan(x)
+            .replace(/\\ln\{([^}]*)\}/g, 'Math.log($1)')     // \ln{x} -> Math.log(x)
+            .replace(/\\ln([a-z])/g, 'Math.log($1)')        // \ln x -> Math.log(x)
+            .replace(/(\d*|\))[ ]*\^[ ]*(\d+|[a-z]|\{[^}]*\})/g, 'Math.pow($1,$2)')  // x^2 -> Math.pow(x,2)
+            .replace(/([a-z])[ ]*\^[ ]*(\d+|[a-z]|\{[^}]*\})/g, 'Math.pow($1,$2)');  // x^y -> Math.pow(x,y)
+        
+        // Handle multiplication (implicit in math notation)
+        jsExpression = jsExpression.replace(/(\d+)([a-z])/g, '$1*$2');
+        
+        console.log('Parsed expression:', jsExpression);
+        
+        // Create a function that evaluates the expression
+        try {
+            return new Function('x', `return ${jsExpression};`);
+        } catch (error) {
+            console.error('Error parsing function:', error);
+            // Return default function
+            return function(x) { return x * x; };
+        }
+    }
+    
+    // Try to calculate exact value for common functions
+    function calculateExactValue(funcText) {
+        // For x^2 from 0 to 1, the exact value is 1/3
+        if (funcText.trim() === 'x^2') return 1/3;
+        // For x^3 from 0 to 1, the exact value is 1/4
+        if (funcText.trim() === 'x^3') return 1/4;
+        // For x from 0 to 1, the exact value is 1/2
+        if (funcText.trim() === 'x') return 1/2;
+        // For constant 1 from 0 to 1, the exact value is 1
+        if (funcText.trim() === '1') return 1;
+        
+        // For other functions, use numerical approximation
+        // This is a simple approximation and might not be accurate for all functions
+        return numericalIntegration(parseFunction(funcText), a, b, 1000);
+    }
+    
+    // Simple numerical integration using trapezoidal rule
+    function numericalIntegration(func, a, b, n) {
+        const h = (b - a) / n;
+        let sum = 0.5 * (func(a) + func(b));
+        
+        for (let i = 1; i < n; i++) {
+            sum += func(a + i * h);
+        }
+        
+        return sum * h;
+    }
+    
+    // Initialize current function and exact value
+    currentFunction = parseFunction(currentFunctionText);
+    exactValue = calculateExactValue(currentFunctionText);
+    
+    // Function to use in calculation
+    function f(x) {
+        try {
+            return currentFunction(x);
+        } catch (error) {
+            console.error('Error evaluating function:', error);
+            return x * x; // Fallback to x^2
+        }
+    }
+    
+    // Remove the event listener for function input since it no longer exists
+    
     // Set default values for inputs
     errorThresholdInput.value = defaultErrorThreshold;
     maxIterationsInput.value = defaultMaxIterations;
 
-    function f(x) {
-        return x * x; // f(x) = x²
-    }
-    
     // Initial canvas setup - draw the function right away
     clearAndDrawAxesFunction();
     
@@ -113,7 +188,7 @@ function initAnimation() {
         ctx.fillText('x', canvas.width - 40, canvas.height - 30);
         ctx.fillText('y', 30, 60);
         
-        // Draw the function f(x) = x^2
+        // Draw the current function
         ctx.beginPath();
         ctx.moveTo(50, canvas.height - 50);
         for (let i = 0; i <= 100; i++) {
@@ -133,7 +208,7 @@ function initAnimation() {
         
         // Label the function
         ctx.fillStyle = 'red';
-        ctx.fillText('f(x) = x²', canvas.width - 100, 70);
+        ctx.fillText(`f(x) = ${currentFunctionText}`, canvas.width - 150, 70);
     }
 
     function updateElapsedTime() {
@@ -159,6 +234,24 @@ function initAnimation() {
             clearInterval(elapsedTimeInterval);
             elapsedTimeInterval = null;
         }
+    }
+
+    // Function to format the exact value display
+    function formatExactValue(value) {
+        if (currentFunctionText.trim() === 'x^2') {
+            return "1/3 = " + value.toFixed(6);
+        }
+        if (currentFunctionText.trim() === 'x^3') {
+            return "1/4 = " + value.toFixed(6);
+        }
+        if (currentFunctionText.trim() === 'x') {
+            return "1/2 = " + value.toFixed(6);
+        }
+        if (currentFunctionText.trim() === '1') {
+            return "1 = " + value.toFixed(6);
+        }
+        // For other functions, just show the numerical value
+        return value.toFixed(6);
     }
 
     function drawFrame() {
@@ -199,14 +292,14 @@ function initAnimation() {
                     <th style="padding: 5px;">Rectangles (n)</th>
                     <th style="padding: 5px; background-color: #FFFF99;">Riemann Sum</th>
                     <th style="padding: 5px; color: red;">Error</th>
-                    <th style="padding: 5px;">Exact Integral</th>
+                    <th style="padding: 5px;">Exact/Approx. Value</th>
                     <th style="padding: 5px;">Elapsed Time</th>
                 </tr>
                 <tr>
                     <td style="padding: 5px; text-align: center;">${n}</td>
-                    <td style="padding: 5px; text-align: center; background-color: #FFFF99;">${sumArea.toFixed(4)}</td>
-                    <td style="padding: 5px; text-align: center; color: red;">${error.toFixed(4)}</td>
-                    <td style="padding: 5px; text-align: center;">${exactValue.toFixed(4)}</td>
+                    <td style="padding: 5px; text-align: center; background-color: #FFFF99;">${sumArea.toFixed(6)}</td>
+                    <td style="padding: 5px; text-align: center; color: red;">${error.toFixed(6)}</td>
+                    <td style="padding: 5px; text-align: center;">${formatExactValue(exactValue)}</td>
                     <td style="padding: 5px; text-align: center;" id="elapsedTime">0.000s</td>
                 </tr>
             </table>
@@ -286,7 +379,7 @@ function initAnimation() {
                     <th style="padding: 5px;">Rectangles (n)</th>
                     <th style="padding: 5px; background-color: #FFFF99;">Riemann Sum</th>
                     <th style="padding: 5px; color: red;">Error</th>
-                    <th style="padding: 5px;">Exact Integral</th>
+                    <th style="padding: 5px;">Exact/Approx. Value</th>
                     <th style="padding: 5px;">Elapsed Time</th>
                 </tr>
                 <tr>
@@ -357,14 +450,14 @@ function initAnimation() {
                     <th style="padding: 5px;">Rectangles (n)</th>
                     <th style="padding: 5px; background-color: #FFFF99;">Riemann Sum</th>
                     <th style="padding: 5px; color: red;">Error</th>
-                    <th style="padding: 5px;">Exact Integral</th>
+                    <th style="padding: 5px;">Exact/Approx. Value</th>
                     <th style="padding: 5px;">Elapsed Time</th>
                 </tr>
                 <tr>
                     <td style="padding: 5px; text-align: center;">${0}</td>
                     <td style="padding: 5px; text-align: center; background-color: #FFFF99;">0.0000</td>
-                    <td style="padding: 5px; text-align: center; color: red;">0.3333</td>
-                    <td style="padding: 5px; text-align: center;">${exactValue.toFixed(4)}</td>
+                    <td style="padding: 5px; text-align: center; color: red;">${exactValue.toFixed(6)}</td>
+                    <td style="padding: 5px; text-align: center;">${formatExactValue(exactValue)}</td>
                     <td style="padding: 5px; text-align: center;" id="elapsedTime">0.000s</td>
                 </tr>
             </table>
@@ -388,7 +481,7 @@ function initAnimation() {
                 <th style="padding: 5px;">Rectangles (n)</th>
                 <th style="padding: 5px; background-color: #FFFF99;">Riemann Sum</th>
                 <th style="padding: 5px; color: red;">Error</th>
-                <th style="padding: 5px;">Exact Integral</th>
+                <th style="padding: 5px;">Exact/Approx. Value</th>
                 <th style="padding: 5px;">Elapsed Time</th>
             </tr>
             <tr>
