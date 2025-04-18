@@ -1,0 +1,4 @@
+.DS*
+.venv*
+__pycache__/
+.env
