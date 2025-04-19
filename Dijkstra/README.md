@@ -4,6 +4,7 @@ This is a simple implementation of Dijkstra's algorithm in Python. The algorithm
 
 You can find the code in the `Dijkstra.py` file and visualsation in the file `Djkstra-Animation.html` which can be run on browsers. The implementation is based on the algorithm described in Wikipedia: [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
 
+You can access the live visualization on Vercel: [Dijkstra Algorithm Visualization](https://dijkstra-smoky.vercel.app/Djkstra-Animation.html) or view the source code on GitHub: [Dijkstra Repository](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Dijkstra).
 
 # The problem
 

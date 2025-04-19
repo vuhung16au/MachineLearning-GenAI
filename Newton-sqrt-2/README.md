@@ -60,3 +60,8 @@ Therefore, using Newton's method with an initial guess of $1.5$, we can approxim
 - Wikipedia: [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method)
 - Wolfram MathWorld: [Newton's Method](https://mathworld.wolfram.com/NewtonsMethod.html)
 
+# Links:
+
+- [Live Demo on Vercel](https://newtonraphsonsqrt2.vercel.app/)
+- [Source Code on GitHub](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Newton-sqrt-2)
+

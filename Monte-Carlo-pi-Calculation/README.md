@@ -73,6 +73,11 @@ $\pi \approx 4 \times \frac{N_{inside}}{N}$
 
 The accuracy of this approximation increases as the number of random points ($N$) becomes larger, due to the Law of Large Numbers. However, as discussed previously, the convergence is relatively slow.
 
+# Project Resources
+
+- [Live Demo](https://montecarlo-mu.vercel.app/)
+- [Source Code](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Monte-Carlo-pi-Calculation)
+
 # References
 - [Monte Carlo method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
 - [Monte Carlo method for estimating pi](https://en.wikipedia.org/wiki/Monte_Carlo_method#Estimating_%CF%80)
