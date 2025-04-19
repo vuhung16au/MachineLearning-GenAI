@@ -1,4 +1,3 @@
-
 # Coin-Minimum
 
 ## Overview
@@ -73,5 +72,9 @@ The script generates:
 ![Algorithm performance comparison across all coin sets](images/all_algorithms_comparison.png "Comparative analysis of different coin change algorithms")
 
 3. **Console output** showing the minimum number of coins needed for different amounts and the time taken by each algorithm.
+
+## Links
+- **GitHub Repository**: [Coin-Minimum on GitHub](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Coin-Minimum)
+- **Live Demo**: [Coin-Minimum on Vercel](https://coin-minimum.vercel.app/)
 
 The visualizations highlight how algorithm performance varies with different coin denominations and target amounts, providing practical insights into the benefits of dynamic programming over naive approaches.
