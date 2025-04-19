@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Numbers Calculation Algorithm Performance Comparison</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/es6-promise.auto.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="js/mathjax-config.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Fibonacci Numbers Calculation Algorithm Performance Comparison</h1>
+        <nav>
+            <ul>
+                <li><a href="#section0RuntimeComparison">Runtime Comparison</a></li>
+                <li><a href="#section1Findings">Findings</a></li>
+                <li><a href="#section2FibonaciSequence">Fibonacci Sequence</a></li>
+                <li><a href="#section2-1FibonacciSpiral">Fibonacci Spiral</a></li>
+                <li><a href="#section3Complexity">Complexity Concepts</a></li>
+                <li><a href="#section4Algorithms">Algorithms</a></li>
+                <li><a href="#section5Conclusion">Conclusion</a></li>
+                <li><a href="#section6References">References</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="section0RuntimeComparison" class="section">
+            <h2>Fibonacci Runtime Comparisons</h2>
+            Click to toggle show and hide the charts
+            <div class="chart-container">
+                <canvas id="linearChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="logChart"></canvas>
+            </div>
+            <div class="data-table">
+                <h3>Raw Performance Data</h3>
+                <table id="performance-data">
+                    <thead>
+                        <tr>
+                            <th>n</th>
+                            <th>Iterative (DP)</th>
+                            <th>Iterative (Optimized)</th>
+                            <th>Memoization</th>
+                            <th>Matrix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be inserted by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="section1Findings" class="section">
+            <h2>Findings</h2>
+            <div class="text-content">
+                <p>Based on the performance data, we can observe several important trends:</p>
+                <ul>
+                    <li>The <strong>Matrix Exponentiation</strong> algorithm consistently outperforms all other methods, especially as the input size grows. This confirms its theoretical O(log n) time complexity.</li>
+                    <li>Both <strong>Iterative (DP)</strong> and <strong>Memoization</strong> approaches show linear growth in runtime, matching their O(n) theoretical time complexity.</li>
+                    <li>The <strong>Optimized Iterative</strong> approach performs better than the standard iterative approach due to its reduced memory operations, despite having the same O(n) time complexity.</li>
+                    <li>The gap between the Matrix approach and the others widens significantly as n increases past 10,000, demonstrating how the logarithmic vs. linear complexity difference becomes pronounced with large inputs.</li>
+                    <li>For small values of n (n < 100), the difference between all algorithms is negligible in practical terms (fractions of a millisecond).</li>
+                </ul>
+                <p>These results validate that the theoretical time complexity analysis accurately predicts the real-world performance.</p>
+            </div>
+        </section>
+
+        <section id="section2FibonaciSequence" class="section">
+            <h2>The Fibonacci Sequence</h2>
+            <div class="text-content">
+                <p>The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1. Mathematically, it can be defined as:</p>
+                <div class="math-block">
+                    \[F(0) = 0\]
+                    \[F(1) = 1\]
+                    \[F(n) = F(n-1) + F(n-2) \text{ for } n > 1\]
+                </div>
+                <p>The resulting sequence begins: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...</p>
+                <p>The Fibonacci sequence appears in many settings in nature, from the arrangement of leaves on a stem to the spiral pattern of shells and the family tree of honeybees.</p>
+            </div>
+        </section>
+
+        <section id="section2-1FibonacciSpiral" class="section">
+            <h2>Fibonacci Spiral</h2>
+            <div class="text-content">
+                <p>The Fibonacci spiral is created by drawing arcs that connect opposite corners of squares with sides equal to Fibonacci numbers. This spiral approximates the golden spiral, which is based on the golden ratio (approximately 1.618).</p>
+                <p>While the Fibonacci spiral and golden spiral are often confused, they are not identical. However, as the Fibonacci sequence progresses toward infinity, the ratio of consecutive Fibonacci numbers approaches the golden ratio, making the Fibonacci spiral an increasingly close approximation of the golden spiral.</p>
+            </div>
+            <div class="visual-container">
+                <canvas id="spiral-canvas" width="800" height="800"></canvas>
+                <div class="controls">
+                    <button id="animate-spiral">Animate Spiral</button>
+                    <button id="reset-spiral">Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3Complexity" class="section">
+            <h2>Complexity Concepts</h2>
+            <div class="text-content">
+                <h3>Time Complexity</h3>
+                <p>Time complexity measures how the runtime of an algorithm grows as the input size increases. It answers the question: "How does the algorithm's execution time scale?"</p>
+                <p>We describe it using Big O notation, which represents the worst-case scenario:</p>
+                <ul>
+                    <li><strong>O(1)</strong>: Constant time - Runtime doesn't increase with input size</li>
+                    <li><strong>O(log n)</strong>: Logarithmic time - Runtime grows logarithmically with input size</li>
+                    <li><strong>O(n)</strong>: Linear time - Runtime grows linearly with input size</li>
+                    <li><strong>O(n²)</strong>: Quadratic time - Runtime grows with the square of the input size</li>
+                    <li><strong>O(2^n)</strong>: Exponential time - Runtime doubles with each additional input element</li>
+                </ul>
+
+                <h3>Space Complexity</h3>
+                <p>Space complexity measures how much memory an algorithm needs based on input size. It answers the question: "How does the algorithm's memory usage scale?"</p>
+                <p>Like time complexity, it's expressed in Big O notation:</p>
+                <ul>
+                    <li><strong>O(1)</strong>: Constant space - Memory usage doesn't increase with input size</li>
+                    <li><strong>O(n)</strong>: Linear space - Memory usage grows linearly with input size</li>
+                    <li><strong>O(n²)</strong>: Quadratic space - Memory usage grows with the square of the input size</li>
+                </ul>
+
+                <h3>Space-Time Trade-off</h3>
+                <p>In algorithm design, there's often a balance between time and space efficiency:</p>
+                <ul>
+                    <li>We can sometimes make algorithms faster by using more memory (e.g., caching results)</li>
+                    <li>Alternatively, we might reduce memory usage at the cost of increased computation time</li>
+                    <li>The best approach depends on specific constraints (is memory or speed more critical?)</li>
+                </ul>
+                <p>The Fibonacci algorithms demonstrate this trade-off well. For example, the memoization approach uses extra memory to store previous results, which improves time efficiency compared to the naive recursive approach.</p>
+            </div>
+        </section>
+
+        <section id="section4Algorithms" class="section">
+            <h2>Fibonacci Calculation Algorithms</h2>
+            <div class="text-content">
+                <h3>1. Recursive (Naive) Approach</h3>
+                <p>This approach directly implements the mathematical definition of Fibonacci numbers using recursion:</p>
+                <pre><code>
+def fib_recursive(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib_recursive(n - 1) + fib_recursive(n - 2)
+                </code></pre>
+                <p><strong>Time Complexity:</strong> O(2^n) - Each call branches into two more calls, creating an exponential growth.</p>
+                <p><strong>Space Complexity:</strong> O(n) - Maximum recursion depth is n, which determines the maximum call stack size.</p>
+
+                <h3>2. Iterative (Dynamic Programming) Approach</h3>
+                <p>This approach calculates Fibonacci numbers iteratively, storing all previous results in an array:</p>
+                <pre><code>
+def fib_iterative(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        fib_sequence = [0] * (n + 1)
+        fib_sequence[0] = 0
+        fib_sequence[1] = 1
+        for i in range(2, n + 1):
+            fib_sequence[i] = fib_sequence[i - 1] + fib_sequence[i - 2]
+        return fib_sequence[n]
+                </code></pre>
+                <p><strong>Time Complexity:</strong> O(n) - We perform a single loop from 2 to n.</p>
+                <p><strong>Space Complexity:</strong> O(n) - We store an array of size n+1.</p>
+
+                <h3>3. Iterative (Optimized) Approach</h3>
+                <p>This approach optimizes memory usage by only storing the two most recent Fibonacci numbers:</p>
+                <pre><code>
+def fib_iterative_optimized(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        a = 0
+        b = 1
+        for _ in range(2, n + 1):
+            temp = a + b
+            a = b
+            b = temp
+        return b
+                </code></pre>
+                <p><strong>Time Complexity:</strong> O(n) - Still requires a single loop from 2 to n.</p>
+                <p><strong>Space Complexity:</strong> O(1) - Only uses three variables regardless of input size.</p>
+
+                <h3>4. Memoization Approach</h3>
+                <p>This approach uses a dictionary to store previously calculated values, preventing redundant calculations:</p>
+                <pre><code>
+def fib_memo(n, memo=None):
+    if memo is None:
+        memo = {0: 0, 1: 1}  # Initialize with base cases
+    
+    if n in memo:
+        return memo[n]
+    
+    for i in range(2, n+1):
+        if i not in memo:
+            memo[i] = memo[i-1] + memo[i-2]
+    
+    return memo[n]
+                </code></pre>
+                <p><strong>Time Complexity:</strong> O(n) - Each Fibonacci number is calculated exactly once.</p>
+                <p><strong>Space Complexity:</strong> O(n) - We store up to n+1 Fibonacci numbers in the memo dictionary.</p>
+
+                <h3>5. Matrix Exponentiation Approach</h3>
+                <p>This approach uses the mathematical property that Fibonacci numbers can be represented using matrix exponentiation:</p>
+                <div class="math-block">
+                    \[ \begin{pmatrix} F_{n+1} \\ F_n \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}^n \begin{pmatrix} 1 \\ 0 \end{pmatrix} \]
+                </div>
+                <pre><code>
+def fib_matrix(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        fib_matrix_base = [[1, 1], [1, 0]]
+        result_matrix = power(fib_matrix_base, n - 1)
+        return result_matrix[0][0]
+
+def power(matrix, n):
+    result = [[1, 0], [0, 1]]  # Identity matrix
+    while n > 0:
+        if n % 2 == 1:
+            result = multiply_matrices(result, matrix)
+        matrix = multiply_matrices(matrix, matrix)
+        n //= 2
+    return result
+                </code></pre>
+                <p><strong>Time Complexity:</strong> O(log n) - The binary exponentiation algorithm reduces the number of multiplications needed.</p>
+                <p><strong>Space Complexity:</strong> O(1) - Only a constant number of 2x2 matrices are used regardless of n.</p>
+                
+                <h4>Complexity Analysis Explanation:</h4>
+                <p><strong>Time Complexity - O(log n):</strong></p>
+                <ul>
+                    <li>The matrix approach achieves logarithmic time complexity through <em>binary exponentiation</em> (also called "exponentiation by squaring").</li>
+                    <li>Instead of multiplying the matrix by itself n times (which would be O(n)), we use the following principle:
+                        <ul>
+                            <li>If n is even: M<sup>n</sup> = (M<sup>n/2</sup>)<sup>2</sup></li>
+                            <li>If n is odd: M<sup>n</sup> = M × (M<sup>(n-1)/2</sup>)<sup>2</sup></li>
+                        </ul>
+                    </li>
+                    <li>The key insight is that we repeatedly square the matrix and halve the exponent (n //= 2).</li>
+                    <li>This process requires only log<sub>2</sub>(n) iterations because we divide n by 2 in each step until it reaches 0.</li>
+                    <li>Each matrix multiplication is a constant-time operation since we're only working with 2×2 matrices.</li>
+                </ul>
+                
+                <p><strong>Space Complexity - O(1):</strong></p>
+                <ul>
+                    <li>Throughout the algorithm, we only need to store a fixed number of 2×2 matrices:</li>
+                    <li>The original matrix, the result matrix, and any temporary matrices needed during multiplication.</li>
+                    <li>The size of these matrices doesn't change regardless of how large n becomes.</li>
+                    <li>Therefore, the algorithm requires constant space O(1).</li>
+                </ul>
+                
+                <p>This demonstrates why the matrix method dramatically outperforms the O(n) algorithms for large inputs - the difference between calculating 1,000,000 operations versus only ~20 operations (log<sub>2</sub> of 1,000,000).</p>
+            </div>
+        </section>
+        </section>
+
+        <section id="section5Conclusion" class="section">
+            <h2>Conclusion</h2>
+            <div class="text-content">
+                <p>This analysis of Fibonacci algorithms reveals several important lessons:</p>
+                <ol>
+                    <li><strong>Algorithm choice matters</strong>: For large inputs, the theoretical advantage of an O(log n) algorithm over an O(n) algorithm creates significant real-world performance differences.</li>
+                    <li><strong>Mathematics can improve computing</strong>: The matrix exponentiation approach leverages mathematical properties to achieve superior performance.</li>
+                    <li><strong>Space-time trade-offs</strong>: As demonstrated by the optimized iterative approach, reducing memory usage can sometimes improve time performance as well by enhancing cache efficiency.</li>
+                    <li><strong>Practical considerations</strong>: For small inputs, even the theoretically "slower" algorithms perform adequately, suggesting that complexity analysis is most important when working with large data sets.</li>
+                </ol>
+                <p>The Fibonacci sequence serves as an excellent example for studying algorithmic efficiency because:</p>
+                <ul>
+                    <li>It has a simple mathematical definition that can be implemented in many ways</li>
+                    <li>The naive solution is highly inefficient, creating a clear opportunity for optimization</li>
+                    <li>It demonstrates how mathematical insights can lead to dramatically more efficient algorithms</li>
+                </ul>
+                <p>Understanding these patterns helps develop intuition for algorithm optimization in more complex problems.</p>
+            </div>
+        </section>
+
+        <section id="section6References" class="section">
+            <h2>References</h2>
+            <div class="text-content">
+                <ul>
+                    <li><a href="https://en.wikipedia.org/wiki/Fibonacci_sequence" target="_blank">Wikipedia: Fibonacci sequence</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence" target="_blank">Wikipedia: Dynamic programming - Fibonacci sequence</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>View the source code on <a href="https://github.com/vuhung16au/MachineLearning-GenAI" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+
+    <script src="js/charts.js"></script>
+    <script src="js/fibonacci-spiral.js"></script>
+</body>
+</html>
