@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance of Algorithms for Minimum Coin Change Problem</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/es6-promise.auto.min.js"></script>
+    <script type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="./js/mathjax-config.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Performance of Algorithms for Minimum Coin Change Problem</h1>
+        <nav>
+            <ul>
+                <li><a href="#section0RuntimeComparison">Runtime Comparisons</a></li>
+                <li><a href="#section1Findings">Findings</a></li>
+                <li><a href="#section2ProblemDefinition">Problem Definition</a></li>
+                <li><a href="#section3Complexity">Complexity</a></li>
+                <li><a href="#section4Algorithms">Algorithms</a></li>
+                <li><a href="#section5ComplexityAnalysis">Complexity Analysis</a></li>
+                <li><a href="#section6Conclusion">Conclusion</a></li>
+                <li><a href="#section7References">References</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="section0RuntimeComparison">
+            <h2>Section 0: Fibonacci Run Time Comparisons</h2>
+            <div class="chart-container">
+                <h3>US Coins Runtime Comparison</h3>
+                <canvas id="usCoinsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Standard Coins Runtime Comparison</h3>
+                <canvas id="standardCoinsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Prime Coins Runtime Comparison</h3>
+                <canvas id="primeCoinsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3>Binary Coins Runtime Comparison</h3>
+                <canvas id="binaryCoinsChart"></canvas>
+            </div>
+        </section>
+
+        <section id="section1Findings">
+            <h2>Section 1: Findings</h2>
+            <p>Based on the runtime comparisons above, we can observe several key findings:</p>
+            <ul>
+                <li>The Greedy algorithm is significantly faster than all other approaches, with runtimes consistently in the microsecond range regardless of input size.</li>
+                <li>Bottom-Up Dynamic Programming is the second fastest algorithm, showing better performance than both memoized approaches.</li>
+                <li>Memoized DP approaches (both recursive and iterative) have similar performance profiles, with the iterative version generally performing slightly better.</li>
+                <li>All algorithms show increasing runtime as the amount increases, but the increase is much more dramatic for the DP-based solutions compared to Greedy.</li>
+                <li>The coin denomination sets (US, Standard, Prime, Binary) affect runtime, but the relative performance order of algorithms remains consistent.</li>
+            </ul>
+            <p>However, it's important to note that while Greedy is fastest, it doesn't guarantee optimal solutions for all coin denomination sets, which is a crucial trade-off.</p>
+        </section>
+
+        <section id="section2ProblemDefinition">
+            <h2>Section 2: The Coin Minimum Problem</h2>
+            <p>The minimum coin change problem involves finding the smallest number of coins needed to make a target amount using given coin denominations. For example, with coins [1, 2, 5] and a target of 7, the optimal answer is 2 coins (5 + 2).</p>
+            
+            <p>The objective is to minimize the total number of coins used while exactly reaching the target amount.</p>
+            
+            <p>Different approaches to solve this problem include:</p>
+            <ul>
+                <li>Naive Recursive Approach: Breaking down the problem into subproblems without storing results</li>
+                <li>Dynamic Programming (both top-down and bottom-up): Using optimal substructure and overlapping subproblems</li>
+                <li>Greedy Algorithm: Making locally optimal choices at each step</li>
+            </ul>
+            
+            <div id="section2-1">
+                <h3>Section 2.1: Visual Explanation</h3>
+                <div class="visualization">
+                    <p>Consider coins [1, 3, 4] and target amount 6:</p>
+                    <div class="decision-tree">
+                        <div class="mermaid">
+                        graph TD
+                            A[Start: Amount = 11; Coins = 1, 5, 10] --> B[Choose coin 1]
+                            A --> C[Choose coin 5]
+                            A --> D[Choose coin 10]
+                            
+                            B --> B1[Remaining Amount = 10]
+                            C --> C1[Remaining Amount = 6]
+                            D --> D1[Remaining Amount = 1]
+                            
+                            B1 --> B2[Choose coin 1]
+                            B1 --> B3[Choose coin 5]
+                            B1 --> B4[Choose coin 10]
+                            
+                            C1 --> C2[Choose coin 1]
+                            C1 --> C3[Choose coin 5]
+                            C1 --> C4[Choose coin 10]
+                            
+                            D1 --> D2[Choose coin 1]
+                            
+                            B2 --> B21[Remaining Amount = 9]
+                            B3 --> B31[Remaining Amount = 5]
+                            B4 --> B41[Remaining Amount = 0; Solution: 2 coins]
+                            
+                            C2 --> C21[Remaining Amount = 5]
+                            C3 --> C31[Remaining Amount = 1]
+                            C4 --> C41[Invalid]
+                            
+                            D2 --> D21[Remaining Amount = 0; Solution: 2 coins]
+                            
+                            B21 --> B211[...]
+                            B31 --> B311[Choose coin 5]
+                            
+                            C21 --> C211[Choose coin 5]
+                            C31 --> C311[Choose coin 1]
+                            
+                            B311 --> B3111[Remaining Amount = 0; Solution: 3 coins]
+                            C211 --> C2111[Remaining Amount = 0; Solution: 3 coins]
+                            C311 --> C3111[Remaining Amount = 0; Solution: 3 coins]
+                            
+                            subgraph Legend
+                            L1[Optimal solution]
+                            L2[Valid but non-optimal]
+                            L3[Invalid path]
+                            end
+                            
+                            style B41 fill:#9f9,stroke:#6c6
+                            style D21 fill:#9f9,stroke:#6c6
+                            style B3111 fill:#ffc,stroke:#cc9
+                            style C2111 fill:#ffc,stroke:#cc9
+                            style C3111 fill:#ffc,stroke:#cc9
+                            style C41 fill:#fcc,stroke:#c99
+                            
+                            style L1 fill:#9f9,stroke:#6c6
+                            style L2 fill:#ffc,stroke:#cc9
+                            style L3 fill:#fcc,stroke:#c99
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+                        <script>
+                            mermaid.initialize({
+                                startOnLoad: true,
+                                theme: 'default'
+                            });
+                        </script>
+                    </div>
+                    <p>The bottom-up DP solution would build a table:</p>
+                    <table class="dp-table">
+                        <tr>
+                            <th>Amount</th>
+                            <th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                        </tr>
+                        <tr>
+                            <td>Min Coins</td>
+                            <td>0</td><td>1</td><td>2</td><td>1</td><td>1</td><td>2</td><td>2</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3Complexity">
+            <h2>Section 3: Understanding Complexity</h2>
+            <h3>Time Complexity</h3>
+            <p>Time complexity measures how an algorithm's runtime grows with input size. It's usually expressed in Big O notation.</p>
+            <p>For the coin change problem, time complexity typically depends on:</p>
+            <ul>
+                <li>The target amount (n)</li>
+                <li>The number of coin denominations (m)</li>
+            </ul>
+
+            <h3>Space Complexity</h3>
+            <p>Space complexity measures the memory an algorithm uses relative to input size.</p>
+            <p>In our algorithms, space is primarily used for:</p>
+            <ul>
+                <li>Storing the memoization table or DP array</li>
+                <li>Call stack space in recursive approaches</li>
+            </ul>
+
+            <h3>Space-Time Trade-off</h3>
+            <p>This refers to the relationship between an algorithm's memory usage and its execution speed:</p>
+            <ul>
+                <li>Naive recursion uses minimal space but has exponential time complexity</li>
+                <li>Memoization uses more space to avoid redundant calculations, improving time complexity</li>
+                <li>Bottom-up DP offers a balance with controlled space usage and good time efficiency</li>
+                <li>Greedy algorithms can be very fast but may not always provide optimal solutions</li>
+            </ul>
+        </section>
+
+        <section id="section4Algorithms">
+            <h2>Section 4: Algorithms</h2>
+            
+            <div id="section4-1">
+                <h3>Section 4.1: Naive Recursive Approach</h3>
+                <p>This approach solves the problem by breaking it down into smaller subproblems and solving them recursively.</p>
+                <p>For each amount, it tries all coin denominations and takes the minimum:</p>
+                <pre><code>function minCoins(coins, amount):
+    if amount == 0:
+        return 0
+    if amount < 0:
+        return INFINITY
+        
+    result = INFINITY
+    for coin in coins:
+        subResult = minCoins(coins, amount - coin)
+        if subResult != INFINITY:
+            result = min(result, subResult + 1)
+            
+    return result</code></pre>
+                <p>This approach is extremely inefficient as it recalculates the same subproblems multiple times, leading to exponential time complexity.</p>
+            </div>
+            
+            <div id="section4-2">
+                <h3>Section 4.2: Memoized Recursive Approach (Top-Down DP)</h3>
+                <p>This improves the naive approach by storing already computed results in a lookup table (memo):</p>
+                <pre><code>function minCoinsMemoized(coins, amount, memo={}):
+    if amount in memo:
+        return memo[amount]
+    if amount == 0:
+        return 0
+    if amount < 0:
+        return INFINITY
+        
+    result = INFINITY
+    for coin in coins:
+        subResult = minCoinsMemoized(coins, amount - coin, memo)
+        if subResult != INFINITY:
+            result = min(result, subResult + 1)
+            
+    memo[amount] = result
+    return result</code></pre>
+                <p>This approach calculates each subproblem only once, significantly improving performance.</p>
+            </div>
+            
+            <div id="section4-3">
+                <h3>Section 4.3: Bottom-Up Dynamic Programming</h3>
+                <p>This approach builds a solution iteratively from smaller subproblems to larger ones:</p>
+                <pre><code>function minCoinsBottomUp(coins, amount):
+    dp = [INFINITY] * (amount + 1)
+    dp[0] = 0
+    
+    for i from 1 to amount:
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+                
+    return dp[amount] if dp[amount] != INFINITY else -1</code></pre>
+                <p>This eliminates recursion overhead and provides a more efficient solution in practice.</p>
+            </div>
+            
+            <div id="section4-4">
+                <h3>Section 4.4: Greedy Approach</h3>
+                <p>The greedy approach always takes the largest possible coin at each step:</p>
+                <pre><code>function minCoinsGreedy(coins, amount):
+    // Sort coins in descending order
+    coins.sort(reverse=True)
+    
+    count = 0
+    remaining = amount
+    
+    for coin in coins:
+        while remaining >= coin:
+            remaining -= coin
+            count += 1
+            
+    return count if remaining == 0 else -1</code></pre>
+                <p>While extremely fast, this approach only works correctly for certain coin systems (like US coins) and can give suboptimal or incorrect results for others.</p>
+            </div>
+        </section>
+
+        <section id="section5ComplexityAnalysis">
+            <h2>Section 5: Complexity Analysis</h2>
+            <table class="complexity-table">
+                <tr>
+                    <th>Algorithm</th>
+                    <th>Time Complexity</th>
+                    <th>Space Complexity</th>
+                </tr>
+                <tr>
+                    <td>Naive Recursive</td>
+                    <td>O(m<sup>n</sup>) where m is number of coins and n is the amount</td>
+                    <td>O(n) - recursion stack depth</td>
+                </tr>
+                <tr>
+                    <td>Memoized DP (Recursive)</td>
+                    <td>O(n × m) - each amount calculated once, considering m coins</td>
+                    <td>O(n) - memoization table and recursion stack</td>
+                </tr>
+                <tr>
+                    <td>Bottom-Up DP</td>
+                    <td>O(n × m) - we fill an array of size n, considering m coins for each entry</td>
+                    <td>O(n) - for the DP array</td>
+                </tr>
+                <tr>
+                    <td>Greedy</td>
+                    <td>O(m log m + n) - sorting plus at most n iterations in the worst case</td>
+                    <td>O(1) - constant extra space</td>
+                </tr>
+            </table>
+            <p>Mathematical justification:</p>
+            <p>For DP approaches, we need to compute the minimum coins for each amount from 1 to n. For each amount, we consider m coin denominations:</p>
+            <p>\[ \text{Time Complexity} = \sum_{i=1}^{n} \sum_{j=1}^{m} O(1) = O(n \times m) \]</p>
+            <p>For the Greedy approach, we first sort coins (O(m log m)) and then in the worst case, we might use only the smallest coin for the entire amount, leading to O(n) iterations:</p>
+            <p>\[ \text{Total Time Complexity} = O(m \log m) + O(n) = O(m \log m + n) \]</p>
+        </section>
+
+        <section id="section6Conclusion">
+            <h2>Section 6: Conclusion</h2>
+            <p>The minimum coin change problem demonstrates several important algorithm design principles:</p>
+            <ul>
+                <li>Dynamic Programming offers a significant improvement over naive recursive solutions by eliminating redundant calculations.</li>
+                <li>Bottom-Up DP generally outperforms Top-Down (memoized) approaches due to reduced overhead.</li>
+                <li>Greedy algorithms can provide extremely fast solutions but don't guarantee optimality for all inputs.</li>
+                <li>There is a clear trade-off between time and space complexity across these approaches.</li>
+            </ul>
+            <p>From our runtime analysis:</p>
+            <ul>
+                <li>For time-critical applications with known optimal greedy coin systems, the Greedy approach is superior.</li>
+                <li>For guaranteed optimal results with a variety of coin denominations, Bottom-Up DP provides the best balance of correctness and efficiency.</li>
+                <li>Understanding these trade-offs is crucial when selecting the appropriate algorithm for specific scenarios.</li>
+            </ul>
+        </section>
+        
+        <section id="section7References">
+            <h2>Section 7: References</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Dynamic_programming" target="_blank">Wikipedia: Dynamic Programming</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Change-making_problem" target="_blank">Wikipedia: Change-making Problem</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>View the source code on <a href="https://github.com/vuhung16au/MachineLearning-GenAI" target="_blank">GitHub</a></p>
+    </footer>
+
+    <button id="backToTopBtn" title="Go to top">↑</button>
+
+    <script src="./js/charts.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
