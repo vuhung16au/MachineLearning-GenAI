@@ -1,3 +1,13 @@
+## Performance Comparison of Fibonacci Calculation Algorithms
+
+![Fibonacci performance comparison](fibonacci_log_scale.png)
+
+![Fibonacci performance comparison](fibonacci_log_scale.png)
+
+Key observations from this chart:
+- Matrix exponentiation (O(log n)) significantly outperforms all other methods
+- Recursive implementation becomes impractical even for moderate inputs
+- Dynamic programming approaches offer substantial improvement over naive recursion
 
 ## 1. Iterative Approach (Dynamic Programming)
 
@@ -143,3 +153,43 @@ print(f"Fibonacci({n_value}) using matrix exponentiation: {result}")
 | Matrix Exponentiation         | O(log n)      | O(1)             |
 
 As you can see, Matrix Exponentiation provides the most efficient time complexity for calculating Fibonacci numbers, especially for very large values of `n`. Iterative DP and Memoization offer a significant improvement over the naive recursive approach with a linear time complexity. The space-optimized iterative DP is the most memory-efficient linear time solution.
+
+## How to use the web version (index.html)
+
+The project includes an interactive web interface that visualizes the performance of different Fibonacci calculation algorithms and demonstrates the Fibonacci spiral.
+
+### Opening the web interface
+
+1. Navigate to the Fibonacci folder in your file explorer
+2. Open `index.html` in any modern web browser (Chrome, Firefox, Safari, etc.)
+
+### Features
+
+The web interface includes several sections:
+
+1. **Runtime Comparison**: Interactive charts that compare the performance of different Fibonacci calculation algorithms using both linear and logarithmic scales.
+
+2. **Findings**: A summary of the key observations from the performance data.
+
+3. **Fibonacci Sequence**: An explanation of the mathematical definition and properties of the Fibonacci sequence.
+
+4. **Fibonacci Spiral**: An interactive visualization of the Fibonacci spiral.
+   - Click the "Animate Spiral" button to watch the spiral form
+   - Use the "Reset" button to start over
+
+5. **Complexity Concepts**: Educational content about time and space complexity.
+
+6. **Algorithms**: Detailed explanations of each Fibonacci calculation algorithm, including code samples and complexity analysis.
+
+7. **Conclusion**: Summary of insights from comparing the different approaches.
+
+8. **References**: Links to additional resources.
+
+### Interpreting the Charts
+
+The performance charts show:
+- How execution time increases with larger input sizes
+- The practical difference between O(n) and O(log n) algorithms
+- Raw performance data in tabular form
+
+The logarithmic scale chart is particularly useful for visualizing the dramatic performance advantage of the Matrix Exponentiation algorithm for large inputs.
