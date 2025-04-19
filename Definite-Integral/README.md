@@ -2,6 +2,10 @@
 
 This project visualizes Riemann sum approximations of definite integrals using matplotlib animations.
 
+## Links
+- [GitHub Repository](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Definite-Integral)
+- [Live Demo on Vercel](https://definite-integral-visualisation.vercel.app/)
+
 # How to Use the Web Application
 1. Open the `index.html` file in a web browser.
 2. The simulation will start automatically when the page loads.
