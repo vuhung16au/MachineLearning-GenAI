@@ -52,3 +52,10 @@ Generated a folder structure. How folders/files are stored.
 - Set dark mode as default when page is loaded. Save the dark/light mode to cookies and make it persist even after users close browsers.
 
 - Add "Disclaimer" text at the bottom of the page: "This application does not store any of your data. Translations are processed in real-time and are not saved on our servers. However, please exercise caution when translating sensitive information, as this application utilizes the Google Gemini API and is therefore subject to Google's terms of service."
+
+- Users can choose version of Gemini API 
+ + Gemini 1.5 Flash (default)
+ + Gemini 2.0 Flash 
+ + Gemini 2.0 Flash-Lite
+
+- Add "copy" buttons to copy the original text or translated text to clipboard.

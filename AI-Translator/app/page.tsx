@@ -7,6 +7,7 @@ import TextArea from './components/TextArea';
 import Button from './components/Button';
 import HistoryList from './components/HistoryList';
 import SavedList from './components/SavedList';
+import ModelSelector from './components/ModelSelector';
 
 export default function TranslatorPage() {
   // States for source and target languages, texts
@@ -17,6 +18,14 @@ export default function TranslatorPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [theme, setTheme] = useState('light');
+  const [selectedModel, setSelectedModel] = useState('gemini-1.5-flash');
+
+  // Models available for translation
+  const models = [
+    { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash (default)' },
+    { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash' },
+    { id: 'gemini-2.0-flash-lite', name: 'Gemini 2.0 Flash-Lite' },
+  ];
 
   // States for history and saved translations
   const [history, setHistory] = useState([]);
@@ -90,7 +99,7 @@ export default function TranslatorPage() {
       const response = await fetch('/api/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sourceText, sourceLanguage, targetLanguage }),
+        body: JSON.stringify({ sourceText, sourceLanguage, targetLanguage, model: selectedModel }),
       });
 
       const data = await response.json();
@@ -222,6 +231,15 @@ export default function TranslatorPage() {
                 className="border-2 border-indigo-100 focus:border-indigo-300 dark:border-gray-700 dark:focus:border-indigo-600 rounded-lg transition-all duration-200 bg-gray-50 dark:bg-gray-900"
               />
             </div>
+          </div>
+
+          <div className="mb-6">
+            <ModelSelector
+              models={models}
+              value={selectedModel}
+              onChange={setSelectedModel}
+              label="Select Gemini Model"
+            />
           </div>
 
           {error && (

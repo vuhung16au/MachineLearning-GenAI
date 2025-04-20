@@ -26,8 +26,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <label className="mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+    <div className="flex items-center space-x-3">
+      <label className="text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
         {label}
       </label>
       <select
