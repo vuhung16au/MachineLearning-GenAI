@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop-It Heart Game</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Pop-It Heart Game</h1>
+        
+        <div class="game-layout">
+            <!-- Left side: Game board -->
+            <div class="game-board-side">
+                <div class="heart-container">
+                    <!-- The heart-shaped game board with 28 bubbles -->
+                    <div class="heart">
+                        <!-- Row 1: 2 bubbles -->
+                        <div class="bubble" data-id="1"></div>
+                        <div class="bubble" data-id="2"></div>
+                        
+                        <!-- Row 2: 7 bubbles -->
+                        <div class="bubble" data-id="3"></div>
+                        <div class="bubble" data-id="4"></div>
+                        <div class="bubble" data-id="5"></div>
+                        <div class="bubble" data-id="6"></div>
+                        <div class="bubble" data-id="7"></div>
+                        <div class="bubble" data-id="8"></div>
+                        <div class="bubble" data-id="9"></div>
+                        
+                        <!-- Row 3: 7 bubbles -->
+                        <div class="bubble" data-id="10"></div>
+                        <div class="bubble" data-id="11"></div>
+                        <div class="bubble" data-id="12"></div>
+                        <div class="bubble" data-id="13"></div>
+                        <div class="bubble" data-id="14"></div>
+                        <div class="bubble" data-id="15"></div>
+                        <div class="bubble" data-id="16"></div>
+                        
+                        <!-- Row 4: 6 bubbles -->
+                        <div class="bubble" data-id="17"></div>
+                        <div class="bubble" data-id="18"></div>
+                        <div class="bubble" data-id="19"></div>
+                        <div class="bubble" data-id="20"></div>
+                        <div class="bubble" data-id="21"></div>
+                        <div class="bubble" data-id="22"></div>
+                        
+                        <!-- Row 5: 5 bubbles -->
+                        <div class="bubble" data-id="23"></div>
+                        <div class="bubble" data-id="24"></div>
+                        <div class="bubble" data-id="25"></div>
+                        <div class="bubble" data-id="26"></div>
+                        <div class="bubble" data-id="27"></div>
+                        
+                        <!-- Row 6: 1 bubble -->
+                        <div class="bubble" data-id="28"></div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button id="start-pop-btn">Start Pop</button>
+                    <button id="end-pop-btn" disabled>End Pop</button>
+                    <button id="restart-btn">Restart Game</button>
+                    <button id="sound-toggle">🔊</button>
+                </div>
+                
+                <div id="game-message" class="game-message"></div>
+            </div>
+            
+            <!-- Right side: Game settings and info -->
+            <div class="game-settings-side">
+                <div class="game-info">
+                    <div class="mode-selection">
+                        <button id="pve-btn" class="mode-btn active">Player vs AI</button>
+                        <button id="pvp-btn" class="mode-btn">Player vs Player</button>
+                    </div>
+                    <div class=
+                        <p>Current Turn: <span id="current-player">Player 1</span></p>
+                        <p>Remaining Bubbles: <span id="remaining-count">30</span></p>
+                        <p>Pop 1-3 bubbles on your turn</p>
+                    </div>
+                </div>
+                
+                <!-- Game Settings Panel -->
+                <div id="game-settings" class="game-settings">
+                    <div id="difficulty-selection" class="setting-section">
+                        <h3>AI Difficulty</h3>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="difficulty" value="easy" checked> 
+                                Level 1: Easy
+                            </label>
+                            <label>
+                                <input type="radio" name="difficulty" value="medium"> 
+                                Level 2: Medium
+                            </label>
+                            <label>
+                                <input type="radio" name="difficulty" value="hard"> 
+                                Level 3: Try Hard
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="first-player-selection" class="setting-section">
+                        <h3>Who Plays First</h3>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="firstPlayer" value="human" checked> 
+                                Human
+                            </label>
+                            <label>
+                                <input type="radio" name="firstPlayer" value="computer"> 
+                                AI
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- How to play section - moved outside the body to be a separate section -->
+<div class="how-to-play-container">
+    <div class="how-to-play">
+        <h2>How to Play</h2>
+        <div class="rules-container">
+            <ol>
+                <li>This is a turn-based game where you pop bubbles from the board.</li>
+                <li>On your turn, you must pop 1-3 bubbles.</li>
+                <li>Click "Start Pop" to begin your turn, then click on the bubbles you wish to pop.</li>
+                <li>When done, click "End Pop" to finish your turn.</li>
+                <li>The player who pops the last bubble loses the game.</li>
+                <li>In Player vs AI mode, you can select the difficulty level and who goes first.</li>
+            </ol>
+            <p class="strategy-tip">Strategy tip: Try to leave your opponent with 5, 9, 13, or 17 bubbles!</p>
+        </div>
+
+        <div class="footer">
+            <p>Made by "Scammer" at 707. Free to play!</p>
+        </div>
+    </div>
+</div>
+
+    </div>
+    
+    <!-- Audio elements -->
+    <audio id="pop-sound" src="./audio/pop.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="./audio/win.mp3" preload="auto"></audio>
+    <audio id="background-music" src="./audio/background.mp3" loop preload="auto"></audio>
+    
+    <script src="./js/game.js"></script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,469 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+body {
+    background-color: #e6e6fa; /* Light purple background */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Heart-shaped background for the page */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vw;
+    max-width: 1200px;
+    max-height: 1200px;
+    background-color: #d8bfd8; /* Light purple */
+    z-index: -2;
+    border-radius: 50%;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vw;
+    max-width: 1200px;
+    max-height: 1200px;
+    background-color: #d8bfd8; /* Light purple */
+    z-index: -2;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    transform: translate(-50%, -45%) rotate(45deg);
+}
+
+.game-container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    color: #ff1493;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* New two-column layout */
+.game-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.game-board-side {
+    flex: 3.5;  /* Increased from 1 to 3.5 to make it wider */
+    min-width: 0;
+}
+
+.game-settings-side {
+    flex: 0.3;  /* Reduced from 1 to 0.3 (30% of original width) */
+    min-width: 200px; /* Ensures minimum readability on all screens */
+}
+
+.game-info {
+    background-color: #ffb6c1;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mode-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.mode-btn {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+    background-color: #ff1493;
+}
+
+.mode-btn.active {
+    background-color: #ff1493;
+    font-weight: bold;
+}
+
+.turn-info {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.turn-info p {
+    margin: 5px 0;
+}
+
+/* Heart-shaped board with 28 bubbles */
+.heart-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 30px 0;
+}
+
+.heart {
+    position: relative;
+    width: 360px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+    padding: 10px;
+    background: transparent;
+}
+
+/* Light pink heart background for the bubble container */
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 52%;
+    height: 80%;
+    border-radius: 50px 50px 0 0;
+    background: rgba(255, 182, 193, 0.5); /* Light pink */
+    z-index: -1;
+}
+
+.heart::before {
+    left: 50%;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+/* Custom grid placement for heart shape - 28 bubbles */
+/* Row 1: 2 bubbles */
+.heart .bubble:nth-child(1) { grid-area: 1/3/2/4; }
+.heart .bubble:nth-child(2) { grid-area: 1/5/2/6; }
+
+/* Row 2: 7 bubbles */
+.heart .bubble:nth-child(3) { grid-area: 2/1/3/2; }
+.heart .bubble:nth-child(4) { grid-area: 2/2/3/3; }
+.heart .bubble:nth-child(5) { grid-area: 2/3/3/4; }
+.heart .bubble:nth-child(6) { grid-area: 2/4/3/5; }
+.heart .bubble:nth-child(7) { grid-area: 2/5/3/6; }
+.heart .bubble:nth-child(8) { grid-area: 2/6/3/7; }
+.heart .bubble:nth-child(9) { grid-area: 2/7/3/8; }
+
+/* Row 3: 7 bubbles */
+.heart .bubble:nth-child(10) { grid-area: 3/1/4/2; }
+.heart .bubble:nth-child(11) { grid-area: 3/2/4/3; }
+.heart .bubble:nth-child(12) { grid-area: 3/3/4/4; }
+.heart .bubble:nth-child(13) { grid-area: 3/4/4/5; }
+.heart .bubble:nth-child(14) { grid-area: 3/5/4/6; }
+.heart .bubble:nth-child(15) { grid-area: 3/6/4/7; }
+.heart .bubble:nth-child(16) { grid-area: 3/7/4/8; }
+
+/* Row 4: 6 bubbles */
+.heart .bubble:nth-child(17) { grid-area: 4/1/5/2; }
+.heart .bubble:nth-child(18) { grid-area: 4/2/5/3; }
+.heart .bubble:nth-child(19) { grid-area: 4/3/5/4; }
+.heart .bubble:nth-child(20) { grid-area: 4/4/5/5; }
+.heart .bubble:nth-child(21) { grid-area: 4/5/5/6; }
+.heart .bubble:nth-child(22) { grid-area: 4/6/5/7; }
+
+/* Row 5: 5 bubbles */
+.heart .bubble:nth-child(23) { grid-area: 5/2/6/3; }
+.heart .bubble:nth-child(24) { grid-area: 5/3/6/4; }
+.heart .bubble:nth-child(25) { grid-area: 5/4/6/5; }
+.heart .bubble:nth-child(26) { grid-area: 5/5/6/6; }
+.heart .bubble:nth-child(27) { grid-area: 5/6/6/7; }
+
+/* Row 6: 1 bubble */
+.heart .bubble:nth-child(28) { grid-area: 6/4/7/5; }
+
+.bubble {
+    background-color: #ff69b4;
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.2), 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.bubble::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+}
+
+.bubble:hover {
+    transform: scale(1.05);
+}
+
+.bubble.popped {
+    background-color: #ff1493;
+    transform: scale(0.9);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+.bubble.popped::after {
+    opacity: 0.3;
+}
+
+.controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+button {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #ff1493;
+    transform: translateY(-2px);
+}
+
+#sound-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.game-message {
+    font-size: 1.5rem;
+    color: #ff1493;
+    font-weight: bold;
+    height: 50px;
+    margin-top: 20px;
+}
+
+/* Animations */
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.8); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(0.9); }
+}
+
+.bubble.popping {
+    animation: pop 0.3s ease forwards;
+}
+
+/* Responsive design */
+@media (max-width: 800px) {
+    .game-layout {
+        flex-direction: column;
+    }
+    
+    .game-board-side,
+    .game-settings-side {
+        width: 100%;
+        flex: auto;
+    }
+    
+    .heart {
+        width: 300px;
+        height: 270px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    .heart {
+        width: 250px;
+        height: 230px;
+        gap: 4px;
+    }
+    
+    .mode-selection {
+        flex-direction: column;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Game settings styling */
+.game-settings {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffb6c1;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.setting-section {
+    margin-bottom: 15px;
+}
+
+.setting-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ff4081;
+    font-size: 1.1em;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Hide settings in PvP mode by default */
+.mode-btn.active ~ #game-settings {
+    display: block;
+}
+
+#pvp-btn.active ~ #game-settings {
+    display: none;
+}
+
+/* How to play section */
+.how-to-play-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+.how-to-play {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #ffb6c1;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.how-to-play h2 {
+    color: #ff1493;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.rules-container {
+    text-align: left;
+}
+
+.rules-container ol {
+    padding-left: 30px;
+    margin-bottom: 15px;
+}
+
+.rules-container li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.rules-container p {
+    font-style: italic;
+    color: #ff1493;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Style for the strategy tip */
+.strategy-tip {
+    font-style: italic;
+    color: #ff1493;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+}
+
+.strategy-tip:hover,
+.strategy-tip.visible {
+    opacity: 1;
+}
+
+/* Footer styling */
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.footer {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    background-color: #ffb6c1;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.footer p {
+    color: #ff1493;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
