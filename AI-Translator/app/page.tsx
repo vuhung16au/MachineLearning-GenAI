@@ -199,8 +199,8 @@ export default function TranslatorPage() {
               <TextArea
                 value={sourceText}
                 onChange={setSourceText}
-                placeholder="Enter text to translate (max 5000 characters)"
-                maxLength={5000}
+                placeholder="Enter text to translate (max 10000 characters)"
+                maxLength={10000}
                 className="border-2 border-indigo-100 focus:border-indigo-300 dark:border-gray-700 dark:focus:border-indigo-600 rounded-lg transition-all duration-200"
               />
             </div>
