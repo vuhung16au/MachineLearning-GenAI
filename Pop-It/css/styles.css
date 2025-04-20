@@ -467,3 +467,20 @@ button:hover {
     font-weight: bold;
     font-size: 1.1rem;
 }
+
+.project-links {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.project-links a {
+    color: #ff6b81;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-links a:hover {
+    text-decoration: underline;
+}

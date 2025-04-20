@@ -3,6 +3,10 @@
 ## Overview
 Pop-It is a fun, web-based game for kids built using HTML, CSS, and JavaScript. This digital version of the popular "Nim" game features a colorful heart-shaped board with bubble buttons that players take turns popping.
 
+## Links
+- 🎮 **Play Now**: [Vercel Deployment](https://pop-it-theta.vercel.app/)
+- 💻 **Source Code**: [GitHub Repository](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/Pop-It)
+
 ## Game Features
 - 🎮 **Interactive Gameplay**: Turn-based mechanics on a heart-shaped board with approximately 30 bubble buttons
 - 🎨 **Attractive Design**: Colorful visuals with pink and red tones, including animations for popping bubbles
