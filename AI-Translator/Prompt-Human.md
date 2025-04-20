@@ -59,3 +59,16 @@ Generated a folder structure. How folders/files are stored.
  + Gemini 2.0 Flash-Lite
 
 - Add "copy" buttons to copy the original text or translated text to clipboard.
+
+Make the text "Translate from" and the source language selection dropdown in ONE line
+Make the text "Translate to" and the target language selection dropdown in ONE line
+
+Improve droopdown box for source language and target language.
+
+Improve the following dropdown UI/UX:
+the source language selection dropdown
+the target language selection dropdown
+
+so that users can 
+- search for a language by pyting (such as typing "ja" will display "Japanese"")
+- Easier to see all the languages they may select
