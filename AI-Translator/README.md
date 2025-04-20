@@ -185,3 +185,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - This project was built using the Gemini API from Google
 - Thanks to the Next.js and React communities for their excellent documentation
+
+## Links
+
+- [Live Demo](https://ai-translator-self.vercel.app/)
+- [GitHub Repository](https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/AI-Translator)

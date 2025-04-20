@@ -350,6 +350,14 @@ export default function TranslatorPage() {
           <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-xs text-gray-600 dark:text-gray-300">
             <p><strong>Disclaimer:</strong> This application does not store any of your data. Translations are processed in real-time and are not saved on our servers. However, please exercise caution when translating sensitive information, as this application utilizes the Google Gemini API and is therefore subject to Google's terms of service.</p>
           </div>
+          <div className="mt-4 flex justify-center space-x-4">
+            <a href="https://ai-translator-self.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
+              Live Demo
+            </a>
+            <a href="https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/AI-Translator" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
+              GitHub Repository
+            </a>
+          </div>
         </footer>
       </div>
     </div>
