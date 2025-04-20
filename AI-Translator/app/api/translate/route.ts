@@ -9,7 +9,12 @@ export async function POST(request: Request) {
     const requestData = await request.json();
     console.log('Request data received:', requestData);
     
-    const { sourceText, sourceLanguage, targetLanguage = 'Vietnamese' } = requestData;
+    const { 
+      sourceText, 
+      sourceLanguage, 
+      targetLanguage = 'Vietnamese',
+      model = 'gemini-1.5-flash' // Default to gemini-1.5-flash if not specified
+    } = requestData;
 
     // More detailed validation with logging
     if (!sourceText) console.log('Missing sourceText field');
@@ -20,13 +25,12 @@ export async function POST(request: Request) {
     if (!sourceText || !sourceLanguage) {
       return NextResponse.json({ 
         error: 'Missing required fields', 
-        received: { sourceText, sourceLanguage, targetLanguage }
+        received: { sourceText, sourceLanguage, targetLanguage, model }
       }, { status: 400 });
     }
 
-    // Use "gemini-1.5-flash" model instead of "gemini-pro"
-    // This is the current model name supported in the latest API version
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Use the model specified in the request
+    const modelInstance = genAI.getGenerativeModel({ model });
 
     // Make the prompt more explicit to ensure proper translation
     const prompt = `Translate the following text from ${sourceLanguage} to ${targetLanguage}. 
@@ -34,8 +38,9 @@ Return ONLY the translated text without any additional explanations or quotation
 "${sourceText}"`;
     
     console.log('Sending prompt to Gemini:', prompt);
+    console.log('Using model:', model);
     
-    const result = await model.generateContent(prompt);
+    const result = await modelInstance.generateContent(prompt);
     const response = await result.response;
     let translatedText = response.text().trim();
     
