@@ -17,13 +17,18 @@ Create a fun, web-based Pop-It game for kids using HTML, CSS, and JavaScript.
 - Once popped, a button is marked as "popped," visually pressed, and cannot be popped again
 - The player who pops the last button loses the game
 - Display the number of unpopped buttons remaining on the board
+- When a player pressed 3 bubbles (maximum number of bubbles one can pop), change the turn to the opponent
+- When Player vs AI, once the AI (computer) finishes its turn, imedieately enable "Start Pop" and the player can pop without pressing the the button "Start Pop"
+- When Player vs Player, the player who pressed 3 bubbles (maximum number of bubbles one can pop) must press "End Pop" to finish their turn
+- When the game ends, display a message indicating the winner and disable all buttons
+- Include a "Restart Game" button to reset the game state
 
 ## Game Modes & Difficulty
 - **Player Options:**
     - Choose who plays first: Human or Computer
     - Toggle between Player vs. Player or Player vs. Computer modes
 - **Difficulty Levels (Computer AI):**
-    - Level 1: Easy - Computer pops random numbers of bubbles
+    - Level 1: Easy - Computer pops random numbers of bubbles. The AI try to lose at 2 last moves by leaving the remaing bubbles to 9 or 5.
     - Level 2: Medium - Computer pops random numbers of bubbles but stronger
     - Level 3: Try Hard - Computer plays optimal moves to win the game
 
