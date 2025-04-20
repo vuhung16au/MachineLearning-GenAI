@@ -119,12 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update end pop button state
         endPopButton.disabled = false;
-        
-        // Check if the turn should end automatically when max bubbles are popped
-        if (gameState.poppedThisTurn === 3 || gameState.remainingBubbles === 0) {
-            gameState.poppingEnabled = false;
-            endTurn();
-        }
     }
     
     // Pop a bubble
@@ -153,6 +147,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (gameState.remainingBubbles === 0) {
                 const winner = gameState.currentPlayer === 1 ? 2 : 1;
                 endGame(winner);
+                return;
+            }
+            
+            // Automatically end turn if 3 bubbles are popped
+            if (gameState.poppedThisTurn === 3) {
+                gameMessage.textContent = "Maximum 3 bubbles popped, ending turn automatically!";
+                setTimeout(() => {
+                    gameState.poppingEnabled = false;
+                    endTurn();
+                }, 500); // Short delay before switching turns
             }
         }, 300);
     }
@@ -175,6 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Computer's turn
         if (gameState.currentPlayer === 2 && gameState.vsComputer && !gameState.gameOver) {
             setTimeout(computerTurn, 1000);
+        } 
+        // Player's turn after computer - auto enable popping
+        else if (gameState.currentPlayer === 1 && gameState.vsComputer && !gameState.gameOver) {
+            // Automatically enable popping for the player
+            gameState.poppingEnabled = true;
+            startPopButton.disabled = true;
+            endPopButton.disabled = false;
+            gameMessage.textContent = `${currentPlayerElement.textContent}, pop 1-3 bubbles!`;
+            
+            // Update UI again after enabling popping
+            updateUI();
         }
     }
     
