@@ -202,26 +202,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const unpoppedBubbles = Array.from(bubbles).filter(bubble => 
             !bubble.classList.contains('popped'));
             
-        // Simple AI strategy: try to leave the opponent with 1, 5, 9, 13, 17... bubbles
-        // These are the "bad positions" in Nim game theory
         let optimalMove;
         const targetRemainders = [1, 5, 9, 13, 17];
         
-        for (let toBePop = 1; toBePop <= 3; toBePop++) {
-            const newRemaining = gameState.remainingBubbles - toBePop;
-            if (targetRemainders.includes(newRemaining)) {
-                optimalMove = toBePop;
-                break;
+        // Special logic for Easy difficulty to intentionally lose
+        if (gameDifficulty === 'easy' && gameState.remainingBubbles <= 12) {
+            // Try to leave 5 or 9 bubbles which are losing positions
+            if (gameState.remainingBubbles <= 8 && gameState.remainingBubbles > 5) {
+                // Try to leave exactly 5 bubbles
+                optimalMove = gameState.remainingBubbles - 5;
+                if (optimalMove > 3) optimalMove = 1; // Stay within rules (1-3 bubbles)
+            } 
+            else if (gameState.remainingBubbles <= 12 && gameState.remainingBubbles > 9) {
+                // Try to leave exactly 9 bubbles
+                optimalMove = gameState.remainingBubbles - 9;
+                if (optimalMove > 3) optimalMove = 1; // Stay within rules (1-3 bubbles)
             }
-        }
-        
-        // If no optimal move found or only one bubble left, just pop one
-        if (!optimalMove || unpoppedBubbles.length <= 1) {
-            optimalMove = Math.min(gameState.remainingBubbles, 1);
-        } else if (unpoppedBubbles.length <= 3) {
-            // If few bubbles left, don't pop all unless it's advantageous
-            optimalMove = Math.min(optimalMove, unpoppedBubbles.length - 1);
-            if (optimalMove <= 0) optimalMove = 1;
+            else {
+                // Random move when we can't set up a losing position
+                optimalMove = Math.min(3, Math.floor(Math.random() * 3) + 1);
+            }
+        } 
+        else {
+            // Original strategy for medium/hard or early game
+            for (let toBePop = 1; toBePop <= 3; toBePop++) {
+                const newRemaining = gameState.remainingBubbles - toBePop;
+                if (targetRemainders.includes(newRemaining)) {
+                    optimalMove = toBePop;
+                    break;
+                }
+            }
+            
+            // If no optimal move found or only one bubble left, just pop one
+            if (!optimalMove || unpoppedBubbles.length <= 1) {
+                optimalMove = Math.min(gameState.remainingBubbles, 1);
+            } else if (unpoppedBubbles.length <= 3) {
+                // If few bubbles left, don't pop all unless it's advantageous
+                optimalMove = Math.min(optimalMove, unpoppedBubbles.length - 1);
+                if (optimalMove <= 0) optimalMove = 1;
+            }
         }
         
         // Perform the computer's moves
