@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Remove preloaded images that are causing warnings -->
+    <!-- Optimize for mobile devices -->
+    <meta name="theme-color" content="#1033be">
+    <!-- Enable view transitions API if supported by browser -->
+    <meta name="view-transition" content="same-origin">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search city...">
+            <div class="suggestions"></div>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div class="cities-container">
+            <!-- Weather cards will be added here dynamically -->
+            <div class="loading-indicator">Loading weather data...</div>
+        </div>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
