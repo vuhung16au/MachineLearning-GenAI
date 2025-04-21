@@ -186,24 +186,22 @@
                 <div>
                     <h3 class="font-medium text-gray-800 mb-2">K-factor Values</h3>
                     <ul class="list-disc pl-5 space-y-2 text-gray-600">
-                        <li><span class="font-semibold">K = 40</span>: For new players (until 30 games) or players under 18 with rating &lt; 2300</li>
+                        <li><span class="font-semibold">K = 40</span>: For new players until they complete events with at least 30 games</li>
+                        <li><span class="font-semibold">K = 40</span>: For players under 18 years old with rating &lt; 2300</li>
                         <li><span class="font-semibold">K = 20</span>: For players with rating &lt; 2400</li>
-                        <li><span class="font-semibold">K = 10</span>: For players with rating ≥ 2400 (remains even if rating drops below 2400)</li>
+                        <li><span class="font-semibold">K = 10</span>: For players who have reached 2400+ rating, even if their rating later drops below 2400</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="font-medium text-gray-800 mb-2">Additional Rules</h3>
+                    <h3 class="font-medium text-gray-800 mb-2">Additional Rules (FIDE Handbook chapter 8.3.3)</h3>
                     <p class="text-gray-600 mb-2">
                         If the number of games (n) for a player on any list for a rating period multiplied by K exceeds 700, 
                         then K shall be the largest whole number such that K × n does not exceed 700.
                     </p>
                     <p class="text-gray-600">
-                        The formula used is: Expected Score \(E = \frac{1}{1 + 10^{(R_c-R)/400}}\) where R is player rating and R<sub>c</sub> is opponent rating.
-                        Rating Change \(\Delta R = K \times (W - E)\) where W is the actual score and E is the expected score.
+                        The rating change is calculated as: Rating Change = K × (Actual Score - Expected Score).
+                        The final rating change is rounded to the nearest whole number, with 0.5 rounded away from zero.
                     </p>
-                    <!-- MathJax for rendering mathematical formulas -->
-                    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
                 </div>
             </div>
         </section>
@@ -263,6 +261,17 @@
                 <p class="mt-2 text-sm text-gray-600">
                     Instead of using the direct formula (1/(1+10^(Rc-R)/400)), this calculator uses the official FIDE probability table based on rating differences.
                     The rating change is calculated as ΔR = K × (Actual Score - Expected Score from table) as specified in the FIDE Handbook.
+                </p>
+            </div>
+            
+            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 mt-4">
+                <p class="text-gray-700">
+                    <strong>FIDE Handbook chapter 8.3.4:</strong>
+                    <span class="italic">"The Rating Change for a Rating Period is rounded to the nearest whole number. 0.5 is rounded away from zero."</span>
+                </p>
+                <p class="mt-2 text-sm text-gray-600">
+                    This means that a rating change of +0.5 is rounded to +1, and a rating change of -0.5 is rounded to -1.
+                    The calculator applies this rounding rule to the final rating change.
                 </p>
             </div>
         </section>
@@ -490,6 +499,43 @@
                             vm.totalRatingChange += vm.games[i].ratingChange;
                         }
                     }
+                    
+                    // Apply K-factor cap when K×n exceeds 700 (FIDE rule)
+                    vm.applyKFactorCap();
+                };
+                
+                // Apply K-factor cap when K×n exceeds 700 (FIDE rule 8.3.3)
+                vm.applyKFactorCap = function() {
+                    // Round to nearest whole number, with 0.5 rounded away from zero (FIDE rule)
+                    vm.totalRatingChange = Math.sign(vm.totalRatingChange) * 
+                        Math.round(Math.abs(vm.totalRatingChange));
+                    
+                    // Check if K×n exceeds 700
+                    var totalK = 0;
+                    var needsAdjustment = false;
+                    
+                    for (var i = 0; i < vm.games.length; i++) {
+                        if (vm.games[i].kFactor) {
+                            totalK += vm.games[i].kFactor;
+                        }
+                    }
+                    
+                    // If K×n exceeds 700, adjust the rating changes proportionally
+                    if (totalK > 700) {
+                        needsAdjustment = true;
+                        var adjustmentFactor = 700 / totalK;
+                        var adjustedTotal = 0;
+                        
+                        // Apply the adjustment factor for each game
+                        for (var i = 0; i < vm.games.length; i++) {
+                            if (vm.games[i].ratingChange) {
+                                var adjustedChange = vm.games[i].ratingChange * adjustmentFactor;
+                                adjustedTotal += adjustedChange;
+                            }
+                        }
+                        
+                        vm.totalRatingChange = adjustedTotal;
+                    }
                 };
                 
                 // Add a new game row
@@ -571,7 +617,7 @@
                     // Update the list of saved calculations
                     vm.loadSavedCalculationsNames();
                     vm.selectedSavedCalc = vm.saveName;
-                    // Removed alert for silent saving  
+                    // Removed alert for silent saving
                 };
                 
                 // Load a saved calculation
@@ -589,7 +635,7 @@
                             vm.games = angular.copy(savedCalc.games);
                             vm.totalRatingChange = savedCalc.totalRatingChange;
                             vm.saveName = vm.selectedSavedCalc;
-                        }   
+                        }
                     }
                 };
                 
