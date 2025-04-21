@@ -21,6 +21,40 @@ Try the live application here: [FIDE ELO Calculator](https://elo-calculator-bice
 - Mobile-responsive design
 - Local storage for saving calculations in your browser
 
+## How to Run Tests with Cypress
+
+This project uses Cypress for end-to-end testing. Follow these steps to run the tests:
+
+1. **Install Dependencies**
+   ```
+   npm install
+   ```
+
+2. **Run Tests in Interactive Mode**
+   ```
+   npm test
+   ```
+   This will open the Cypress Test Runner where you can select individual tests to run.
+
+3. **Run Tests Headlessly**
+   ```
+   npm run test:headless
+   ```
+   This will run all tests in the command line without opening a browser window.
+
+4. **Run Tests with Server**
+   ```
+   npm run cy:run
+   ```
+   This will start the local development server and run the tests against it.
+
+## Test Coverage
+
+The test suite covers:
+- Basic functionality of the calculator
+- User interface interactions
+- Data persistence features
+
 ## How to Use
 
 1. **Enter Game Information**
