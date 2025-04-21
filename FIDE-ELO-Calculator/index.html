@@ -37,7 +37,7 @@
                         <button 
                             ng-click="ctrl.addGame()" 
                             class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                            ng-disabled="ctrl.games.length >= 20">
+                            ng-disabled="ctrl.games.length >= 60">
                             Add Game
                         </button>
                     </div>
@@ -57,7 +57,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="game in ctrl.games track by $index" class="border-b hover:bg-gray-50">
+                            <tr ng-repeat="game in ctrl.games track by $index" class="border-b hover:bg-gray-50" ng-class="{'bg-yellow-50': Math.abs(game.playerRating - game.opponentRating) >= 400}">
                                 <td class="p-2">{{$index + 1}}</td>
                                 <td class="p-2">
                                     <input 
@@ -101,8 +101,10 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td class="p-2 font-semibold" ng-class="{'text-green-600': game.ratingChange > 0, 'text-red-600': game.ratingChange < 0}">
-                                    {{game.ratingChange > 0 ? '+' : ''}}{{game.ratingChange | number:1}}
+                                <td class="p-2 font-semibold" ng-class="{'text-green-600': game.ratingChange > 0, 'text-red-600': game.ratingChange < 0, 'bg-yellow-100': Math.abs(game.playerRating - game.opponentRating) >= 400}">
+                                    <span ng-class="{'bg-yellow-200 px-2 py-1 rounded': Math.abs(game.playerRating - game.opponentRating) >= 400}">
+                                        {{game.ratingChange > 0 ? '+' : ''}}{{game.ratingChange | number:1}}
+                                    </span>
                                 </td>
                                 <td class="p-2">
                                     <button 
@@ -540,7 +542,7 @@
                 
                 // Add a new game row
                 vm.addGame = function() {
-                    if (vm.games.length < 20) {
+                    if (vm.games.length < 60) {
                         // Copy the player rating from the last game for convenience
                         var lastPlayerRating = vm.games[vm.games.length - 1].playerRating;
                         // Copy the K-factor from the last game for convenience
