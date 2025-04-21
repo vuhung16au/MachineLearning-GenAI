@@ -15,37 +15,31 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search city...">
-            <div class="suggestions"></div>
-            <button class="search-btn">
-                <i class="fas fa-search"></i>
-            </button>
+    <div class="page-container">
+        <div class="wrapper">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search city...">
+                <div class="suggestions"></div>
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="cities-container">
+                <!-- Weather cards will be added here dynamically -->
+                <div class="loading-indicator">Loading weather data...</div>
+            </div>
         </div>
 
-        <div class="cities-container">
-            <!-- Weather cards will be added here dynamically -->
-            <div class="loading-indicator">Loading weather data...</div>
-        </div>
+        <footer class="page-footer">
+            <div class="footer-links">
+                <a href="https://world-weather-six.vercel.app/" target="_blank"><i class="fas fa-globe"></i>Live Demo</a>
+                <a href="https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/WeatherApp" target="_blank"><i class="fab fa-github"></i>GitHub Repository</a>
+            </div>
+        </footer>
     </div>
 
-
     <script src="app.js" defer></script>
-
-    
-
-    <!-- <footer class="page-footer">
-        <div class="footer-links">
-            <a href="https://world-weather-six.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-globe"></i> Live Demo
-            </a>
-            <a href="https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/WeatherApp" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github"></i> GitHub Repository
-            </a>
-        </div>
-    </footer>
-     -->
 </body>
 
 </html>

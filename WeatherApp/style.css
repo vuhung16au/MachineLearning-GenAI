@@ -16,6 +16,15 @@ body {
     background: linear-gradient(135deg, #1033be 0%, #5182e5 100%);
 }
 
+.page-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
 .wrapper {
     width: 100%;
     max-width: 1200px;
@@ -422,6 +431,10 @@ body {
   .weather-details {
     grid-template-columns: 1fr;
   }
+
+  .page-container {
+    gap: 20px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -440,11 +453,8 @@ body {
 /* Footer Styles */
 .page-footer {
     width: 100%;
-    margin-top: 30px;
     padding: 15px 0;
     text-align: center;
-    display: block;
-    clear: both; /* Ensures it appears below all floating elements */
 }
 
 .footer-links {
@@ -455,13 +465,14 @@ body {
 }
 
 .footer-links a {
-    color: #1033be;
+    color: #ffffff;
     text-decoration: none;
     padding: 8px 15px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(25, 81, 236, 0.8);
     transition: all 0.3s ease;
     font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .footer-links a:hover {
