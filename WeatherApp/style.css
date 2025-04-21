@@ -436,3 +436,41 @@ body {
     max-width: 1500px;
   }
 }
+
+/* Footer Styles */
+.page-footer {
+    width: 100%;
+    margin-top: 30px;
+    padding: 15px 0;
+    text-align: center;
+    display: block;
+    clear: both; /* Ensures it appears below all floating elements */
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #1033be;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    background-color: #1033be;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-links i {
+    margin-right: 6px;
+}
