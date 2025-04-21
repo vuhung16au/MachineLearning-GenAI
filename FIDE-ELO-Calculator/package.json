@@ -1,0 +1,15 @@
+{
+  "name": "project-name",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "http-server -p 8080",
+    "test": "cypress open",
+    "test:headless": "cypress run",
+    "cy:run": "start-server-and-test start http://localhost:8080 test:headless"
+  },
+  "devDependencies": {
+    "cypress": "^12.0.0",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^2.0.11"
+  }
+}
