@@ -40,12 +40,6 @@
                             ng-disabled="ctrl.games.length >= 20">
                             Add Game
                         </button>
-                        <!-- <button 
-                            ng-click="ctrl.removeGame()" 
-                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-                            ng-disabled="ctrl.games.length <= 1">
-                            Remove Game
-                        </button> -->
                     </div>
                 </div>
 
@@ -98,6 +92,7 @@
                                 <td class="p-2">
                                     <div class="flex">
                                         <select 
+                                            id="k-factor-select"
                                             ng-model="game.kFactor" 
                                             ng-change="ctrl.calculateRatingChange($index)"
                                             class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
@@ -126,16 +121,6 @@
                                     {{ctrl.totalRatingChange > 0 ? '+' : ''}}{{ctrl.totalRatingChange | number:1}}
                                 </td>
                             </tr>
-                            <!-- <tr>
-                                <td colspan="6" class="p-3 text-right">
-                                    <button 
-                                        ng-click="ctrl.addGame()" 
-                                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                                        ng-disabled="ctrl.games.length >= 11">
-                                        Add Game
-                                    </button>
-                                </td>
-                            </tr> -->
                         </tfoot>
                     </table>
                 </div>
@@ -257,14 +242,37 @@
             </div>
         </section>
 
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Important FIDE Rating Rules</h2>
+            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
+                <p class="text-gray-700">
+                    <strong>FIDE Handbook chapter 8.3.1:</strong>
+                    <span class="italic">"A difference in rating of more than 400 points shall be counted for rating purposes as though it were a difference of 400 points."</span>
+                </p>
+                <p class="mt-2 text-sm text-gray-600">
+                    This means that if the difference between player ratings exceeds 400 points, 
+                    the calculation uses 400 as the maximum difference to prevent extremely skewed expected scores.
+                </p>
+            </div>
+            
+            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-gray-700">
+                    <strong>FIDE Handbook chapter 8.3.2:</strong>
+                    <span class="italic">This calculator implements the official FIDE Table 8.1.2 for determining probability scores.</span>
+                </p>
+                <p class="mt-2 text-sm text-gray-600">
+                    Instead of using the direct formula (1/(1+10^(Rc-R)/400)), this calculator uses the official FIDE probability table based on rating differences.
+                    The rating change is calculated as ΔR = K × (Actual Score - Expected Score from table) as specified in the FIDE Handbook.
+                </p>
+            </div>
+        </section>
+
         <footer class="text-center text-gray-500 text-sm">
             <p>Based on the <a href="https://handbook.fide.com/chapter/B022024" class="text-blue-600 hover:underline" target="_blank">FIDE Handbook, Chapter B.022024</a></p>
             <p class="mt-2">
                 <a href="https://elo-calculator-bice.vercel.app/" class="text-blue-600 hover:underline" target="_blank">App Deployment</a> | 
                 <a href="https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/FIDE-ELO-Calculator" class="text-blue-600 hover:underline" target="_blank">GitHub Repository</a>
             </p>
-            <!-- <p class="mt-1">© 2025 FIDE ELO Calculator</p>
-            <p class="mt-2 p-2 bg-gray-50 rounded-md">This page runs on your browser and doesn't send any information to the internet. The saved data is stored as cookies on your browser.</p> -->
         </footer>
     </div>
 
@@ -330,13 +338,104 @@
                     vm.showDeleteModal = false;
                     vm.loadSavedCalculationsNames();
                     
+                    // Create lookup table for scoring probability based on FIDE Handbook 8.1.2
+                    vm.probabilityTable = [
+                        { diff: 0, probH: 0.50, probL: 0.50 },
+                        { diff: 4, probH: 0.51, probL: 0.49 },
+                        { diff: 11, probH: 0.52, probL: 0.48 },
+                        { diff: 18, probH: 0.53, probL: 0.47 },
+                        { diff: 26, probH: 0.54, probL: 0.46 },
+                        { diff: 33, probH: 0.55, probL: 0.45 },
+                        { diff: 40, probH: 0.56, probL: 0.44 },
+                        { diff: 47, probH: 0.57, probL: 0.43 },
+                        { diff: 54, probH: 0.58, probL: 0.42 },
+                        { diff: 62, probH: 0.59, probL: 0.41 },
+                        { diff: 69, probH: 0.60, probL: 0.40 },
+                        { diff: 77, probH: 0.61, probL: 0.39 },
+                        { diff: 84, probH: 0.62, probL: 0.38 },
+                        { diff: 92, probH: 0.63, probL: 0.37 },
+                        { diff: 99, probH: 0.64, probL: 0.36 },
+                        { diff: 107, probH: 0.65, probL: 0.35 },
+                        { diff: 114, probH: 0.66, probL: 0.34 },
+                        { diff: 122, probH: 0.67, probL: 0.33 },
+                        { diff: 130, probH: 0.68, probL: 0.32 },
+                        { diff: 138, probH: 0.69, probL: 0.31 },
+                        { diff: 146, probH: 0.70, probL: 0.30 },
+                        { diff: 154, probH: 0.71, probL: 0.29 },
+                        { diff: 163, probH: 0.72, probL: 0.28 },
+                        { diff: 171, probH: 0.73, probL: 0.27 },
+                        { diff: 180, probH: 0.74, probL: 0.26 },
+                        { diff: 189, probH: 0.75, probL: 0.25 },
+                        { diff: 198, probH: 0.76, probL: 0.24 },
+                        { diff: 207, probH: 0.77, probL: 0.23 },
+                        { diff: 216, probH: 0.78, probL: 0.22 },
+                        { diff: 226, probH: 0.79, probL: 0.21 },
+                        { diff: 236, probH: 0.80, probL: 0.20 },
+                        { diff: 246, probH: 0.81, probL: 0.19 },
+                        { diff: 257, probH: 0.82, probL: 0.18 },
+                        { diff: 268, probH: 0.83, probL: 0.17 },
+                        { diff: 279, probH: 0.84, probL: 0.16 },
+                        { diff: 291, probH: 0.85, probL: 0.15 },
+                        { diff: 303, probH: 0.86, probL: 0.14 },
+                        { diff: 316, probH: 0.87, probL: 0.13 },
+                        { diff: 329, probH: 0.88, probL: 0.12 },
+                        { diff: 345, probH: 0.89, probL: 0.11 },
+                        { diff: 358, probH: 0.90, probL: 0.10 },
+                        { diff: 375, probH: 0.91, probL: 0.09 },
+                        { diff: 392, probH: 0.92, probL: 0.08 },
+                        { diff: 412, probH: 0.93, probL: 0.07 },
+                        { diff: 433, probH: 0.94, probL: 0.06 },
+                        { diff: 457, probH: 0.95, probL: 0.05 },
+                        { diff: 485, probH: 0.96, probL: 0.04 },
+                        { diff: 518, probH: 0.97, probL: 0.03 },
+                        { diff: 560, probH: 0.98, probL: 0.02 },
+                        { diff: 620, probH: 0.99, probL: 0.01 },
+                        { diff: 736, probH: 1.00, probL: 0.00 }
+                    ];
+                    
                     // Calculate rating changes for initial game
                     vm.calculateRatingChange(0);
                 };
                 
-                // Calculate expected score based on FIDE formula
-                vm.calculateExpectedScore = function(playerRating, opponentRating) {
-                    return 1 / (1 + Math.pow(10, (opponentRating - playerRating) / 400));
+                // Find expected score using the lookup table from FIDE Handbook 8.1.2
+                vm.getExpectedScoreFromTable = function(playerRating, opponentRating) {
+                    var ratingDiff = Math.abs(playerRating - opponentRating);
+                    
+                    // Apply the 400-point rating difference cap according to FIDE rules
+                    if (ratingDiff > 400) {
+                        ratingDiff = 400;
+                    }
+                    
+                    // Determine which player is higher rated
+                    var isPlayerHigherRated = playerRating >= opponentRating;
+                    
+                    // Find the probability from the table
+                    for (var i = vm.probabilityTable.length - 1; i >= 0; i--) {
+                        var entry = vm.probabilityTable[i];
+                        if (ratingDiff >= entry.diff) {
+                            // Return the appropriate probability based on whether player is higher or lower rated
+                            return isPlayerHigherRated ? entry.probH : entry.probL;
+                        }
+                    }
+                    
+                    // Default case (should not reach here)
+                    return 0.5;
+                };
+                
+                // Calculate expected score based on FIDE formula (kept for reference)
+                vm.calculateExpectedScoreFormula = function(playerRating, opponentRating) {
+                    // Apply the 400-point rating difference cap according to FIDE rules
+                    var ratingDifference = opponentRating - playerRating;
+                    
+                    // Cap the rating difference at ±400 points
+                    if (ratingDifference > 400) {
+                        ratingDifference = 400;
+                    } else if (ratingDifference < -400) {
+                        ratingDifference = -400;
+                    }
+                    
+                    // Calculate expected score with the capped rating difference
+                    return 1 / (1 + Math.pow(10, ratingDifference / 400));
                 };
                 
                 // Calculate rating change for a single game
@@ -360,11 +459,17 @@
                     kFactor = Math.max(10, Math.min(40, kFactor));
                     game.kFactor = kFactor;
                     
-                    // Calculate expected score
-                    var expectedScore = vm.calculateExpectedScore(playerRating, opponentRating);
+                    // Calculate expected score using FIDE Table 8.1.2
+                    var expectedScore = vm.getExpectedScoreFromTable(playerRating, opponentRating);
                     
                     // Calculate rating change
                     game.ratingChange = kFactor * (score - expectedScore);
+                    
+                    // Log game details to console when K-factor is selected
+                    if (document.activeElement && document.activeElement.id === 'k-factor-select') {
+                        console.log("Player Rating,\tOpponent Rating,\tScore,\tK-factor,\tRating Change");
+                        console.log(playerRating + ",\t" + opponentRating + ",\t" + score + ",\t" + kFactor + ",\t" + game.ratingChange.toFixed(1));
+                    }
                     
                     // Calculate total rating change
                     vm.calculateTotalRatingChange();
@@ -466,8 +571,7 @@
                     // Update the list of saved calculations
                     vm.loadSavedCalculationsNames();
                     vm.selectedSavedCalc = vm.saveName;
-                    
-                    // Removed alert for silent saving
+                    // Removed alert for silent saving  
                 };
                 
                 // Load a saved calculation
@@ -485,7 +589,7 @@
                             vm.games = angular.copy(savedCalc.games);
                             vm.totalRatingChange = savedCalc.totalRatingChange;
                             vm.saveName = vm.selectedSavedCalc;
-                        }
+                        }   
                     }
                 };
                 

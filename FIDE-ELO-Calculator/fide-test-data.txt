@@ -1,0 +1,105 @@
+FIDE test data, as of 22 Apr 2025
+
+https://ratings.fide.com/calc.phtml?page=change
+
+Test data
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 1 / K factor: 40
+Rating Change is: +20
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 0.5 / K factor: 40
+Rating Change is: +0
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 0 / K factor: 40
+Rating Change is: -20
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 1 / K factor: 20
+Rating Change is: +10
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 0.5 / K factor: 20
+Rating Change is: +0
+
+Rating: 1800
+Opponent Rating: 1800
+Score: 0 / K factor: 20
+Rating Change is: -10
+
+Rating: 2000
+Opponent Rating: 1800
+Score: 1 / K factor: 40
+Rating Change is: +9.6
+
+Rating: 2000
+Opponent Rating: 1800
+Score: 0.5 / K factor: 40
+Rating Change is: -10.4
+
+Rating: 2000
+Opponent Rating: 1800
+Score: 0 / K factor: 40
+Rating Change is: -30.4
+
+Difference of more than 400 is counted as 400.
+Rating: 2500
+Opponent Rating: 1800
+Score: 1 / K factor: 10
+Rating Change is: +0.8
+
+Difference of more than 400 is counted as 400.
+Rating: 2500
+Opponent Rating: 1800
+Score: 0.5 / K factor: 10
+Rating Change is: -4.2
+
+Difference of more than 400 is counted as 400.
+Rating: 2500
+Opponent Rating: 1800
+Score: 0 / K factor: 10
+Rating Change is: -9.2
+
+Difference of more than 400 is counted as 400.
+Rating: 1300
+Opponent Rating: 1800
+Score: 1 / K factor: 30
+Rating Change is: +27.6
+
+Difference of more than 400 is counted as 400.
+Rating: 1300
+Opponent Rating: 1800
+Score: 0.5 / K factor: 30
+Rating Change is: +12.6
+
+Difference of more than 400 is counted as 400.
+Rating: 1300
+Opponent Rating: 1800
+Score: 0 / K factor: 30
+Rating Change is: -2.4
+
+Rating: 2050
+Opponent Rating: 1800
+Score: 1 / K factor: 40
+Rating Change is: +7.6
+
+Rating: 2050
+Opponent Rating: 1800
+Score: 0.5 / K factor: 40
+Rating Change is: -12.4
+
+Rating: 2050
+Opponent Rating: 1800
+Score: 0 / K factor: 40
+Rating Change is: -32.4
+
+
+
+
