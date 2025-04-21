@@ -1,0 +1,71 @@
+FIDE ELO Calculator (support multiple games)
+
+# Objectvies:
+Create a FIDE ELO calculator that support multiple input and custom K-factor 
+
+# FIDE ELO Calculator 
+https://ratings.fide.com/calc.phtml?page=change
+
+This page can calculate ELO based on player and opponent's FIDE ELO rating, with K factor fixed to 10, 15, 20, 30, 40 -> 
+
+# The inputs include 
+
+The input is design as a table, have up to 11 rows, each row contains the following inputs: 
+- Integer input: Player rating
+- Integer input: Opponent rating
+- Dropdown list: Score (win (1), draw (1/2), lost (0))
+- K-factor dropdown list: 10, 15, 20, 30, 40 or users can input any integer between 10 and 40. The default value is 40.
+- Button: "Calculate Rating Change", when clicked, show the "Rating changes"
+
+
+Example:
+
+Rating: 2050
+Opponent Rating: 2353
+Score: 1 / K factor: 40
+Rating Change is: +34.4
+
+# Case/Example:
+
+A players with ELO rating 2050 plays 11 games in a chess tournaments.
+After each game, he wants to how many ELO he gains or loses.
+Also, he also wants to know, after the 11 games of the tournament, how many ELO he gains or loses. 
+
+Until now, he has been using "FIDE ELO Calculator" to calculate ELO changes for each game one by one.
+
+And he'll want to enter 11 games at a time! 
+
+# Use stories:
+- Users can input player/opponent ratings, score, k-factor from multiple games to calculate ratings change after each games or after the tournamens (has multiple games)
+- Users can save up to 30 ELO calculations to local storage using cookies
+- Users can load calculated ELO from cookies and display 
+
+# Technologies:
+- HTML, CSS, JS, cookies
+- AngularJS to display the tables of possible (pls suggest me)
+
+# NFR
+
+- Responsive to web/mobile browsers 
+- Simple, light-weight
+- Instantly calculate ELO changes as users finishes entering info for each game (in a line)
+- Tailwind for fancy looks and feel 
+
+# Put the reference links at the footer of this page
+
+- (FIDE) Calculators for Chess Rating https://ratings.fide.com/calc.phtml?page=change
+
+- FIDE Handbook: https://handbook.fide.com/chapter/B022024
+
+Legends:
+```
+Rating - Rating of a player.
+Rc - Opponent rating.
+W - Score.
+K val - K is the development coefficient.
+K is the development coefficient.
+K = 40 for a player new to the rating list until he has completed events with at least 30 games
+K = 20 as long as a player's rating remains under 2400.
+K = 10 once a player's published rating has reached 2400 and remains at that level subsequently, even if the rating drops below 2400.
+K = 40 for all players until their 18th birthday, as long as their rating remains under 2300.
+```
