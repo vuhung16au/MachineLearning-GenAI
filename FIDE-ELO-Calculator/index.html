@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIDE ELO Calculator</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AngularJS via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans antialiased" ng-app="fidEloCalculator" ng-controller="CalculatorController as ctrl" ng-cloak>
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">FIDE ELO Rating Calculator</h1>
+            <p class="text-gray-600">Accurately calculate your chess rating changes after tournaments with precision</p>
+        </header>
+
+        <main class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold text-gray-700">Game Inputs</h2>
+                    <div class="flex space-x-2">
+                        <button 
+                            ng-click="ctrl.addGame()" 
+                            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                            ng-disabled="ctrl.games.length >= 20">
+                            Add Game
+                        </button>
+                        <!-- <button 
+                            ng-click="ctrl.removeGame()" 
+                            class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                            ng-disabled="ctrl.games.length <= 1">
+                            Remove Game
+                        </button> -->
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700 text-sm">
+                                <th class="p-2 text-left border-b">#</th>
+                                <th class="p-2 text-left border-b">Player Rating</th>
+                                <th class="p-2 text-left border-b">Opponent Rating</th>
+                                <th class="p-2 text-left border-b">Score</th>
+                                <th class="p-2 text-left border-b">K-factor</th>
+                                <th class="p-2 text-left border-b">Rating Change</th>
+                                <th class="p-2 text-left border-b">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="game in ctrl.games track by $index" class="border-b hover:bg-gray-50">
+                                <td class="p-2">{{$index + 1}}</td>
+                                <td class="p-2">
+                                    <input 
+                                        type="number" 
+                                        ng-model="game.playerRating" 
+                                        min="0" 
+                                        max="3000" 
+                                        ng-change="ctrl.calculateRatingChange($index)"
+                                        class="w-24 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="e.g., 2050">
+                                </td>
+                                <td class="p-2">
+                                    <input 
+                                        type="number" 
+                                        ng-model="game.opponentRating" 
+                                        min="0" 
+                                        max="3000" 
+                                        ng-change="ctrl.calculateRatingChange($index)"
+                                        class="w-24 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        placeholder="e.g., 2353">
+                                </td>
+                                <td class="p-2">
+                                    <select 
+                                        ng-model="game.score" 
+                                        ng-change="ctrl.calculateRatingChange($index)"
+                                        class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                                        <option value="1">Win (1)</option>
+                                        <option value="0.5">Draw (0.5)</option>
+                                        <option value="0">Loss (0)</option>
+                                    </select>
+                                </td>
+                                <td class="p-2">
+                                    <div class="flex">
+                                        <select 
+                                            ng-model="game.kFactor" 
+                                            ng-change="ctrl.calculateRatingChange($index)"
+                                            class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                                            ng-init="game.kFactor = game.kFactor || 20">
+                                            <option ng-repeat="k in [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]" ng-value="k">{{k}}</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="p-2 font-semibold" ng-class="{'text-green-600': game.ratingChange > 0, 'text-red-600': game.ratingChange < 0}">
+                                    {{game.ratingChange > 0 ? '+' : ''}}{{game.ratingChange | number:1}}
+                                </td>
+                                <td class="p-2">
+                                    <button 
+                                        ng-click="ctrl.removeGame($index)" 
+                                        class="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                                        ng-disabled="ctrl.games.length <= 1">
+                                        <span title="Remove this game">✕</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-gray-50">
+                                <td colspan="5" class="p-3 text-right font-semibold">Total Rating Change:</td>
+                                <td class="p-3 font-bold text-lg" ng-class="{'text-green-600': ctrl.totalRatingChange > 0, 'text-red-600': ctrl.totalRatingChange < 0}">
+                                    {{ctrl.totalRatingChange > 0 ? '+' : ''}}{{ctrl.totalRatingChange | number:1}}
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td colspan="6" class="p-3 text-right">
+                                    <button 
+                                        ng-click="ctrl.addGame()" 
+                                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                                        ng-disabled="ctrl.games.length >= 11">
+                                        Add Game
+                                    </button>
+                                </td>
+                            </tr> -->
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-between items-center gap-4 mt-8">
+                <div class="flex gap-2">
+                    <button 
+                        ng-click="ctrl.resetCalculator()" 
+                        class="px-6 py-3 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors">
+                        Reset Calculator
+                    </button>
+                </div>
+                
+                <div class="flex gap-2">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            ng-model="ctrl.saveName" 
+                            placeholder="Calculation Name" 
+                            class="px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            maxlength="30">
+                    </div>
+                    <button 
+                        ng-click="ctrl.saveCalculation()" 
+                        class="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                        ng-disabled="!ctrl.saveName">
+                        Save Calculation
+                    </button>
+
+                    <div class="relative">
+                        <select 
+                            ng-model="ctrl.selectedSavedCalc" 
+                            ng-options="calc for calc in ctrl.savedCalculationsNames" 
+                            class="px-6 py-3 pr-10 border rounded appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                            <option value="" disabled>Select Saved Calculation</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <button 
+                        ng-click="ctrl.loadCalculation()" 
+                        class="px-6 py-3 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+                        ng-disabled="!ctrl.selectedSavedCalc">
+                        Load Calculation
+                    </button>
+                    <button 
+                        ng-click="ctrl.deleteCalculation()" 
+                        class="px-6 py-3 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                        ng-disabled="!ctrl.selectedSavedCalc">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">K-factor Guidelines</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">K-factor Values</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                        <li><span class="font-semibold">K = 40</span>: For new players (until 30 games) or players under 18 with rating &lt; 2300</li>
+                        <li><span class="font-semibold">K = 20</span>: For players with rating &lt; 2400</li>
+                        <li><span class="font-semibold">K = 10</span>: For players with rating ≥ 2400 (remains even if rating drops below 2400)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">Additional Rules</h3>
+                    <p class="text-gray-600 mb-2">
+                        If the number of games (n) for a player on any list for a rating period multiplied by K exceeds 700, 
+                        then K shall be the largest whole number such that K × n does not exceed 700.
+                    </p>
+                    <p class="text-gray-600">
+                        The formula used is: Expected Score \(E = \frac{1}{1 + 10^{(R_c-R)/400}}\) where R is player rating and R<sub>c</sub> is opponent rating.
+                        Rating Change \(\Delta R = K \times (W - E)\) where W is the actual score and E is the expected score.
+                    </p>
+                    <!-- MathJax for rendering mathematical formulas -->
+                    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">How to Use This Calculator</h2>
+            <div class="space-y-4 text-gray-600">
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">1. Enter Game Information</h3>
+                    <p>Fill in your rating in the "Player Rating" field and your opponent's rating in the "Opponent Rating" field for each game. Select the result (Win, Draw, or Loss) and the appropriate K-factor based on the guidelines.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">2. Add or Remove Games</h3>
+                    <p>Click the "Add Game" button to add more games (up to 11 games total). Use the "✕" button to remove specific games if needed.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">3. Save Your Calculations</h3>
+                    <p>Enter a name for your calculation in the "Calculation Name" field and click "Save Calculation". This will store your data locally in your browser for future reference.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">4. Load or Delete Saved Calculations</h3>
+                    <p>Select a previously saved calculation from the dropdown list and click "Load Calculation" to retrieve it, or "Delete" to remove it from your saved calculations.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">5. Reset the Calculator</h3>
+                    <p>Click "Reset Calculator" to clear all input fields and start a new calculation.</p>
+                </div>
+                
+                <div class="bg-blue-50 p-3 rounded-md">
+                    <p><strong>Note:</strong> All data is stored locally in your browser. No information is sent to any server or external service.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm">
+            <p>Based on the <a href="https://handbook.fide.com/chapter/B022024" class="text-blue-600 hover:underline" target="_blank">FIDE Handbook, Chapter B.022024</a></p>
+            <!-- <p class="mt-1">© 2025 FIDE ELO Calculator</p>
+            <p class="mt-2 p-2 bg-gray-50 rounded-md">This page runs on your browser and doesn't send any information to the internet. The saved data is stored as cookies on your browser.</p> -->
+        </footer>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div 
+        ng-if="ctrl.showDeleteModal" 
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300"
+        ng-class="{'opacity-100': ctrl.showDeleteModal, 'opacity-0': !ctrl.showDeleteModal}">
+        <div 
+            class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-transform duration-300"
+            ng-class="{'scale-100': ctrl.showDeleteModal, 'scale-95': !ctrl.showDeleteModal}">
+            <div class="p-6 border-b">
+                <h3 class="text-lg font-semibold text-gray-800">Confirm Deletion</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-gray-600">
+                    Are you sure you want to delete the calculation named 
+                    <span class="font-semibold text-red-600">{{ctrl.selectedSavedCalc}}</span>?
+                </p>
+                <p class="text-gray-500 text-sm mt-2">This action cannot be undone.</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-b-lg flex justify-end space-x-3">
+                <button 
+                    ng-click="ctrl.cancelDelete()" 
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors">
+                    Cancel
+                </button>
+                <button 
+                    ng-click="ctrl.confirmDelete()" 
+                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script>
+        (function() {
+            'use strict';
+            
+            angular.module('fidEloCalculator', [])
+                .controller('CalculatorController', CalculatorController);
+            
+            function CalculatorController() {
+                var vm = this;
+                
+                // Initialize the calculator
+                vm.init = function() {
+                    // Create a default game
+                    vm.games = [{
+                        playerRating: 2050,
+                        opponentRating: 2353,
+                        score: '1',
+                        kFactor: 40,
+                        customK: false,
+                        ratingChange: 0
+                    }];
+                    
+                    vm.totalRatingChange = 0;
+                    vm.saveName = '';
+                    vm.selectedSavedCalc = '';
+                    vm.showDeleteModal = false;
+                    vm.loadSavedCalculationsNames();
+                    
+                    // Calculate rating changes for initial game
+                    vm.calculateRatingChange(0);
+                };
+                
+                // Calculate expected score based on FIDE formula
+                vm.calculateExpectedScore = function(playerRating, opponentRating) {
+                    return 1 / (1 + Math.pow(10, (opponentRating - playerRating) / 400));
+                };
+                
+                // Calculate rating change for a single game
+                vm.calculateRatingChange = function(index) {
+                    var game = vm.games[index];
+                    
+                    // Validate inputs
+                    if (!game.playerRating || !game.opponentRating || !game.score || !game.kFactor) {
+                        game.ratingChange = 0;
+                        vm.calculateTotalRatingChange();
+                        return;
+                    }
+                    
+                    // Convert values to correct types
+                    var playerRating = parseInt(game.playerRating);
+                    var opponentRating = parseInt(game.opponentRating);
+                    var score = parseFloat(game.score);
+                    var kFactor = parseInt(game.kFactor);
+                    
+                    // Ensure K-factor is within valid range
+                    kFactor = Math.max(10, Math.min(40, kFactor));
+                    game.kFactor = kFactor;
+                    
+                    // Calculate expected score
+                    var expectedScore = vm.calculateExpectedScore(playerRating, opponentRating);
+                    
+                    // Calculate rating change
+                    game.ratingChange = kFactor * (score - expectedScore);
+                    
+                    // Calculate total rating change
+                    vm.calculateTotalRatingChange();
+                };
+                
+                // Calculate all rating changes
+                vm.calculateAllRatingChanges = function() {
+                    for (var i = 0; i < vm.games.length; i++) {
+                        vm.calculateRatingChange(i);
+                    }
+                };
+                
+                // Calculate total rating change across all games
+                vm.calculateTotalRatingChange = function() {
+                    vm.totalRatingChange = 0;
+                    for (var i = 0; i < vm.games.length; i++) {
+                        if (vm.games[i].ratingChange) {
+                            vm.totalRatingChange += vm.games[i].ratingChange;
+                        }
+                    }
+                };
+                
+                // Add a new game row
+                vm.addGame = function() {
+                    if (vm.games.length < 20) {
+                        // Copy the player rating from the last game for convenience
+                        var lastPlayerRating = vm.games[vm.games.length - 1].playerRating;
+                        // Copy the K-factor from the last game for convenience
+                        var lastKFactor = vm.games[vm.games.length - 1].kFactor;
+                        var lastCustomK = vm.games[vm.games.length - 1].customK;
+                        
+                        vm.games.push({
+                            playerRating: lastPlayerRating,
+                            opponentRating: '',
+                            score: '1',
+                            kFactor: lastKFactor || 40,
+                            customK: lastCustomK || false,
+                            ratingChange: 0
+                        });
+                    }
+                };
+                
+                // Remove a game row by index
+                vm.removeGame = function(index) {
+                    if (vm.games.length > 1) {
+                        // If no index provided, remove the last game (for backward compatibility)
+                        if (index === undefined) {
+                            vm.games.pop();
+                        } else {
+                            // Remove the game at the specified index
+                            vm.games.splice(index, 1);
+                        }
+                        vm.calculateTotalRatingChange();
+                    }
+                };
+                
+                // Reset the calculator
+                vm.resetCalculator = function() {
+                    vm.init();
+                };
+                
+                // Load saved calculations from local storage
+                vm.loadSavedCalculationsNames = function() {
+                    var savedCalculations = localStorage.getItem('fideEloCalculations');
+                    if (savedCalculations) {
+                        var calculationsObj = JSON.parse(savedCalculations);
+                        vm.savedCalculationsNames = Object.keys(calculationsObj);
+                    } else {
+                        vm.savedCalculationsNames = [];
+                    }
+                };
+                
+                // Save current calculation to local storage
+                vm.saveCalculation = function() {
+                    if (!vm.saveName) {
+                        return;
+                    }
+                    
+                    // Get existing saved calculations or create a new object
+                    var savedCalculations = localStorage.getItem('fideEloCalculations');
+                    var calculationsObj = savedCalculations ? JSON.parse(savedCalculations) : {};
+                    
+                    // Check if we have reached the maximum number of saved calculations (30)
+                    if (Object.keys(calculationsObj).length >= 30 && !calculationsObj[vm.saveName]) {
+                        alert('You have reached the maximum of 30 saved calculations. Please delete some before saving more.');
+                        return;
+                    }
+                    
+                    // Save the current calculation
+                    calculationsObj[vm.saveName] = {
+                        games: angular.copy(vm.games),
+                        totalRatingChange: vm.totalRatingChange,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Save to local storage
+                    localStorage.setItem('fideEloCalculations', JSON.stringify(calculationsObj));
+                    
+                    // Update the list of saved calculations
+                    vm.loadSavedCalculationsNames();
+                    vm.selectedSavedCalc = vm.saveName;
+                    
+                    // Removed alert for silent saving
+                };
+                
+                // Load a saved calculation
+                vm.loadCalculation = function() {
+                    if (!vm.selectedSavedCalc) {
+                        return;
+                    }
+                    
+                    var savedCalculations = localStorage.getItem('fideEloCalculations');
+                    if (savedCalculations) {
+                        var calculationsObj = JSON.parse(savedCalculations);
+                        var savedCalc = calculationsObj[vm.selectedSavedCalc];
+                        
+                        if (savedCalc) {
+                            vm.games = angular.copy(savedCalc.games);
+                            vm.totalRatingChange = savedCalc.totalRatingChange;
+                            vm.saveName = vm.selectedSavedCalc;
+                        }
+                    }
+                };
+                
+                // Delete a saved calculation - Modified to show custom modal
+                vm.deleteCalculation = function() {
+                    if (!vm.selectedSavedCalc) {
+                        return;
+                    }
+                    
+                    // Show the custom modal dialog instead of using confirm()
+                    vm.showDeleteModal = true;
+                };
+                
+                // Handle cancel on delete confirmation modal
+                vm.cancelDelete = function() {
+                    vm.showDeleteModal = false;
+                };
+                
+                // Handle confirmation on delete modal
+                vm.confirmDelete = function() {
+                    var savedCalculations = localStorage.getItem('fideEloCalculations');
+                    if (savedCalculations) {
+                        var calculationsObj = JSON.parse(savedCalculations);
+                        
+                        // Delete the selected calculation
+                        delete calculationsObj[vm.selectedSavedCalc];
+                        
+                        // Save the updated object back to local storage
+                        localStorage.setItem('fideEloCalculations', JSON.stringify(calculationsObj));
+                        
+                        // Update the list of saved calculations
+                        vm.loadSavedCalculationsNames();
+                        vm.selectedSavedCalc = '';
+                        
+                        // Hide the modal
+                        vm.showDeleteModal = false;
+                    }
+                };
+                
+                // Initialize the controller
+                vm.init();
+            }
+        })();
+    </script>
+</body>
+</html>
