@@ -7,6 +7,10 @@ A web-based application for calculating chess rating changes according to FIDE (
 
 This application allows chess players to calculate their rating changes after tournaments or individual games with precision. It implements the official FIDE ELO formula and supports multiple K-factors based on FIDE guidelines.
 
+## Live Demo
+
+Try the live application here: [FIDE ELO Calculator](https://elo-calculator-bice.vercel.app/)
+
 ## Features
 
 - Calculate rating changes for up to 20 games simultaneously
@@ -66,7 +70,7 @@ Additional rule: If the number of games (n) for a player on any list for a ratin
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/FIDE-ELO-Calculator.git
+   git clone https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/FIDE-ELO-Calculator.git
    ```
 
 2. Open `index.html` in your web browser
