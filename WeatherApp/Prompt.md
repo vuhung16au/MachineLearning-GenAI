@@ -62,3 +62,19 @@ Expected implementation: <div class="date">Sunday, Apr 20 3:05pm (GTM+10)</div>
 
 If the city is Tokyo (GMT+9), then shows 
 Expected implementation: <div class="date">Sunday, Apr 20 2:05pm (GTM+9)</div>
+
+# Generate `README.md` file
+
+Finish the `README.md` for this repo. 
+
+README.md covers 
+
+- Short intro about the features of the app
+- How to use it 
+- Techstack used: HTML, CSS, JS, cookies (no backend so can run on browsers)
+
+Add links to the bottom of the page: 
+
+- https://world-weather-six.vercel.app/
+- https://github.com/vuhung16au/MachineLearning-GenAI/tree/main/WeatherApp
+
