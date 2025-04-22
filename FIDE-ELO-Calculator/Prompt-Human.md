@@ -125,3 +125,8 @@ Verify that all the sections 8.3.1, 8.3.2, 8.3.3 and 8.3.4 are correctly impleme
 Pls use cypress to test the following:
 - input data in the file 'fide-test-data.txt'
 
+
+# Responsive design
+
+make sure that index.html is responsive to smartphone, display correctly under different size of browser size
+
