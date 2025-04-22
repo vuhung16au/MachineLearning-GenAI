@@ -1,8 +1,9 @@
 # FIDE ELO Calculator
 
-A web-based application for calculating chess rating changes according to FIDE (International Chess Federation) regulations.
+A web-based application for calculating chess rating changes according to FIDE (International Chess Federation) regulations (as of 22 Apr 2025). This calculator allows players to input their ratings, opponent ratings, and game results to determine the expected rating changes after multiple games.
 
 ![FIDE ELO Calculator Interface](FIDE-ELO-Calculator.png)
+
 ## Description
 
 This application allows chess players to calculate their rating changes after tournaments or individual games with precision. It implements the official FIDE ELO formula and supports multiple K-factors based on FIDE guidelines.
@@ -31,6 +32,13 @@ This project uses Cypress for end-to-end testing. Follow these steps to run the 
    ```
 
 2. **Run Tests in Interactive Mode**
+
+   ```
+   npm start
+   ```
+
+   This will start a local server and open the application in your default browser. Then, in another terminal, run:
+
    ```
    npm test
    ```
@@ -111,6 +119,11 @@ Additional rule: If the number of games (n) for a player on any list for a ratin
 
 No server configuration or installation is required as the application runs entirely in the browser.
 
+Alternatively, you can use a local server like `http-server` or `live-server` to serve the files.
+
+   ```
+   http://localhost:8080
+   ```
 ## Data Privacy
 
 All calculations and saved data are stored locally in your browser using Local Storage. No information is sent to any server or external service.

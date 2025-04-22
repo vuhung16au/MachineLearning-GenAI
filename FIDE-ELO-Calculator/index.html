@@ -278,6 +278,136 @@
             </div>
         </section>
 
+        <!-- New Section for ELO Changes Calculation Examples -->
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">ELO Changes Calculation Examples</h2>
+            
+            <div class="mb-6">
+                <h3 class="font-medium text-gray-800 mb-3">Example 1: Rating Difference > 400 Points (Rule 8.3.1)</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h4 class="font-semibold text-green-800 mb-2">Lower Rated Player Wins</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li><span class="font-semibold">Player Rating:</span> 1300</li>
+                            <li><span class="font-semibold">Opponent Rating:</span> 1800</li>
+                            <li><span class="font-semibold">Rating Difference:</span> 500 (capped at 400)</li>
+                            <li><span class="font-semibold">Score:</span> 1 (Win)</li>
+                            <li><span class="font-semibold">K-factor:</span> 30</li>
+                            <li><span class="font-semibold">Expected Score:</span> 0.08 (from table)</li>
+                            <li><span class="font-semibold">Rating Change:</span> 30 × (1 - 0.08) = +27.6</li>
+                        </ul>
+                        <p class="mt-3 text-sm text-gray-700 italic">
+                            Note: Even though the actual difference is 500 points, FIDE rule 8.3.1 caps it at 400 points for calculation purposes.
+                        </p>
+                    </div>
+                    
+                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-2">Higher Rated Player Draws</h4>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li><span class="font-semibold">Player Rating:</span> 2050</li>
+                            <li><span class="font-semibold">Opponent Rating:</span> 1800</li>
+                            <li><span class="font-semibold">Rating Difference:</span> 250</li>
+                            <li><span class="font-semibold">Score:</span> 0.5 (Draw)</li>
+                            <li><span class="font-semibold">K-factor:</span> 40</li>
+                            <li><span class="font-semibold">Expected Score:</span> 0.81 (from table)</li>
+                            <li><span class="font-semibold">Rating Change:</span> 40 × (0.5 - 0.81) = -12.4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="font-medium text-gray-800 mb-3">Example 2: K-factor Adjustment (Rule 8.3.3)</h3>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <h4 class="font-semibold text-yellow-800 mb-2">K-factor Adjustment When K×n > 700</h4>
+                    <p class="text-gray-700 mb-3">
+                        When a player plays N = 21 games with a standard K-factor = 40, the product K×n = 40×21 = 840, which exceeds the maximum 700.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        According to FIDE Handbook chapter 8.3.3, the K-factor must be adjusted to the largest whole number where K×n ≤ 700.
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-gray-200 mb-3">
+                        <p class="font-mono text-center">K<sub>adjusted</sub> = ⌊700 ÷ n⌋ = ⌊700 ÷ 21⌋ = ⌊33.33...⌋ = 33</p>
+                    </div>
+                    <p class="text-gray-700">
+                        Therefore, for this player, the K-factor would be reduced from 40 to 33 for all games in this rating period.
+                        This ensures that K×n = 33×21 = 693, which is below the maximum 700.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="font-medium text-gray-800 mb-3">Example 3: Rounding Rules (Rule 8.3.4)</h3>
+                <div class="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                    <h4 class="font-semibold text-purple-800 mb-2">Multiple Games with Rounding</h4>
+                    <p class="text-gray-700 mb-3">
+                        FIDE Handbook chapter 8.3.4 states: "The Rating Change for a Rating Period is rounded to the nearest whole number. 0.5 is rounded away from zero."
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        Let's see how a player's rating changes after playing 2 games:
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <h5 class="font-semibold text-gray-800 mb-2">Game 1:</h5>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                                <li><span class="font-semibold">Player Rating:</span> 2000</li>
+                                <li><span class="font-semibold">Opponent Rating:</span> 1800</li>
+                                <li><span class="font-semibold">Rating Difference:</span> 200</li>
+                                <li><span class="font-semibold">Score:</span> 0.5 (Draw)</li>
+                                <li><span class="font-semibold">K-factor:</span> 40</li>
+                                <li><span class="font-semibold">Expected Score:</span> 0.76 (from table)</li>
+                                <li><span class="font-semibold">Rating Change:</span> 40 × (0.5 - 0.76) = -10.4</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-3 rounded-lg border border-gray-200">
+                            <h5 class="font-semibold text-gray-800 mb-2">Game 2:</h5>
+                            <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                                <li><span class="font-semibold">Player Rating:</span> 2000</li>
+                                <li><span class="font-semibold">Opponent Rating:</span> 1600</li>
+                                <li><span class="font-semibold">Rating Difference:</span> 400</li>
+                                <li><span class="font-semibold">Score:</span> 0 (Loss)</li>
+                                <li><span class="font-semibold">K-factor:</span> 40</li>
+                                <li><span class="font-semibold">Expected Score:</span> 0.92 (from table)</li>
+                                <li><span class="font-semibold">Rating Change:</span> 40 × (0 - 0.92) = -36.8</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-300 mb-3">
+                        <h5 class="font-semibold text-gray-800 mb-2">Total Rating Change Calculation:</h5>
+                        <p class="font-mono mb-2">Game 1 Change + Game 2 Change = -10.4 + (-36.8) = -47.2</p>
+                        <p class="font-medium text-gray-700">According to FIDE Rule 8.3.4, we round to the nearest whole number:</p>
+                        <p class="font-mono text-lg text-center mt-2">-47.2 rounds to <span class="font-bold">-47</span></p>
+                        <p class="mt-3 text-sm text-gray-600 italic">
+                            Note: If the fractional part was exactly 0.5, it would round away from zero. For example, -10.5 would round to -11, and +10.5 would round to +11.
+                        </p>
+                    </div>
+                    
+                    <p class="text-gray-700 mt-3">
+                        Therefore, after these two games, the player's new rating would be:
+                        <span class="font-mono font-bold">2000 - 47 = 1953</span>
+                    </p>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="font-medium text-gray-800 mb-3">The Complete Rating Change Formula</h3>
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-center">
+                    <p class="font-mono text-lg mb-2">ΔR = K × (S<sub>a</sub> - S<sub>e</sub>)</p>
+                    <p class="text-gray-600 mb-2">Where:</p>
+                    <ul class="text-left text-gray-700 space-y-1 max-w-md mx-auto">
+                        <li>• ΔR = Rating change</li>
+                        <li>• K = K-factor (adjusted if K×n > 700)</li>
+                        <li>• S<sub>a</sub> = Actual score (1 for win, 0.5 for draw, 0 for loss)</li>
+                        <li>• S<sub>e</sub> = Expected score from probability table (based on rating difference, capped at 400)</li>
+                        <li>• S<sub>e</sub> = 1 / (1 + 10<sup>(R<sub>o</sub> - R<sub>p</sub>)/400</sup>) (mathematical formula)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <footer class="text-center text-gray-500 text-sm">
             <p>Based on the <a href="https://handbook.fide.com/chapter/B022024" class="text-blue-600 hover:underline" target="_blank">FIDE Handbook, Chapter B.022024</a></p>
             <p class="mt-2">
