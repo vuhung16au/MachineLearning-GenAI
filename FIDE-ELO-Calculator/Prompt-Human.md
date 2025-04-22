@@ -69,3 +69,59 @@ K = 20 as long as a player's rating remains under 2400.
 K = 10 once a player's published rating has reached 2400 and remains at that level subsequently, even if the rating drops below 2400.
 K = 40 for all players until their 18th birthday, as long as their rating remains under 2300.
 ```
+
+# Additional features:
+
+Add to 'index.html' a section named "ELO Changes Calculation Example" just below the section "Important FIDE Rating Rules"
+
+This sections explain FIDE rules 8.3.1, 8.3.2, 8.3.3 and 8.3.4
+
+Using example
+
+Pls note the elo diff is greater than 400
+```
+Difference of more than 400 is counted as 400.
+Rating: 1300
+Opponent Rating: 1800
+Score: 1 / K factor: 30
+Rating Change is: +27.6
+```
+
+```
+Rating: 2050
+Opponent Rating: 1800
+Score: 0.5 / K factor: 40
+Rating Change is: -12.4
+```
+
+When a players plays N = 21 games, and his K factor = 40, 
+explain how K factor is adjusted (it is 21)
+
+Use maths formula (mathjax?) to write beautiful formula.
+
+Add a section to explain "FIDE Handbook chapter 8.3.4"
+
+Use example below
+
+A player plays 2 games:
+
+Rating: 2000
+Opponent Rating: 1800
+Score: 0.5 / K factor: 40
+
+Rating: 2000
+Opponent Rating: 1600
+Score: 0 / K factor: 40
+
+How his rating change? Explain the calculation as example.
+
+# Verification
+
+Verify that all the sections 8.3.1, 8.3.2, 8.3.3 and 8.3.4 are correctly implemented
+- Check that the K factor is set to 40 for new players until they have completed 30 games.
+
+# Cypress test
+
+Pls use cypress to test the following:
+- input data in the file 'fide-test-data.txt'
+
