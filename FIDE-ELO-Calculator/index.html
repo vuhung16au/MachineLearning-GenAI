@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FIDE ELO Calculator</title>
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Local CSS for additional styling -->
-    <link rel="stylesheet" href="css/tailwind.css">
-    <!-- AngularJS via CDN -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Processed Tailwind CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Local CSS for styling (processed by Vite) -->
     <style>
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
@@ -40,6 +37,8 @@
             }
         }
     </style>
+    <!-- AngularJS via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body class="bg-gray-100 font-sans antialiased" ng-app="fidEloCalculator" ng-controller="CalculatorController as ctrl" ng-cloak>
     <div class="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-6xl">
@@ -835,5 +834,6 @@
             }
         })();
     </script>
+    <script type="module" src="/main.js"></script>
 </body>
 </html>
