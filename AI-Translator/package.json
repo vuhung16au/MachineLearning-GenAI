@@ -1,6 +1,6 @@
 {
   "name": "ai-translator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,7 +26,8 @@
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
     "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6",
+    "// tailwindcss: latest stable version": "",
+    "tailwindcss": "^3.4.1", 
     "typescript": "^5.3.3"
   }
 }

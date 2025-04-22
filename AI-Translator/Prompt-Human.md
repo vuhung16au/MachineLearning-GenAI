@@ -12,7 +12,8 @@ The app will use Next.js as backend.
 # Technologies:
 - Gemini API for translation
 - Next.js for backend
-- Frontend: Please suggest a modern technology
+- Frontend: HTML, CSS, JavaScript, Tailwind CSS
+- Cookies for storing user preferences (language selection, dark/light mode, history, and saved translations)
 
 # The UI
 
@@ -32,7 +33,8 @@ The app will use Next.js as backend.
 
 - Simple
 - Easy to use 
-- Colors: light-dark theme 
+- Colors: light-dark theme (as default dark mode), user can switch between light and dark mode.
+- Responsive design: The app should be responsive and work well on different screen sizes, including mobile devices.
 
 # Supported languages 
 (ref https://gemini.google.com/faq?hl=en-AU)
@@ -72,3 +74,7 @@ the target language selection dropdown
 so that users can 
 - search for a language by pyting (such as typing "ja" will display "Japanese"")
 - Easier to see all the languages they may select
+
+- Realtime translation: As users type in the source text area, the app should automatically translate the text and display it in the translated text area. This feature can be toggled on/off by users.
+
+- Users can select OpenAI API key or Gemini API key.
