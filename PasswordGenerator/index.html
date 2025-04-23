@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Password Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../fontawesome/css/all.min.css">
+  <!-- SEO Keywords -->
+  <meta name="keywords" content="password generator, secure password, random password, password creator, strong password, générateur de mot de passe, generador de contraseñas, Passwortgenerator, 密码生成器, パスワード生成器, 비밀번호 생성기, gerador de senha, генератор паролей, online tool, security">
+  <meta name="description" content="Advanced password generator with customizable options for length, character types, and security rules. Generate strong, secure passwords that run locally in your browser with no data sent to the internet.">
+</head>
+<body>
+ 
+  <div class="wrapper">
+    <div class="theme-switch-container">
+      <span class="theme-switch-label">Light</span>
+      <label class="theme-switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider round"></span>
+      </label>
+      <span class="theme-switch-label">Dark</span>
+    </div>
+    
+    <h1 class="main-title" style="text-align: center;">Advanced/Strong Password Generator</h1>
+
+    <p class="main-description">Generate secure passwords with customizable options. Your passwords are generated locally in your browser, ensuring maximum privacy and security.</p>
+    
+    <br>
+  
+    
+    <div class="options-container">
+      <div class="option-row">
+        <label>Password Length:</label>
+        <select id="passwordLength">
+          <option value="6">6</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="16" selected>16</option>
+          <option value="20">20</option>
+          <option value="22">22</option>
+          <option value="24">24</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+      
+      <div class="option-row">
+        <label>Include Numbers:</label>
+        <input type="checkbox" id="includeNumbers" checked>
+        <span class="option-hint">(e.g. 123456)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>Include Lowercase Characters:</label>
+        <input type="checkbox" id="includeLowercase" checked>
+        <span class="option-hint">(e.g. abcdefgh)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>Include Uppercase Characters:</label>
+        <input type="checkbox" id="includeUppercase" checked>
+        <span class="option-hint">(e.g. ABCDEFGH)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>Begin With A Letter:</label>
+        <input type="checkbox" id="beginWithLetter" checked>
+        <span class="option-hint">(don't begin with a number or symbol)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>Include Symbols:</label>
+        <input type="checkbox" id="includeSymbols" checked>
+        <input type="text" id="symbolsList" value='!";#$%&*()+.-/::;<=>?@[]^_`{}~'>
+      </div>
+      
+      <div class="option-row">
+        <label>No Similar Characters:</label>
+        <input type="checkbox" id="noSimilarChars" checked>
+        <span class="option-hint">(don't use characters like i, I, 1, L, o, O, 0, etc.)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>No Duplicate Characters:</label>
+        <input type="checkbox" id="noDuplicateChars" checked>
+        <span class="option-hint">(don't use the same character more than once)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>No Sequential Characters:</label>
+        <input type="checkbox" id="noSequentialChars" checked>
+        <span class="option-hint">(don't use sequential characters, e.g. abc, 789)</span>
+      </div>
+      
+      <div class="option-row">
+        <label>Auto Generate On The First Call:</label>
+        <input type="checkbox" id="autoGenerate" checked>
+        <span class="option-hint">(generate passwords automatically when you open this page)</span>
+      </div>
+      
+      <!-- <div class="option-row">
+        <label>Quantity:</label>
+        <select id="quantity">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+        </select>
+      </div> -->
+      
+      <div class="option-row">
+        <label>Save My Preference:</label>
+        <input type="checkbox" id="savePreference">
+        <span class="option-hint">(save all the settings above in cookies)</span>
+      </div>
+    </div>
+    
+    <div class="buttons-container">
+      <button id="generate" class="generate_button">Generate</button>
+      <button id="copy1st" class="generate_button">Copy the 1st Line</button>
+      <button id="copyAll" class="generate_button">Copy ALL</button>
+    </div>
+    
+    <div class="passwords-container">
+      <h3>Your New Passwords:</h3>
+      <div id="passwordsOutput" class="passwords-output">
+        <!-- Generated passwords will appear here -->
+      </div>
+    </div>
+    
+    <div class="explanation-container">
+      <h3>About This Password Generator</h3>
+      <div class="explanation-content">
+      <p>How it works: This advanced password generator creates secure passwords based on your selected criteria:</p>
+      <ul>
+        <li>Password Length: Choose how many characters your password should contain</li>
+        <li>Include Numbers: Add digits for additional security</li>
+        <li>Include Lowercase/Uppercase: Mix character cases for stronger passwords</li>
+        <li>Begin With A Letter: Ensures compatibility with systems that require passwords to start with letters</li>
+        <li>Include Symbols: Add special characters to significantly increase password strength</li>
+        <li>No Similar Characters: Avoids easily confused characters like 'i', 'l', '1', 'O', '0'</li>
+        <li>No Duplicate Characters: Ensures each character appears only once</li>
+        <li>No Sequential Characters: Prevents predictable sequences like 'abc' or '123'</li>
+      </ul>
+      <p class="security-note">Privacy Notice: This password generator operates entirely in your browser. Your passwords are generated locally and are never transmitted over the internet or stored on any server. For maximum security, you can even save this page and use it offline.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+:root {
+  --background-color: #ecf0f1;
+  --wrapper-background: #fff;
+  --text-color: #333;
+  --hint-color: #707070;
+  --border-color: #ccc;
+  --passwords-bg: #f9f9f9;
+  --button-color: #3783f5;
+  --button-hover: #226ede;
+  --box-shadow: rgba(0,0,0,0.1);
+  --input-bg: transparent;
+}
+
+.dark-mode {
+  --background-color: #121212;
+  --wrapper-background: #1e1e1e;
+  --text-color: #e0e0e0;
+  --hint-color: #aaaaaa;
+  --border-color: #444;
+  --passwords-bg: #2d2d2d;
+  --button-color: #3783f5;
+  --button-hover: #4e93f5;
+  --box-shadow: rgba(0,0,0,0.3);
+  --input-bg: #2d2d2d;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+} 
+.wrapper{
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 15px;
+  background: var(--wrapper-background);
+  padding: 30px 25px;
+  box-shadow: 0 5px 15px var(--box-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Theme Switch styling */
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.theme-switch-label {
+  margin: 0 8px;
+  color: var(--text-color);
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--button-color);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--button-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Options styling */
+.options-container {
+  margin-bottom: 20px;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.option-row label {
+  width: 220px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.option-hint {
+  margin-left: 10px;
+  color: var(--hint-color);
+  font-size: 0.9em;
+}
+
+#symbolsList {
+  width: 300px;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+/* Buttons styling */
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Existing button style */
+.generate_button{
+  color: #fff;
+  padding: 12px 0;
+  background: var(--button-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+  transition: background-color 0.3s ease;
+}
+.generate_button:hover{
+  background-color: var(--button-hover);
+}
+
+/* Password output styling */
+.passwords-container {
+  margin-top: 20px;
+}
+
+.passwords-container h3 {
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.passwords-output {
+  background-color: var(--passwords-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+  max-height: 300px;
+  overflow-y: auto;
+  color: var(--text-color);
+}
+
+.password-line {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.line-number {
+  background-color: var(--button-color);
+  color: white;
+  padding: 2px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  min-width: 20px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.password-text {
+  flex-grow: 1;
+  word-break: break-all;
+}
+
+/* Existing styles for password box */
+.wrapper .pas_box{
+  position: relative;
+  height: 50px;
+}
+.pas_box input{
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  padding: 0 45px 0 15px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+.pas_box .copy_icon{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  color: var(--hint-color);
+  cursor: pointer;
+  font-size: 20px;
+  transform: translateY(-50%);
+}
+.copy_icon:hover{
+  color: var(--button-color);
+}
+.wrapper .range_box{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.range_box input{
+  width: 100%;
+  height: 5px;
+  accent-color: var(--button-color);
+  cursor: pointer;
+}
+.range_box .slider_num{
+  min-width: 30px;
+  font-size: 17px;
+  text-align: right;
+  color: var(--hint-color);
+}
+
+/* Explanation section styling */
+.explanation-container {
+  margin-top: 30px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+.explanation-content {
+  color: var(--text-color);
+}
+
+.explanation-content p,
+.explanation-content li {
+  margin-bottom: 8px;
+}
+
+.explanation-content ul {
+  padding-left: 20px;
+}
+
+.security-note {
+  font-style: italic;
+  margin-top: 15px;
+}
