@@ -2,8 +2,9 @@
 export default {
   content: [
     './index.html',
-    './**/*.{js,ts,jsx,tsx}',
-    './*.{html,js}'
+    './css/**/*.{css,js}',
+    './cypress/e2e/**/*.{js,ts}',
+    './*.{html,js,ts}'
   ],
   theme: {
     extend: {},

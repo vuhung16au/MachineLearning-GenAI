@@ -18,6 +18,7 @@
         }
         input[type=number] {
             -moz-appearance: textfield;
+            appearance: textfield;
         }
         @media (max-width: 640px) {
             .custom-scrollbar {
@@ -36,6 +37,27 @@
                 border-radius: 10px;
             }
         }
+        
+        /* Drag and drop styles */
+        .drag-handle {
+            cursor: move;
+            color: #888;
+            padding: 2px 5px;
+            display: inline-block;
+        }
+        
+        tr.drag-row {
+            cursor: move;
+        }
+        
+        tr.dragging {
+            opacity: 0.5;
+            background-color: #f0f0f0 !important;
+        }
+        
+        tr.drag-over {
+            border-top: 2px solid #4299e1;
+        }
     </style>
     <!-- AngularJS via CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
@@ -47,7 +69,7 @@
             <p class="text-sm sm:text-base text-gray-600">Accurately calculate your chess rating changes after tournaments with precision</p>
         </header>
 
-        <main class="bg-white shadow-md rounded-lg p-6 mb-8">
+        <main>
             <div class="mb-6">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-semibold text-gray-700">Game Inputs</h2>
@@ -72,12 +94,21 @@
                                 <th class="p-2 text-left border-b">Score</th>
                                 <th class="p-2 text-left border-b">K-factor</th>
                                 <th class="p-2 text-left border-b">Rating Change</th>
+                                <th class="p-2 text-left border-b">Memo</th>
                                 <th class="p-2 text-left border-b">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="game in ctrl.games track by $index" class="border-b hover:bg-gray-50" ng-class="{'bg-yellow-50': Math.abs(game.playerRating - game.opponentRating) >= 400}">
-                                <td class="p-2">{{$index + 1}}</td>
+                            <tr ng-repeat="game in ctrl.games track by $index" 
+                                class="border-b hover:bg-gray-50 game-row" 
+                                ng-class="{'bg-yellow-50': Math.abs(game.playerRating - game.opponentRating) >= 400}" 
+                                ng-attr-id="game-row-{{$index}}">
+                                <td class="p-2">
+                                    <div class="flex items-center">
+                                        <span class="drag-handle mr-2">☰</span>
+                                        <span>{{$index + 1}}</span>
+                                    </div>
+                                </td>
                                 <td class="p-2">
                                     <input 
                                         type="number" 
@@ -124,6 +155,14 @@
                                     <span ng-class="{'bg-yellow-200 px-2 py-1 rounded': Math.abs(game.playerRating - game.opponentRating) >= 400}">
                                         {{game.ratingChange > 0 ? '+' : ''}}{{game.ratingChange | number:1}}
                                     </span>
+                                </td>
+                                <td class="p-2">
+                                    <input 
+                                        type="text" 
+                                        ng-model="game.memo" 
+                                        class="w-full sm:w-32 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                        placeholder="Notes about the game"
+                                        maxlength="64">
                                 </td>
                                 <td class="p-2">
                                     <button 
@@ -300,7 +339,6 @@
             </div>
         </section>
 
-        <!-- ELO Changes Calculation Examples Section -->
         <section class="bg-white shadow-md rounded-lg p-4 sm:p-6 mb-4 sm:mb-8">
             <h2 class="text-xl font-semibold text-gray-700 mb-3 sm:mb-4">ELO Changes Calculation Examples</h2>
             
@@ -477,6 +515,7 @@
         (function() {
             'use strict';
             
+            // Define the Angular module and controller
             angular.module('fidEloCalculator', [])
                 .controller('CalculatorController', CalculatorController);
             
@@ -492,7 +531,8 @@
                         score: '1',
                         kFactor: 40,
                         customK: false,
-                        ratingChange: 0
+                        ratingChange: 0,
+                        memo: ''
                     }];
                     
                     vm.totalRatingChange = 0;
@@ -707,7 +747,8 @@
                             score: '1',
                             kFactor: lastKFactor || 40,
                             customK: lastCustomK || false,
-                            ratingChange: 0
+                            ratingChange: 0,
+                            memo: ''
                         });
                     }
                 };
@@ -752,7 +793,7 @@
                     var savedCalculations = localStorage.getItem('fideEloCalculations');
                     var calculationsObj = savedCalculations ? JSON.parse(savedCalculations) : {};
                     
-                    // Check if we have reached the maximum number of saved calculations (30)
+                    // Check if we have reached the maximum of 30 saved calculations
                     if (Object.keys(calculationsObj).length >= 30 && !calculationsObj[vm.saveName]) {
                         alert('You have reached the maximum of 30 saved calculations. Please delete some before saving more.');
                         return;
