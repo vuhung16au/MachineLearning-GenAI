@@ -83,3 +83,17 @@ If the number of games (n) for a player on any list for a rating period multipli
 **References**:  
 - [FIDE Rating Change Calculator](https://ratings.fide.com/calc.phtml?page=change)  
 - [FIDE Handbook](https://handbook.fide.com/chapter/B022024)
+
+# Add game memo
+
+# Drag/drop to reorder games 
+
+refer to the code below 
+https://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested
+
+try to implement reorder games by drag/drop rows in games table. 
+
+Make it simple, and make sure we don't have any performance issues.
+
+Use lightweight ngDraggable library or HTML5 drag/drop API.
+
