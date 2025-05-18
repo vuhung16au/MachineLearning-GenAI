@@ -1,3 +1,9 @@
+Prove that, for any monotonic function $f(x)$ in the interval $[a, b]$:
+
+$$\int_{a}^{b} f(x) \, dx + \int_{f(a)}^{f(b)} f^{-1}(x) \, dx = b \cdot f(b) - a \cdot f(a)$$
+
+---
+
 **Proof without using area:**
 
 Let $y = f(x)$. Since $f$ is monotonic on $[a, b]$, it has an inverse function $x = f^{-1}(y)$ on the interval $[f(a), f(b)]$.
