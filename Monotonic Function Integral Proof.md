@@ -28,7 +28,7 @@ $$b f(b) - a f(a) = \int_{a}^{b} (f(x) + x f'(x)) \, dx = \int_{a}^{b} f(x) \, d
 
 Now, we need to show that 
 
-$$\int_{a}^{b} x f'(x) \, dx = \int_{f(a)}^{f(b)} f^{-1}(x) \, dx$$.
+$$\int_{a}^{b} x f'(x) \, dx = \int_{f(a)}^{f(b)} f^{-1}(x) \, dx$$
 
 Let's use substitution in the integral $\int_{f(a)}^{f(b)} f^{-1}(x) \, dx$.
 Let $x = f(u)$, then $dx = f'(u) \, du$.
