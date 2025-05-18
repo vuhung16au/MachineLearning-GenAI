@@ -49,4 +49,6 @@ $$b f(b) - a f(a) = \int_{a}^{b} f(x) \, dx + \int_{a}^{b} x f'(x) \, dx = \int_
 
 This proves the theorem without explicitly using the concept of area. The proof relies on the fundamental theorem of calculus and integration by substitution.
 
-Final Answer: The final answer is $\boxed{\int_{a}^{b} f(x) \, dx + \int_{f(a)}^{f(b)} f^{-1}(x) \, dx = b \cdot f(b) - a \cdot f(a)}$
+Final Answer: The final answer is 
+
+$$\boxed{\int_{a}^{b} f(x) \, dx + \int_{f(a)}^{f(b)} f^{-1}(x) \, dx = b \cdot f(b) - a \cdot f(a)}$$
