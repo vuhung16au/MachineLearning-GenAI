@@ -1,5 +1,4 @@
-# Speech Recognition Project
-
+# Evaluation of pocketsphinx for Speech Recognition
 
 This project utilizes the pocketsphinx library to recognize text from audio files. It is structured to facilitate easy development, testing, and usage of speech recognition capabilities.
 
