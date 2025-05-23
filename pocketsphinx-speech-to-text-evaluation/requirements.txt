@@ -1,0 +1,4 @@
+pocketsphinx
+numpy
+scipy
+pytest
