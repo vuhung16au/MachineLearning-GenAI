@@ -14,7 +14,7 @@ This problem is a geometric one involving a regular polygon, specifically a 15-g
 
 (As of now Apr 1, 2025) We give the AIs (Gemini, Grok 3.x) some hints and let them solve the problem. 
 
-Please refer to the notebook `15_gon_Problem.ipynb` for the hints and the solution.
+Please refer to the [notebook](15_gon_Problem.ipynb) for the hints and the solution.
 
 Without the hints, the AIs struggle to solve the problem.
 
