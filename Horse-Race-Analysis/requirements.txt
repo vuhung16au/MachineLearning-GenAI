@@ -1,8 +1,21 @@
+# Core data science packages
 pandas
 numpy
-seaborn
 matplotlib
+seaborn
+
+# Machine learning packages
 scikit-learn
-statsmodels
 tensorflow
 keras
+
+# Automated ML libraries
+lazypredict
+pycaret
+
+# NLP and deep learning packages
+transformers
+torch
+
+# Additional utilities
+statsmodels
