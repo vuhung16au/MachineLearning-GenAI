@@ -2,6 +2,8 @@
 
 This project provides tools and analysis for horse racing data.
 
+Refer to the [Notebooks](Horse-Race-Analysis.ipynb) for detailed analysis and insights, including data preprocessing, model training, evaluation, as well as visualizations and key findings.
+
 ## Development Environment Setup
 
 Follow these steps to set up your development environment:
@@ -135,7 +137,7 @@ from tensorflow.keras.models import load_model
 
 # Load the saved model
 model = load_model('model/nn_model.keras')
-# or
+# or (oldered for compatibility with older versions)
 # model = load_model('model/nn_model.h5')
 ```
 
