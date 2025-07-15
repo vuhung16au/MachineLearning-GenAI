@@ -11,7 +11,7 @@ keras
 
 # Automated ML libraries
 lazypredict
-pycaret
+pycaret>=3.0.0
 
 # NLP and deep learning packages
 transformers
@@ -19,3 +19,8 @@ torch
 
 # Additional utilities
 statsmodels
+
+seaborn
+matplotlib
+
+sentence-transformers

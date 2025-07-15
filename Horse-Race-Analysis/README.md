@@ -10,14 +10,14 @@ Follow these steps to set up your development environment:
 
 ### Prerequisites
 
-- Python 3.9 or higher
+- Python 3.10 or 3.11
 
 ### Setup Instructions
 
 1. **Create a virtual environment**
 
    ```bash
-   python3.9 -m venv .venv
+   python3.11 -m venv .venv
    ```
 
 2. **Activate the virtual environment**
