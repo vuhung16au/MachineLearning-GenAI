@@ -36,7 +36,7 @@ Follow these steps to set up your development environment:
    pip install -r requirements.txt
    ```
 
-```bash
+
 ### Deactivating the Environment
 
 When you're done working, you can deactivate the virtual environment:
