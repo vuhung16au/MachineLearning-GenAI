@@ -2,7 +2,11 @@
 
 This project provides tools and analysis for horse racing data.
 
-Refer to the [Basic Notebooks](Horse-Race-Analysis.ipynb) or [Deep Dive Notebooks](Horse-Race-Analysis-DeepDive.ipynb) for detailed analysis and insights, including data preprocessing, model training, evaluation, as well as visualizations and key findings.
+Refer to the [Basic Notebooks](Horse-Race-Analysis.ipynb) 
+or [Deep Dive Notebooks](Horse-Race-Analysis-DeepDive.ipynb) 
+for detailed analysis and insights, 
+including data preprocessing, model training, evaluation, 
+as well as visualizations and key findings.
 
 ## Development Environment Setup
 
