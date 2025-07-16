@@ -1,8 +1,6 @@
 # Core data science packages
 pandas
 numpy
-matplotlib
-seaborn
 
 # Machine learning packages
 scikit-learn
@@ -17,10 +15,11 @@ pycaret>=3.0.0
 transformers
 torch
 
-# Additional utilities
-statsmodels
 
+# Visualization libraries
 seaborn
 matplotlib
 
+# Additional utilities
+statsmodels
 sentence-transformers

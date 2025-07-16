@@ -2,7 +2,7 @@
 
 This project provides tools and analysis for horse racing data.
 
-Refer to the [Notebooks](Horse-Race-Analysis.ipynb) for detailed analysis and insights, including data preprocessing, model training, evaluation, as well as visualizations and key findings.
+Refer to the [Basic Notebooks](Horse-Race-Analysis.ipynb) or [Deep Dive Notebooks](Horse-Race-Analysis-DeepDive.ipynb) for detailed analysis and insights, including data preprocessing, model training, evaluation, as well as visualizations and key findings.
 
 ## Development Environment Setup
 
@@ -17,7 +17,7 @@ Follow these steps to set up your development environment:
 1. **Create a virtual environment**
 
    ```bash
-   python3.11 -m venv .venv
+   python3.10 -m venv .venv
    ```
 
 2. **Activate the virtual environment**
@@ -32,6 +32,7 @@ Follow these steps to set up your development environment:
    pip install -r requirements.txt
    ```
 
+```bash
 ### Deactivating the Environment
 
 When you're done working, you can deactivate the virtual environment:
