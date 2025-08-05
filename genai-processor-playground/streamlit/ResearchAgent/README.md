@@ -125,6 +125,66 @@ The app consists of several key components:
 4. **TopicVerbalizer**: Converts research data into human-readable format
 5. **Research Synthesizer**: Combines all research into a final report
 
+#### Research Flow Sequence Diagram
+
+**Technology Stack Components:**
+- **Streamlit Interface (S)**: Web interface for user interactions and real-time updates
+- **GenAI Processors Components**: ResearchAgent (RA), TopicGenerator (TG), TopicResearcher (TR), TopicVerbalizer (TV), Research Synthesizer (RS) - modular research pipeline components
+- **Google Gemini API (API)**: AI-powered research and synthesis for all AI operations
+- **Async Processing**: Real-time progress updates between components for responsive UI
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as Streamlit Interface<br/>(Streamlit)
+    participant RA as ResearchAgent<br/>(GenAI Processors)
+    participant TG as TopicGenerator<br/>(GenAI Processors)
+    participant TR as TopicResearcher<br/>(GenAI Processors)
+    participant TV as TopicVerbalizer<br/>(GenAI Processors)
+    participant RS as Research Synthesizer<br/>(GenAI Processors)
+    participant API as Google Gemini API<br/>(AI Services)
+
+    U->>S: Enter research query
+    Note over S: Async Processing:<br/>Real-time UI updates
+    S->>RA: Start research process
+    
+    Note over RA: Phase 1: Topic Generation
+    RA->>TG: Generate topics from query
+    TG->>API: Request topic generation
+    API-->>TG: Return generated topics
+    TG-->>RA: Return topic list
+    Note over S: Async Processing:<br/>Real-time progress update
+    RA->>S: Update progress (topics generated)
+    S-->>U: Show generated topics
+    
+    Note over RA: Phase 2: Research Each Topic
+    loop For each topic
+        RA->>TR: Research individual topic
+        TR->>API: Request research data
+        API-->>TR: Return research results
+        TR->>TV: Convert to readable format
+        TV->>API: Request verbalization
+        API-->>TV: Return formatted content
+        TV-->>TR: Return formatted research
+        TR-->>RA: Return topic research
+        Note over S: Async Processing:<br/>Real-time progress update
+        RA->>S: Update progress (topic completed)
+        S-->>U: Show progress update
+    end
+    
+    Note over RA: Phase 3: Synthesis
+    RA->>RS: Synthesize all research
+    RS->>API: Request final synthesis
+    API-->>RS: Return synthesized report
+    RS-->>RA: Return final report
+    Note over S: Async Processing:<br/>Final UI update
+    RA->>S: Complete research process
+    S-->>U: Display final research report
+    
+    U->>S: Download report
+    S-->>U: Provide markdown file
+```
+
 ## Security Notes
 
 - API keys are handled securely and not stored permanently
@@ -155,3 +215,7 @@ Topics: 5
   • Topic 1: "Analysis of Vietnam's historical military doctrines and their application in modern defense strategies."
 ...
 ```
+
+## Live demo 
+
+You can try the Research Agent app live at [Research Agent Demo](https://genai-research-agent.streamlit.app/).
