@@ -4,6 +4,8 @@ Research Agent Streamlit App Launcher
 
 Simple launcher script for the Research Agent Streamlit application.
 This script ensures the proper environment setup and launches the app.
+
+Licensed under the MIT License. See LICENSE.md for more information.
 """
 
 import os

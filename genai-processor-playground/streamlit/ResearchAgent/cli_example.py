@@ -5,6 +5,8 @@ Research Agent Example - Command Line Version
 This script demonstrates how to use the Research Agent programmatically
 without the Streamlit interface. Useful for automation, testing, or
 integration into other applications.
+
+Licensed under the MIT License. See LICENSE.md for more information.
 """
 
 import asyncio

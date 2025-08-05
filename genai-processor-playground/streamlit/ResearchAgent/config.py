@@ -1,6 +1,8 @@
 # Research Agent Configuration
 # This file contains default configuration options for the Research Agent Streamlit app.
 # You can modify these values to customize the default behavior.
+#
+# Licensed under the MIT License. See LICENSE.md for more information.
 
 # Default Models
 DEFAULT_TOPIC_GENERATOR_MODEL = "gemini-2.5-flash"

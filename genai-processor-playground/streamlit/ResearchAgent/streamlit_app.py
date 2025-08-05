@@ -15,6 +15,8 @@ Features:
 - Visual display of generated topics before research
 - Final synthesized research output
 - Error handling and user-friendly feedback
+
+Licensed under the MIT License. See LICENSE.md for more information.
 """
 
 import asyncio

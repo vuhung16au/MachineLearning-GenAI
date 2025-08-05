@@ -6,6 +6,8 @@ This script helps set up the Research Agent Streamlit application by:
 1. Checking for required dependencies
 2. Installing missing packages
 3. Providing setup instructions
+
+Licensed under the MIT License. See LICENSE.md for more information.
 """
 
 import subprocess
