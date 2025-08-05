@@ -1,0 +1,1 @@
+Playing with Google DeepMind's [GenAI Processors](https://github.com/google-gemini/genai-processors)
