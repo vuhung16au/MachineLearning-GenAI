@@ -169,4 +169,8 @@ To extend or modify the application:
 2. **Customize UI**: Use Streamlit's theming and CSS capabilities
 3. **Extend Processing**: Add new processors to the pipeline for additional file types
 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 
