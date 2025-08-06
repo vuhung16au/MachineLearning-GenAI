@@ -1,15 +1,23 @@
-# 🧮 MathMate - Streamlit Chat Application
+# 🧮 MathMate - AI Mathematics Companion with Research Capabilities
 
-A Streamlit-based chat application featuring MathMate, an AI assistant specialized in mathematics and problem-solving powered by Google's Gemini model.
+A comprehensive Streamlit-based application featuring MathMate, an AI assistant specialized in mathematics and problem-solving, now enhanced with powerful research capabilities powered by Google's Gemini model.
 
 ## Features
 
-- **Web UI**: Interactive Streamlit interface for seamless conversation
+### 💬 Chat Mode
+- **Interactive Conversations**: Real-time mathematical assistance
 - **Mathematical Expertise**: Help with concepts from basic arithmetic to advanced topics
 - **Multimodal Support**: Process URLs for images and PDFs
 - **Context Management**: Maintains conversation history throughout the session
 - **Google Search Integration**: Model has access to search tools for enhanced responses
-- **Error Handling**: Proper validation and exception handling
+
+### 🔬 Research Mode
+- **Topic Generation**: Automatically generates relevant research topics based on your query
+- **Deep Research**: Uses AI and web search to gather comprehensive information
+- **Synthesis**: Combines findings into well-structured research reports
+- **Configurable Parameters**: Adjust number of topics, models, and exclusions
+- **Real-time Updates**: See the research process unfold with status updates
+- **Export Functionality**: Download research reports as Markdown files
 
 ## Prerequisites
 
@@ -17,15 +25,22 @@ Before running this application, ensure you have:
 
 1. **Python 3.8+** installed
 2. **Google API Key** from [AI Studio](https://aistudio.google.com/)
+3. **Virtual Environment** (recommended)
 
 ## Setup
 
-1. **Install Dependencies**
+1. **Create Virtual Environment**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Set Environment Variable**
+3. **Set Environment Variable**
    ```bash
    export GOOGLE_API_KEY='your-api-key-here'
    ```
@@ -39,13 +54,21 @@ Before running this application, ensure you have:
 
 ### Running the Application
 
+**Option 1: Using the launch script (recommended)**
 ```bash
-streamlit run app.py
+./run.sh
+```
+
+**Option 2: Direct command**
+```bash
+.venv/bin/python -m streamlit run app.py
 ```
 
 The application will open in your default web browser at `http://localhost:8501`.
 
 ### Using MathMate
+
+#### 💬 Chat Mode Examples
 
 1. **Basic Math Questions**
    - "What is the derivative of x²?"
@@ -53,13 +76,31 @@ The application will open in your default web browser at `http://localhost:8501`
    - "How do I solve quadratic equations?"
 
 2. **URL Analysis**
-   - "Explain this diagram: https://example.com/math-diagram.png"
-   - "Summarize this paper: https://arxiv.org/pdf/math-paper.pdf"
+   - "Explain this diagram: <https://example.com/math-diagram.png>"
+   - "Summarize this paper: <https://arxiv.org/pdf/math-paper.pdf>"
 
 3. **Advanced Topics**
    - "Explain calculus concepts"
    - "Help me with linear algebra"
    - "Statistics and probability questions"
+
+#### 🔬 Research Mode Examples
+
+1. **Mathematical Research Queries**
+   - "Research the latest developments in quantum computing and its applications in mathematics"
+   - "Investigate the mathematical foundations of machine learning algorithms"
+   - "Study the applications of differential equations in physics and engineering"
+
+2. **Research Process**
+   - Click "Preview Topics" to see generated research topics
+   - Click "Start Research" to begin comprehensive research
+   - Watch real-time status updates as the agent works
+   - Download the final research report as a Markdown file
+
+3. **Configuration Options**
+   - Adjust number of topics (1-10)
+   - Choose different AI models
+   - Exclude specific topics from research
 
 ## Application Structure
 
