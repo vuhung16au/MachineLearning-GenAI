@@ -1,0 +1,7 @@
+genai_processors
+google-genai
+streamlit
+httpx
+termcolor
+python-dotenv
+asyncio
