@@ -8,7 +8,7 @@
 - **Dirichlet Distribution**: Essential for topic modeling and NLP
 - **Hierarchical Models**: Parameters with distributions
 
-### **Mathematical Beauty**: 
+### 2. Mathematical Beauty
 - Connect factorials, trigonometric integrals, and complex analysis
 - **Creative Applications**: Elegant solutions to complex problems
 
@@ -147,7 +147,9 @@ $$\Gamma(n) = \frac{\Gamma(n + 1)}{n}$$
 
 This establishes the fundamental connection between the Gamma function and factorials, showing that the Gamma function is indeed a continuous extension of the factorial function.
 
-## Proof: $\Gamma(n) = z^n \int_0^{\infty} e^{-zx} x^{n-1} dx$
+## Prove that: 
+
+$$\Gamma(n) = z^n \int_0^{\infty} e^{-zx} x^{n-1} dx$$
 
 Let us prove this alternative integral representation of the Gamma function.
 
@@ -292,7 +294,9 @@ $$\int_0^{\infty} e^{-4x} x^{5/2} dx = \frac{15\sqrt{\pi}}{8 \cdot 4^{7/2}} = \f
 
 ## Example: Prove Legendre's Duplication Formula
 
-**Problem:** Prove that $\Gamma\left(\frac{1}{2}\right)\Gamma(2n) = 2^{2n-1}\Gamma(n)\Gamma\left(n + \frac{1}{2}\right)$
+**Problem:** Prove that 
+
+$$\Gamma\left(\frac{1}{2}\right)\Gamma(2n) = 2^{2n-1}\Gamma(n)\Gamma\left(n + \frac{1}{2}\right)$$
 
 **Solution:**
 
@@ -352,9 +356,9 @@ $$= \Gamma\left(n + \frac{1}{2}\right) \cdot \frac{2^{2n-1} n!}{n} = 2^{2n-1}\Ga
 
 This is Legendre's Duplication Formula, which relates Gamma functions at different arguments.
 
-## Example: Prove $\int_0^1 x^m (\log x)^n dx = \frac{(-1)^n n!}{(m+1)^{n+1}}$
+## Example: Prove 
 
-**Problem:** Prove that $\int_0^1 x^m (\log x)^n dx = \frac{(-1)^n n!}{(m+1)^{n+1}}$
+$$\int_0^1 x^m (\log x)^n dx = \frac{(-1)^n n!}{(m+1)^{n+1}}$$
 
 **Solution:**
 
@@ -493,9 +497,9 @@ $$LHS = \frac{2n \cdot \Gamma(2n)}{2^n \cdot n \cdot \Gamma(n)} = \frac{2 \cdot 
 
 This identity is useful in combinatorics and probability theory, particularly when dealing with products of odd numbers and their relationship to Gamma functions.
 
-## Example: Evaluate $\int_0^{\infty} e^{-ax} x^{m-1} \sin(bx) dx$ in terms of Gamma Function
+## Example: Evaluate in terms of Gamma Function 
 
-**Problem:** Evaluate $\int_0^{\infty} e^{-ax} x^{m-1} \sin(bx) dx$ in terms of Gamma Function
+$$\int_0^{\infty} e^{-ax} x^{m-1} \sin(bx) dx$$ 
 
 **Solution:**
 
@@ -557,9 +561,9 @@ where $\theta = \arctan(b/a)$
 
 This result is useful in Laplace transforms and probability theory involving exponential distributions with sinusoidal components.
 
-## Example: Prove $\int_0^{\infty} \frac{x^a}{a^x} dx = \frac{\Gamma(a+1)}{(\log a)^{a+1}}$
+## Example: Prove 
 
-**Problem:** Prove that $\int_0^{\infty} \frac{x^a}{a^x} dx = \frac{\Gamma(a+1)}{(\log a)^{a+1}}$
+$$\int_0^{\infty} \frac{x^a}{a^x} dx = \frac{\Gamma(a+1)}{(\log a)^{a+1}}$$
 
 **Solution:**
 
@@ -616,7 +620,7 @@ This result is useful in advanced calculus and special functions, demonstrating 
 
 $$ \Gamma(n) \Gamma(-n) = -\frac{\pi}{n \sin(n\pi)}$$
 
-**Problem:** Prove that $\Gamma(n) \Gamma(-n) = -\frac{\pi}{n \sin(n\pi)}$ where $n$ is not an integer.
+where $n$ is not an integer.
 
 **Solution:**
 
@@ -1157,9 +1161,9 @@ $$I = \frac{1}{3} B(2, 11)$$
 
 This example demonstrates how substitution can transform complex integrals into standard Beta function form for evaluation.
 
-## Example: Evaluate $\int_0^{\infty} e^{-x^2} dx$ using Gamma Function
+## Example: Evaluate using Gamma Function
 
-**Problem:** Evaluate the integral $\int_0^{\infty} e^{-x^2} dx$ using the Gamma function.
+$$\int_0^{\infty} e^{-x^2} dx$$ 
 
 **Solution:**
 
