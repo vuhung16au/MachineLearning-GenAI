@@ -60,7 +60,7 @@ def read_analysis_data():
     # Parse the markdown content to extract data
     data = {
         'total_jobs': 0,
-        'top_10_skills': [],
+        'top_5_skills': [],
         'high_demand_skills': [],
         'medium_demand_skills': [],
         'lower_demand_skills': [],
@@ -72,7 +72,7 @@ def read_analysis_data():
     if total_match:
         data['total_jobs'] = int(total_match.group(1))
     
-    # Extract top 10 skills
+    # Extract top 5 skills (from top 10 section)
     top_10_section = re.search(r'## TOP 10 MOST DEMANDED SKILLS\n\n(.*?)\n\n##', content, re.DOTALL)
     if top_10_section:
         lines = top_10_section.group(1).strip().split('\n')[2:]  # Skip header and separator
@@ -80,12 +80,14 @@ def read_analysis_data():
             if line.strip() and '|' in line:
                 parts = [p.strip() for p in line.split('|') if p.strip()]
                 if len(parts) >= 4:
-                    data['top_10_skills'].append({
+                    data['top_5_skills'].append({
                         'rank': parts[0],
                         'skill': parts[1],
                         'count': int(parts[2]),
                         'percentage': float(parts[3].replace('%', ''))
                     })
+        # Take only the first 5 skills
+        data['top_5_skills'] = data['top_5_skills'][:5]
     
     # Extract high demand skills
     high_demand_section = re.search(r'## HIGH DEMAND SKILLS \(>50% of jobs\)\n\n(.*?)\n\n##', content, re.DOTALL)
@@ -131,10 +133,10 @@ def read_analysis_data():
 
 def generate_pie_chart(data):
     """Generate pie chart for top 5 skills"""
-    if not data['top_10_skills']:
+    if not data['top_5_skills']:
         return None
     
-    top_5 = data['top_10_skills'][:5]
+    top_5 = data['top_5_skills']
     
     fig = go.Figure(data=[go.Pie(
         labels=[skill['skill'] for skill in top_5],
@@ -258,9 +260,9 @@ def generate_html_dashboard(data):
         <!-- Second Row -->
         <div class="grid grid-cols-3 gap-8">
             
-            <!-- Top 10 Most Demanded Skills -->
+            <!-- Top 5 Most Demanded Skills -->
             <div class="bg-white rounded-xl card-shadow p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Top 10 Most Demanded Skills</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Top 5 Most Demanded Skills</h2>
                 <div class="space-y-3">
                     {''.join([f'''
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -273,7 +275,7 @@ def generate_html_dashboard(data):
                             <div class="text-xs text-gray-500">{skill['count']} jobs</div>
                         </div>
                     </div>
-                    ''' for skill in data['top_10_skills'][:10]])}
+                    ''' for skill in data['top_5_skills']])}
                 </div>
             </div>
             
@@ -329,7 +331,7 @@ def generate_html_dashboard(data):
                     <div class="text-sm text-gray-600">Medium Demand Skills</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-3xl font-bold text-purple-600">{len(data['top_10_skills'])}</div>
+                    <div class="text-3xl font-bold text-purple-600">{len(data['top_5_skills'])}</div>
                     <div class="text-sm text-gray-600">Top Skills Tracked</div>
                 </div>
             </div>
@@ -413,7 +415,7 @@ def main():
             return
         
         print(f"✅ Successfully loaded data for {data['total_jobs']} jobs")
-        print(f"   🎯 Top 10 skills: {len(data['top_10_skills'])}")
+        print(f"   🎯 Top 5 skills: {len(data['top_5_skills'])}")
         print(f"   🔥 High demand skills: {len(data['high_demand_skills'])}")
         print(f"   📈 Medium demand skills: {len(data['medium_demand_skills'])}")
         
@@ -441,8 +443,8 @@ def main():
             f.write("## Key Findings\n\n")
             for insight in data['key_insights']:
                 f.write(f"- {insight}\n")
-            f.write("\n## Top 10 Most Demanded Skills\n\n")
-            for skill in data['top_10_skills']:
+            f.write("\n## Top 5 Most Demanded Skills\n\n")
+            for skill in data['top_5_skills']:
                 f.write(f"{skill['rank']}. **{skill['skill']}** - {skill['percentage']:.1f}% ({skill['count']} jobs)\n")
         
         print(f"✅ Markdown report saved to: {report_file}")
