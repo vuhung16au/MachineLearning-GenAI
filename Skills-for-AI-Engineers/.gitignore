@@ -82,11 +82,68 @@ Thumbs.db
 
 ### Project-specific ###
 # Input URLs (local only)
+00.inputs/
 00.inputs/job_description.txt
+
+# Keep sample files in version control
+# !00.inputs/job_description-sample.txt
 
 # Downloaded HTML/process artifacts
 01.processing/
 
-# Generated reports (can be regenerated)
+# Generated reports and outputs (can be regenerated)
+02.outputs/
 02.outputs/skills_analysis_detail.md
 02.outputs/skills_analysis_summary.md
+02.outputs/skills_wordcloud.png
+02.outputs/skills_analysis_dashboard.html
+02.outputs/skills_analysis_html.png
+02.outputs/report.md
+02.outputs/skills_data.pkl
+
+# Keep sample files in version control
+# !02.outputs/skills_analysis_summary-sample.md
+
+# Project-specific documentation
+Prompt.md
+Prompt*.md
+TODO.md
+TODO*.md
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# Chrome driver logs
+chromedriver.log
+geckodriver.log
+
+# Selenium screenshots (if any)
+screenshots/
+*.png.tmp
+
+# Data files and caches
+*.pickle
+*.csv
+*.json
+*.xml
+
+# Browser data
+chrome_user_data/
+firefox_profile/
+
+# API keys and secrets
+.env.local
+.env.production
+secrets.json
+config.json
+
+# Large data files
+*.zip
+*.tar.gz
+*.rar
+*.7z
