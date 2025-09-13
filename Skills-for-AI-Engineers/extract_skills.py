@@ -11,12 +11,17 @@ import re
 import sys
 import time
 import urllib.parse
+import argparse
 from collections import Counter
 from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 import docx
 import subprocess
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
 
 
 def create_directories():
@@ -234,72 +239,123 @@ def extract_skills(text):
     return normalized_skills
 
 
-def process_job_descriptions():
-    """Main function to process job descriptions"""
-    print("🚀 Starting Job Description Skills Extraction")
+def generate_wordcloud(skill_counts, output_file):
+    """Generate word cloud from skill counts"""
+    try:
+        # Prepare data for wordcloud
+        if not skill_counts:
+            print("⚠️  No skills found for wordcloud generation")
+            return
+        
+        # Create wordcloud
+        wordcloud = WordCloud(
+            width=800,
+            height=400,
+            background_color='white',
+            max_words=100,
+            colormap='viridis',
+            relative_scaling=0.5,
+            random_state=42
+        ).generate_from_frequencies(skill_counts)
+        
+        # Save wordcloud
+        plt.figure(figsize=(10, 5))
+        plt.imshow(wordcloud, interpolation='bilinear')
+        plt.axis('off')
+        plt.tight_layout(pad=0)
+        plt.savefig(output_file, dpi=300, bbox_inches='tight', facecolor='white')
+        plt.close()
+        
+        print(f"📊 Wordcloud saved to: {output_file}")
+        
+    except Exception as e:
+        print(f"❌ Error generating wordcloud: {e}")
+
+
+def step_1_scrape_job_pages():
+    """Step 1: Scrape job listing pages from Seek.com.au"""
+    print("🚀 Step 1: Scraping job listing pages")
+    print("=" * 50)
+    print("⚠️  This step is handled by scrape_sydney_jobs.py")
+    print("   Please run: python scrape_sydney_jobs.py")
+    return True
+
+
+def step_2_extract_job_links():
+    """Step 2: Extract job description links from scraped pages"""
+    print("🚀 Step 2: Extracting job description links")
+    print("=" * 50)
+    print("⚠️  This step is handled by scrape_sydney_jobs.py")
+    print("   Please run: python scrape_sydney_jobs.py")
+    return True
+
+
+def step_3_fetch_job_descriptions():
+    """Step 3: Fetch individual job descriptions"""
+    print("🚀 Step 3: Fetching job descriptions")
+    print("=" * 50)
+    print("⚠️  This step is handled by scrape_sydney_jobs.py")
+    print("   Please run: python scrape_sydney_jobs.py")
+    return True
+
+
+def step_4_extract_skills():
+    """Step 4: Extract skills from job descriptions"""
+    print("🚀 Step 4: Extracting skills from job descriptions")
     print("=" * 50)
     
     # Create directories
     create_directories()
     
-    # Read URLs from job_description.txt
-    urls_file = "00.inputs/job_description.txt"
-    if not os.path.exists(urls_file):
-        print(f"❌ Error: {urls_file} not found!")
-        return
-    
-    with open(urls_file, 'r') as f:
-        raw_urls = [line.strip() for line in f if line.strip()]
-    
-    # Deduplicate by job id from URL path to avoid processing duplicates
-    urls = []
-    seen_job_ids = set()
-    for url in raw_urls:
-        try:
-            parsed = urllib.parse.urlparse(url)
-            job_id = parsed.path.split('/')[-1] if parsed.path else url
-        except Exception:
-            job_id = url
-        if job_id in seen_job_ids:
-            continue
-        seen_job_ids.add(job_id)
-        urls.append(url)
-    
-    print(f"📋 Found {len(urls)} unique URLs to process (from {len(raw_urls)} lines)")
-    
-    # Download job descriptions
+    # Process HTML files from 01.processing directory
     job_descriptions_dir = "01.processing"
-    downloaded_files = []
+    if not os.path.exists(job_descriptions_dir):
+        print(f"❌ Error: {job_descriptions_dir} directory not found!")
+        return False
     
-    for url in urls:
-        filepath = download_job_description(url, job_descriptions_dir)
-        if filepath:
-            downloaded_files.append(filepath)
-        time.sleep(2)  # Be polite: wait 2s between downloads
+    # Find all HTML files (job descriptions)
+    html_files = []
+    for file in os.listdir(job_descriptions_dir):
+        if file.endswith('.html') and not file.startswith('page_'):
+            html_files.append(os.path.join(job_descriptions_dir, file))
     
-    print(f"📥 Downloaded {len(downloaded_files)} job descriptions")
+    if not html_files:
+        print("❌ No job description HTML files found in 01.processing/")
+        return False
+    
+    print(f"📋 Found {len(html_files)} job description files to process")
     
     # Process each job description
     all_skills = []
     file_skills = {}
+    total_files = len(html_files)
     
-    for filepath in downloaded_files:
-        print(f"🔍 Processing: {os.path.basename(filepath)}")
+    print(f"\n🔍 Starting skills extraction from {total_files} job descriptions...")
+    print("=" * 60)
+    
+    for i, filepath in enumerate(html_files, 1):
+        filename = os.path.basename(filepath)
+        print(f"\n📄 [{i}/{total_files}] Processing: {filename}")
         
         if filepath.endswith('.html'):
             text = extract_text_from_html(filepath)
         elif filepath.endswith('.docx'):
             text = extract_text_from_docx(filepath)
         else:
+            print(f"  ⚠️  Skipping unsupported file type")
             continue
         
         if text:
             skills = extract_skills(text)
             file_skills[filepath] = skills
             all_skills.extend(skills)
-            print(f"  ✓ Found {len(skills)} skills")
+            print(f"  ✅ Found {len(skills)} skills")
         else:
-            print(f"  ✗ No text extracted")
+            print(f"  ❌ No text extracted")
+        
+        # Show progress every 50 files
+        if i % 50 == 0 or i == total_files:
+            print(f"  📊 Progress: {i}/{total_files} files processed ({i/total_files*100:.1f}%)")
     
     # Count skill frequency
     skill_counts = Counter(all_skills)
@@ -307,12 +363,117 @@ def process_job_descriptions():
     
     if total_jobs == 0:
         print("❌ No job descriptions processed successfully!")
-        return
+        return False
     
-    # Generate analysis
+    print(f"\n📊 Skills Extraction Summary:")
+    print(f"   📄 Files processed: {total_files}")
+    print(f"   ✅ Successful extractions: {total_jobs}")
+    print(f"   🔧 Total skills found: {len(all_skills)}")
+    print(f"   🎯 Unique skills: {len(skill_counts)}")
+    
+    # Save skills data for next steps
+    skills_data = {
+        'skill_counts': skill_counts,
+        'file_skills': file_skills,
+        'total_jobs': total_jobs,
+        'all_skills': all_skills
+    }
+    
+    # Save to temporary file for next steps
+    import pickle
+    with open("02.outputs/skills_data.pkl", "wb") as f:
+        pickle.dump(skills_data, f)
+    
+    print(f"💾 Skills data saved for next steps")
+    return True
+
+
+def step_5_generate_wordcloud():
+    """Step 5: Generate word cloud visualization"""
+    print("🚀 Step 5: Generating word cloud visualization")
+    print("=" * 50)
+    
+    # Load skills data from previous step
+    import pickle
+    try:
+        with open("02.outputs/skills_data.pkl", "rb") as f:
+            skills_data = pickle.load(f)
+    except FileNotFoundError:
+        print("❌ Skills data not found. Please run step 4 first.")
+        return False
+    
+    skill_counts = skills_data['skill_counts']
+    
+    print(f"🎨 Generating word cloud from {len(skill_counts)} unique skills...")
+    wordcloud_file = "02.outputs/skills_wordcloud.png"
+    generate_wordcloud(skill_counts, wordcloud_file)
+    
+    print(f"✅ Word cloud generation complete!")
+    return True
+
+
+def step_6_generate_analysis():
+    """Step 6: Generate analysis reports"""
+    print("🚀 Step 6: Generating analysis reports")
+    print("=" * 50)
+    
+    # Load skills data from previous step
+    import pickle
+    try:
+        with open("02.outputs/skills_data.pkl", "rb") as f:
+            skills_data = pickle.load(f)
+    except FileNotFoundError:
+        print("❌ Skills data not found. Please run step 4 first.")
+        return False
+    
+    skill_counts = skills_data['skill_counts']
+    file_skills = skills_data['file_skills']
+    total_jobs = skills_data['total_jobs']
+    
+    print(f"📈 Generating analysis reports for {total_jobs} jobs...")
     generate_analysis(skill_counts, file_skills, total_jobs)
     
-    print("\n✅ Analysis complete! Check the 02.outputs directory for results.")
+    print(f"✅ Analysis reports generation complete!")
+    return True
+
+
+def step_7_generate_dashboard():
+    """Step 7: Generate dashboard and final reports"""
+    print("🚀 Step 7: Generating dashboard and final reports")
+    print("=" * 50)
+    print("⚠️  This step is handled by generate_report.py")
+    print("   Please run: python generate_report.py")
+    return True
+
+
+def process_job_descriptions():
+    """Main function to process job descriptions (legacy - runs all steps)"""
+    print("🚀 Starting Job Description Skills Extraction (All Steps)")
+    print("=" * 60)
+    
+    # Run all steps in sequence
+    steps = [
+        ("Step 1: Scraping job pages", step_1_scrape_job_pages),
+        ("Step 2: Extracting job links", step_2_extract_job_links),
+        ("Step 3: Fetching job descriptions", step_3_fetch_job_descriptions),
+        ("Step 4: Extracting skills", step_4_extract_skills),
+        ("Step 5: Generating word cloud", step_5_generate_wordcloud),
+        ("Step 6: Generating analysis", step_6_generate_analysis),
+        ("Step 7: Generating dashboard", step_7_generate_dashboard)
+    ]
+    
+    for step_name, step_func in steps:
+        print(f"\n{step_name}")
+        print("-" * 40)
+        if not step_func():
+            print(f"❌ {step_name} failed!")
+            return
+    
+    print(f"\n✅ All steps completed successfully!")
+    print(f"📁 Check the 02.outputs directory for results:")
+    print(f"   🎨 Word cloud: 02.outputs/skills_wordcloud.png")
+    print(f"   📊 Summary report: 02.outputs/skills_analysis_summary.md")
+    print(f"   📋 Detailed report: 02.outputs/skills_analysis_detail.md")
 
 
 def generate_analysis(skill_counts, file_skills, total_jobs):
@@ -497,10 +658,117 @@ def generate_detailed_report(skill_counts, file_skills, total_jobs):
     print(f"📋 Detailed report saved to: {output_file}")
 
 
+def show_help():
+    """Show help message"""
+    help_text = """
+AI Engineer Skills Analysis Pipeline
+
+This script extracts skills from job descriptions and generates analysis reports.
+You can run the entire pipeline or specific steps.
+
+USAGE:
+    python extract_skills.py [OPTIONS]
+
+OPTIONS:
+    --step STEP     Run a specific step (1-7)
+    --help, -h      Show this help message
+
+STEPS:
+    1. Scrape job listing pages from Seek.com.au
+       (Handled by: python scrape_sydney_jobs.py)
+    
+    2. Extract job description links from scraped pages
+       (Handled by: python scrape_sydney_jobs.py)
+    
+    3. Fetch individual job descriptions
+       (Handled by: python scrape_sydney_jobs.py)
+    
+    4. Extract skills from job descriptions
+       (Processes HTML files in 01.processing/)
+    
+    5. Generate word cloud visualization
+       (Creates: 02.outputs/skills_wordcloud.png)
+    
+    6. Generate analysis reports
+       (Creates: 02.outputs/skills_analysis_summary.md, skills_analysis_detail.md)
+    
+    7. Generate dashboard and final reports
+       (Handled by: python generate_report.py)
+
+EXAMPLES:
+    # Run all steps (legacy mode)
+    python extract_skills.py
+    
+    # Run specific steps
+    python extract_skills.py --step 4
+    python extract_skills.py --step 5
+    python extract_skills.py --step 6
+    
+    # Show help
+    python extract_skills.py --help
+
+WORKFLOW:
+    1. First run: python scrape_sydney_jobs.py (steps 1-3)
+    2. Then run: python extract_skills.py --step 4 (extract skills)
+    3. Then run: python extract_skills.py --step 5 (generate word cloud)
+    4. Then run: python extract_skills.py --step 6 (generate analysis)
+    5. Finally run: python generate_report.py (step 7)
+
+OUTPUT FILES:
+    - 02.outputs/skills_wordcloud.png
+    - 02.outputs/skills_analysis_summary.md
+    - 02.outputs/skills_analysis_detail.md
+    - 02.outputs/skills_data.pkl (temporary data file)
+"""
+    print(help_text)
+
+
 def main():
     """Main entry point"""
+    parser = argparse.ArgumentParser(
+        description="AI Engineer Skills Analysis Pipeline",
+        add_help=False
+    )
+    parser.add_argument('--step', type=int, choices=range(1, 8), 
+                       help='Run a specific step (1-7)')
+    parser.add_argument('--help', '-h', action='store_true', 
+                       help='Show help message')
+    
+    args = parser.parse_args()
+    
+    # Show help if requested
+    if args.help:
+        show_help()
+        return
+    
     try:
-        process_job_descriptions()
+        if args.step:
+            # Run specific step
+            step_functions = {
+                1: step_1_scrape_job_pages,
+                2: step_2_extract_job_links,
+                3: step_3_fetch_job_descriptions,
+                4: step_4_extract_skills,
+                5: step_5_generate_wordcloud,
+                6: step_6_generate_analysis,
+                7: step_7_generate_dashboard
+            }
+            
+            step_name = f"Step {args.step}"
+            step_func = step_functions[args.step]
+            
+            print(f"🚀 Running {step_name}")
+            print("=" * 60)
+            
+            if step_func():
+                print(f"\n✅ {step_name} completed successfully!")
+            else:
+                print(f"\n❌ {step_name} failed!")
+                sys.exit(1)
+        else:
+            # Run all steps (legacy mode)
+            process_job_descriptions()
+            
     except KeyboardInterrupt:
         print("\n⚠️  Process interrupted by user")
     except Exception as e:
