@@ -1,0 +1,20 @@
+# Core dependencies for Gemini 2.5 Flash demo with google.genai
+# google-genai>=0.1.0  # Primary Google GenAI library
+google>=3.0.0  # For google.genai import
+pillow>=10.0.0
+pypdf>=3.0.0
+moviepy>=1.0.3
+tensorflow>=2.13.0
+requests>=2.31.0
+numpy>=1.24.0
+
+# Additional dependencies for enhanced functionality
+pathlib  # For cross-platform path handling
+
+# Optional dependencies for enhanced functionality
+# ffmpeg-python>=0.2.0  # Alternative to system ffmpeg
+# opencv-python>=4.8.0  # Alternative for video processing
+
+# Development dependencies (optional)
+# jupyter>=1.0.0
+# ipykernel>=6.0.0
