@@ -1,0 +1,14 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+scipy
+statsmodels
+xgboost
+langchain
+google-generativeai
+fastapi
+uvicorn
+requests
+pydantic
