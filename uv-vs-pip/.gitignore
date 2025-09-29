@@ -1,0 +1,61 @@
+# macOS
+.DS_Store
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+.venv-*/
+.venv*/
+venv/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+.cache/
+coverage.xml
+
+# Editors/IDE
+.vscode/
+.idea/
+
+# Env/config
+.env
+.env.*
+.python-version
+
+# Logs
+*.log
+results/logs/*
+!results/logs/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Misc
+.bench/
+
+# Environment folders 
+.venv-*/
+.venv*/
+venv/
+ENV/
+
+# Project specific
+results/
+Prompt.md
