@@ -1,0 +1,201 @@
+dog_id,breed,age_months,training_level,temperament,size,energy_level,socialization_score,previous_negative_experiences,owner_race,living_environment,daily_exercise_hours
+D_000000,Labrador,62,Intermediate,Calm,Medium,High,1.078557761535145,3,Hispanic,Urban,3.9250243820078086
+D_000001,Bulldog,99,Intermediate,Energetic,Large,Low,3.0259215266411577,3,White,Suburban,3.9023359762430885
+D_000002,German Shepherd,74,Untrained,Calm,Medium,Medium,4.825055913821133,3,White,Rural,1.6186634392782493
+D_000003,Labrador,48,Untrained,Shy,Large,Medium,7.044236214774866,2,White,Suburban,1.3839899569819043
+D_000004,Labrador,20,Advanced,Aggressive,Small,High,9.903742093546374,2,Middle Eastern,Suburban,2.225622925390717
+D_000005,Beagle,58,Basic,Calm,Large,Medium,2.3233554592401817,0,Hispanic,Urban,0.63808183522942
+D_000006,Bulldog,160,Advanced,Friendly,Medium,High,5.534295611637274,1,Middle Eastern,Suburban,3.702613482148795
+D_000007,Poodle,174,Untrained,Shy,Medium,Medium,5.192800823952713,0,Hispanic,Urban,3.6104262517467944
+D_000008,Rottweiler,55,Basic,Friendly,Small,Medium,2.3179027761657967,0,White,Urban,2.0937744709652515
+D_000009,Poodle,142,Intermediate,Aggressive,Large,Low,4.184467897162279,0,Black,Suburban,2.116420520962129
+D_000010,Siberian Husky,96,Intermediate,Aggressive,Small,High,7.626525587561409,1,Asian,Suburban,3.0465767015666017
+D_000011,Golden Retriever,41,Basic,Friendly,Small,High,8.910551938418209,3,Asian,Rural,0.8379266750921079
+D_000012,Siberian Husky,97,Untrained,Calm,Small,Medium,0.21647902587247914,0,Hispanic,Suburban,3.610249342770343
+D_000013,Siberian Husky,87,Intermediate,Friendly,Small,Low,7.6265348991148425,2,Asian,Suburban,2.32443713838423
+D_000014,Golden Retriever,106,Advanced,Aggressive,Medium,Low,9.619776547341258,2,Middle Eastern,Urban,2.2682926723058587
+D_000015,Labrador,168,Intermediate,Energetic,Medium,Low,9.764900340442491,4,Native American,Urban,1.6026977381265979
+D_000016,Labrador,31,Basic,Energetic,Large,Low,9.650316229099188,4,Native American,Urban,2.409629625495027
+D_000017,Labrador,115,Intermediate,Energetic,Small,Low,2.6175286903702366,3,Middle Eastern,Urban,2.5619669110461336
+D_000018,Rottweiler,125,Intermediate,Friendly,Small,High,3.47047025953777,0,White,Rural,1.777350156838788
+D_000019,German Shepherd,159,Intermediate,Friendly,Large,High,2.6670343063721424,0,Hispanic,Suburban,3.2556404311008835
+D_000020,Poodle,43,Advanced,Energetic,Medium,Low,2.529118055562871,4,Hispanic,Suburban,3.7285246385131945
+D_000021,Labrador,132,Intermediate,Aggressive,Large,High,2.710629901403637,4,White,Urban,3.7981707322726295
+D_000022,Beagle,150,Intermediate,Friendly,Large,Low,3.979530562013335,1,Hispanic,Suburban,3.346001866047678
+D_000023,Golden Retriever,44,Intermediate,Shy,Medium,Low,4.967701131271635,3,Black,Rural,2.6830978592483943
+D_000024,German Shepherd,151,Untrained,Friendly,Medium,Medium,3.7473102253575985,0,Black,Urban,0.8814999645204163
+D_000025,Labrador,74,Untrained,Friendly,Medium,Medium,1.4369160726173391,2,Native American,Rural,1.6080872194442635
+D_000026,Bulldog,55,Intermediate,Friendly,Small,Medium,2.5098648552318137,2,Asian,Suburban,3.9927029704430073
+D_000027,German Shepherd,63,Basic,Calm,Medium,High,2.356871143307094,4,Black,Suburban,1.484410071331661
+D_000028,Poodle,50,Untrained,Shy,Large,Medium,5.546936856470578,4,White,Rural,1.9796557198088336
+D_000029,Poodle,51,Basic,Calm,Medium,Medium,9.738777670436397,1,Black,Urban,1.3145558465451874
+D_000030,Rottweiler,151,Basic,Friendly,Medium,Low,0.8900317798267965,1,Asian,Rural,1.0143614206633405
+D_000031,Labrador,52,Basic,Friendly,Large,Medium,4.024451384435926,1,Native American,Urban,0.9972156330507178
+D_000032,German Shepherd,166,Advanced,Calm,Medium,Medium,9.274228364827623,1,Hispanic,Urban,2.9123040772703317
+D_000033,Golden Retriever,170,Untrained,Friendly,Small,High,6.226260273619194,1,Native American,Suburban,2.7182266384013767
+D_000034,Beagle,160,Advanced,Aggressive,Large,High,8.67705459766688,0,Native American,Suburban,2.06826303053572
+D_000035,Bulldog,102,Basic,Friendly,Small,High,9.044739272812876,0,Hispanic,Rural,2.570283362472439
+D_000036,Golden Retriever,16,Basic,Shy,Medium,High,7.768603268982814,0,Asian,Suburban,1.3897624017334087
+D_000037,Labrador,173,Untrained,Aggressive,Medium,Low,9.75604968589112,3,Hispanic,Rural,3.6023173461853832
+D_000038,Labrador,119,Basic,Shy,Medium,Medium,3.330392353633942,0,White,Suburban,1.4754980029940215
+D_000039,Siberian Husky,164,Intermediate,Energetic,Large,Medium,0.41970503406067006,0,Hispanic,Urban,1.3306119647136188
+D_000040,Bulldog,70,Advanced,Friendly,Small,Medium,3.8279283107990936,3,Asian,Suburban,1.1559395079432193
+D_000041,Beagle,165,Advanced,Energetic,Medium,Low,7.809448189504872,4,Hispanic,Rural,3.4353000407236
+D_000042,German Shepherd,6,Untrained,Friendly,Large,Low,9.993649321926787,2,Middle Eastern,Suburban,2.809881972306685
+D_000043,Siberian Husky,154,Intermediate,Energetic,Large,High,8.227500147651233,1,Native American,Rural,3.4854438916054784
+D_000044,German Shepherd,58,Advanced,Aggressive,Large,High,6.1352788416357305,0,White,Suburban,3.0511574752676247
+D_000045,Rottweiler,111,Intermediate,Calm,Medium,Medium,2.8973760052888933,4,Native American,Urban,2.535356659969887
+D_000046,Poodle,139,Intermediate,Shy,Small,Medium,0.20492046877974457,2,White,Rural,0.6823076742450283
+D_000047,Beagle,52,Basic,Calm,Large,Medium,7.139145840836343,2,Black,Urban,1.6435937186707994
+D_000048,Golden Retriever,29,Advanced,Friendly,Small,High,7.47740385641692,4,Asian,Urban,0.6730660283777155
+D_000049,Golden Retriever,122,Basic,Energetic,Medium,Low,3.218466352013203,1,Asian,Urban,1.3241499595380701
+D_000050,Poodle,5,Basic,Aggressive,Large,Medium,5.286298375366193,4,Native American,Rural,0.6227273215655155
+D_000051,Labrador,70,Intermediate,Calm,Small,High,0.6212577072009573,0,Middle Eastern,Urban,3.5859943501285394
+D_000052,Poodle,65,Advanced,Calm,Medium,Low,3.2697762324273927,0,White,Urban,1.6280411569101796
+D_000053,Labrador,158,Untrained,Energetic,Large,Medium,9.921264713522762,3,Asian,Urban,1.9446707546207778
+D_000054,German Shepherd,101,Intermediate,Friendly,Large,Low,8.675572874455385,4,Hispanic,Suburban,3.4871823328427136
+D_000055,German Shepherd,31,Advanced,Friendly,Small,Low,0.0317429818450321,1,White,Rural,2.176642539861148
+D_000056,Beagle,142,Intermediate,Friendly,Small,Low,9.053731882624273,2,Middle Eastern,Rural,2.2310642230343483
+D_000057,Golden Retriever,57,Intermediate,Friendly,Large,Medium,1.2729253309507838,2,Hispanic,Rural,0.8668792432926794
+D_000058,German Shepherd,35,Advanced,Energetic,Large,High,0.9101180688251698,4,White,Urban,2.336858626276594
+D_000059,Rottweiler,81,Untrained,Energetic,Medium,Medium,4.598510809004321,1,Hispanic,Urban,1.450406690339537
+D_000060,Golden Retriever,122,Advanced,Friendly,Medium,High,4.098384781095941,0,Black,Urban,2.872540156202109
+D_000061,Poodle,172,Advanced,Calm,Small,Medium,2.2495004387703386,3,Asian,Urban,1.9320032577116781
+D_000062,Labrador,136,Untrained,Aggressive,Medium,Medium,6.095685338984641,1,Black,Urban,1.2372110279600532
+D_000063,Labrador,128,Untrained,Shy,Medium,High,9.233846679907238,2,Middle Eastern,Rural,3.549154662226112
+D_000064,Rottweiler,16,Advanced,Shy,Large,High,2.564055930082839,0,Middle Eastern,Urban,1.8634220756853286
+D_000065,Bulldog,30,Advanced,Friendly,Medium,Low,4.975751441541355,1,Hispanic,Rural,1.8891917339534334
+D_000066,Labrador,88,Basic,Friendly,Medium,Medium,6.172910760526177,4,Middle Eastern,Suburban,1.774096142250982
+D_000067,Bulldog,107,Basic,Aggressive,Large,Low,7.6461873401361835,2,White,Suburban,3.6300601266152683
+D_000068,Siberian Husky,146,Basic,Friendly,Medium,Medium,6.87502092804416,3,Asian,Urban,3.9740645657684563
+D_000069,Poodle,164,Intermediate,Aggressive,Medium,High,8.947492209757982,3,Middle Eastern,Rural,3.7709532539014865
+D_000070,Bulldog,26,Basic,Shy,Medium,Medium,4.705050789923272,1,White,Urban,2.2936614644183093
+D_000071,Siberian Husky,29,Untrained,Energetic,Medium,Low,4.134732641219685,0,Asian,Urban,0.7574266764169773
+D_000072,Rottweiler,45,Advanced,Friendly,Large,High,6.141627026161989,0,White,Rural,1.735070726765169
+D_000073,Siberian Husky,88,Untrained,Calm,Medium,Medium,4.5591593702211375,0,Middle Eastern,Suburban,1.5799827415612093
+D_000074,Bulldog,62,Basic,Energetic,Medium,High,1.9301498540569861,4,Middle Eastern,Rural,3.04589052846083
+D_000075,Labrador,6,Basic,Friendly,Medium,High,1.6574901538845488,4,Asian,Rural,1.6421209006255744
+D_000076,Golden Retriever,179,Advanced,Energetic,Large,High,2.8721257112736156,1,Black,Urban,3.9038006875590994
+D_000077,Beagle,16,Basic,Calm,Large,High,2.423257302463214,1,White,Suburban,2.281512059189164
+D_000078,German Shepherd,12,Intermediate,Energetic,Small,High,4.5573581400848475,0,Hispanic,Rural,1.7745348668661194
+D_000079,Poodle,100,Advanced,Aggressive,Medium,Low,8.56568196489899,4,Asian,Rural,2.2222736528747613
+D_000080,Poodle,86,Untrained,Energetic,Small,High,0.18457225539944222,3,White,Urban,0.5537818775715315
+D_000081,Beagle,44,Advanced,Energetic,Medium,Low,2.8487120683547653,0,Native American,Suburban,1.1392806656032028
+D_000082,Beagle,21,Untrained,Shy,Small,Medium,0.4786559890610709,4,White,Urban,1.3827001771591951
+D_000083,Bulldog,83,Untrained,Shy,Small,Medium,4.824514703811175,2,White,Suburban,3.200004961475277
+D_000084,Rottweiler,101,Basic,Shy,Small,Medium,4.9383594065192336,1,Middle Eastern,Rural,1.611409801793683
+D_000085,Golden Retriever,155,Basic,Energetic,Medium,Medium,2.3226572579752522,2,Middle Eastern,Suburban,1.705534009499785
+D_000086,Rottweiler,75,Untrained,Shy,Large,Low,1.733731567575082,0,Black,Suburban,1.38350917935714
+D_000087,Bulldog,48,Untrained,Calm,Medium,Medium,4.108092623743414,2,Black,Rural,3.9521089479520453
+D_000088,German Shepherd,33,Advanced,Aggressive,Medium,High,5.959268121167338,4,Asian,Suburban,1.7473385066757088
+D_000089,Golden Retriever,24,Untrained,Aggressive,Large,High,7.003063538838071,3,Black,Suburban,0.9715215578173226
+D_000090,Golden Retriever,22,Basic,Calm,Medium,Medium,5.072039367678184,0,Asian,Urban,3.481428830866266
+D_000091,Poodle,21,Basic,Shy,Large,High,9.616667721824964,1,Native American,Suburban,0.6531804651941149
+D_000092,Rottweiler,144,Basic,Shy,Large,Medium,4.016905685616143,1,White,Rural,2.425135593495114
+D_000093,Beagle,150,Advanced,Energetic,Medium,Medium,9.791033942522734,1,Middle Eastern,Urban,3.500647382367435
+D_000094,Golden Retriever,7,Advanced,Shy,Large,Low,7.0872857990489955,3,Asian,Suburban,3.8233810298977815
+D_000095,Labrador,19,Basic,Friendly,Large,Low,1.962872001430761,1,Middle Eastern,Suburban,3.461011981890889
+D_000096,German Shepherd,60,Basic,Calm,Large,Medium,9.102217014103122,4,Asian,Rural,3.417388710403208
+D_000097,Golden Retriever,144,Advanced,Shy,Large,Medium,0.8077921387434361,3,Native American,Rural,2.930896909130459
+D_000098,Golden Retriever,122,Advanced,Calm,Medium,Low,0.7989368779136086,4,Middle Eastern,Suburban,2.9173380540355276
+D_000099,Golden Retriever,90,Advanced,Friendly,Small,Low,0.6616872172518085,1,Asian,Rural,1.5934206418787111
+D_000100,Siberian Husky,81,Untrained,Energetic,Large,Medium,2.999739081545325,0,Hispanic,Rural,1.9508229028656339
+D_000101,Poodle,77,Intermediate,Aggressive,Small,Medium,8.06899347919689,0,Native American,Suburban,2.6698820201199185
+D_000102,Bulldog,84,Basic,Friendly,Medium,Medium,4.651235991477796,1,Native American,Suburban,1.6368843841199414
+D_000103,Bulldog,79,Advanced,Calm,Medium,High,9.232088358721901,0,Native American,Rural,3.5553205564315067
+D_000104,Poodle,57,Intermediate,Aggressive,Small,High,0.5608016926367088,3,Black,Urban,2.678103747589925
+D_000105,Beagle,11,Intermediate,Energetic,Large,Low,9.491705051076304,2,Black,Rural,3.75190723441964
+D_000106,Rottweiler,77,Intermediate,Friendly,Medium,Low,1.8715219259893001,0,Asian,Rural,3.5056294071681218
+D_000107,Golden Retriever,44,Basic,Energetic,Medium,Medium,3.9478750917071395,4,Hispanic,Suburban,1.7386703918990056
+D_000108,Beagle,34,Basic,Energetic,Medium,Medium,6.57494229984942,1,Native American,Rural,1.8628539913369226
+D_000109,Golden Retriever,166,Advanced,Energetic,Medium,Medium,8.838293234754854,3,Hispanic,Suburban,2.492673206216329
+D_000110,Beagle,139,Untrained,Friendly,Small,Medium,2.998857400558049,3,Asian,Suburban,3.5451931758824897
+D_000111,Poodle,72,Untrained,Aggressive,Large,Low,1.749460136910298,0,White,Rural,1.7580575916378371
+D_000112,Rottweiler,117,Intermediate,Shy,Large,High,5.640849216886251,2,White,Urban,2.5693501701271493
+D_000113,Rottweiler,161,Intermediate,Energetic,Large,High,8.76918931870847,2,Black,Urban,0.8223409972668309
+D_000114,German Shepherd,95,Basic,Energetic,Small,High,4.663029899818976,4,Native American,Urban,3.7594331959046823
+D_000115,German Shepherd,15,Intermediate,Energetic,Large,High,6.658493646001281,0,Hispanic,Rural,2.111144446722415
+D_000116,German Shepherd,70,Untrained,Calm,Small,Medium,7.068194450101439,3,White,Rural,0.5548533086105403
+D_000117,German Shepherd,174,Advanced,Shy,Medium,Medium,6.304582972424243,3,Hispanic,Rural,3.8895094656236444
+D_000118,German Shepherd,54,Advanced,Shy,Small,Medium,4.611417778806999,0,Hispanic,Urban,1.8524544664070344
+D_000119,Rottweiler,162,Advanced,Calm,Medium,Low,1.3338123663774282,0,Middle Eastern,Suburban,0.962501823594512
+D_000120,German Shepherd,76,Basic,Friendly,Small,High,2.5256107126952543,1,White,Rural,1.3805963941768882
+D_000121,Bulldog,127,Basic,Shy,Large,Medium,2.2140990979318986,4,Middle Eastern,Rural,2.2825114673797415
+D_000122,Golden Retriever,115,Advanced,Shy,Large,Medium,0.455501559653525,3,Black,Rural,1.458448816847407
+D_000123,Beagle,79,Intermediate,Friendly,Large,Low,4.41848087173857,0,Middle Eastern,Rural,2.03990818464833
+D_000124,Poodle,5,Basic,Aggressive,Large,Low,9.528038482491732,0,Hispanic,Urban,2.1470713553062426
+D_000125,Rottweiler,17,Intermediate,Friendly,Medium,Low,7.313450951852715,3,Native American,Suburban,1.7355849427552938
+D_000126,Rottweiler,8,Intermediate,Shy,Large,High,5.323306025871027,1,Black,Urban,2.3180505614405122
+D_000127,Golden Retriever,140,Untrained,Friendly,Large,Low,4.234252316468348,3,Middle Eastern,Urban,2.3508182635486823
+D_000128,Siberian Husky,111,Untrained,Friendly,Small,High,3.6827032544512095,4,Hispanic,Rural,0.563552879624776
+D_000129,Beagle,136,Untrained,Calm,Medium,Medium,8.51282212216531,1,Asian,Rural,3.8214148273771538
+D_000130,Beagle,8,Intermediate,Friendly,Small,Medium,2.559849537907785,1,Black,Rural,3.1845438549326928
+D_000131,Rottweiler,115,Basic,Shy,Large,Low,4.6928227812024135,3,Asian,Suburban,3.2373150511826343
+D_000132,Labrador,151,Advanced,Friendly,Large,High,4.156610015004492,4,Asian,Rural,1.1287183923024926
+D_000133,Poodle,166,Advanced,Friendly,Large,Medium,3.2909588031475954,0,Middle Eastern,Rural,2.200371956011397
+D_000134,Siberian Husky,17,Untrained,Friendly,Medium,Medium,9.404013722621855,3,Middle Eastern,Rural,1.4801862196579476
+D_000135,Siberian Husky,127,Untrained,Aggressive,Large,Low,6.3381540622994486,1,Asian,Rural,2.3741040813576944
+D_000136,German Shepherd,88,Intermediate,Calm,Medium,Medium,8.343778636564078,3,Middle Eastern,Urban,1.1603530192981142
+D_000137,Rottweiler,7,Basic,Energetic,Small,Low,6.064577755435456,1,Native American,Urban,3.704155456507303
+D_000138,Golden Retriever,95,Intermediate,Friendly,Medium,Low,1.8059620790472364,1,Black,Rural,0.6539007456750919
+D_000139,Rottweiler,111,Intermediate,Calm,Small,Low,4.274228023694365,2,White,Urban,1.9050524224100134
+D_000140,German Shepherd,89,Basic,Friendly,Large,Medium,2.9671130852868477,2,Native American,Urban,2.7276474799253396
+D_000141,Siberian Husky,12,Intermediate,Calm,Small,High,8.346685217897052,4,Asian,Rural,2.2857557692744144
+D_000142,Rottweiler,130,Intermediate,Energetic,Large,Medium,2.3096634821603157,4,White,Rural,2.8392782930665157
+D_000143,Poodle,40,Intermediate,Shy,Small,High,3.6109964062646682,0,Asian,Rural,3.9407815608355015
+D_000144,Labrador,41,Intermediate,Shy,Small,Low,3.768355610161657,0,Middle Eastern,Suburban,1.4557850761246143
+D_000145,Labrador,21,Advanced,Aggressive,Large,Medium,7.267348363533426,3,Asian,Urban,1.2156335206915143
+D_000146,Beagle,178,Basic,Shy,Medium,High,1.137624624806518,2,Middle Eastern,Urban,1.4857855338956234
+D_000147,Rottweiler,158,Intermediate,Energetic,Medium,Medium,2.4531049798597993,3,Native American,Urban,3.5790218657107555
+D_000148,German Shepherd,60,Intermediate,Friendly,Medium,Medium,4.403517738932523,2,Native American,Urban,1.61278765397388
+D_000149,Siberian Husky,119,Intermediate,Energetic,Large,Low,0.11199305255704117,0,White,Urban,1.5807721043020857
+D_000150,Beagle,67,Basic,Friendly,Medium,Medium,7.2454067406098135,2,Native American,Urban,3.8399045453035847
+D_000151,Siberian Husky,176,Untrained,Shy,Medium,High,9.448354530207373,1,Asian,Urban,2.8251719556179724
+D_000152,Rottweiler,55,Intermediate,Calm,Medium,Low,5.790725276859945,4,Middle Eastern,Urban,3.8081600291584055
+D_000153,German Shepherd,61,Intermediate,Calm,Medium,Medium,0.27631832855930627,2,White,Suburban,2.9109815180523273
+D_000154,Bulldog,63,Untrained,Calm,Medium,Medium,3.1265631435521946,2,Black,Rural,3.100506714823318
+D_000155,Siberian Husky,12,Advanced,Friendly,Medium,High,3.631287104896359,0,Asian,Rural,2.032757673465798
+D_000156,Labrador,55,Untrained,Shy,Small,Medium,0.04373982283009337,2,Asian,Rural,0.8868947754585736
+D_000157,Rottweiler,105,Intermediate,Energetic,Large,Medium,4.288543613066384,2,Native American,Rural,1.3543310037241083
+D_000158,Rottweiler,40,Untrained,Calm,Small,Low,9.217274205310659,1,Native American,Suburban,3.2937741355580465
+D_000159,German Shepherd,142,Advanced,Calm,Medium,Medium,8.829754998308971,3,Hispanic,Suburban,1.197725451306402
+D_000160,German Shepherd,19,Basic,Energetic,Medium,High,7.247042751485582,0,Middle Eastern,Urban,3.3613634558534224
+D_000161,Rottweiler,33,Intermediate,Energetic,Large,Low,1.6979263955094737,4,Middle Eastern,Suburban,3.257526518549404
+D_000162,Bulldog,145,Basic,Aggressive,Large,Low,5.45488148056962,0,Black,Urban,1.9741698293888676
+D_000163,Bulldog,145,Untrained,Energetic,Small,High,5.811062446978964,0,Hispanic,Suburban,0.9187065383062462
+D_000164,Bulldog,26,Basic,Calm,Small,Low,0.8786633093194274,2,White,Rural,2.5809253540076567
+D_000165,Bulldog,87,Intermediate,Shy,Medium,Low,9.41904972838329,3,Native American,Suburban,0.7786568796460323
+D_000166,Siberian Husky,99,Untrained,Friendly,Large,Low,4.752929765655082,3,Hispanic,Urban,3.9279695559824828
+D_000167,German Shepherd,115,Untrained,Calm,Medium,High,4.262314582647643,3,Native American,Urban,0.8460556010670597
+D_000168,Beagle,135,Basic,Aggressive,Small,Medium,5.5419369661539815,2,Middle Eastern,Rural,1.9511702183876725
+D_000169,Golden Retriever,81,Untrained,Energetic,Small,Medium,6.218819638903935,0,Middle Eastern,Suburban,0.8524276038633108
+D_000170,Bulldog,30,Basic,Friendly,Medium,Low,8.693401079073551,3,Hispanic,Urban,1.8735815970397778
+D_000171,Bulldog,97,Untrained,Shy,Large,Low,6.863722327726434,2,Black,Rural,1.0404523051899732
+D_000172,Labrador,81,Advanced,Shy,Medium,Low,9.879929924466168,3,Native American,Urban,3.401139891915572
+D_000173,Rottweiler,38,Advanced,Shy,Large,High,8.89185699840876,1,Hispanic,Rural,1.9031595290269412
+D_000174,Poodle,86,Untrained,Energetic,Small,Low,2.936764133584362,1,Middle Eastern,Rural,2.411086076622626
+D_000175,Bulldog,32,Untrained,Aggressive,Small,Medium,2.707337324217325,4,White,Urban,3.595737871778522
+D_000176,Bulldog,145,Advanced,Energetic,Medium,Medium,1.6039387500614521,0,Asian,Rural,2.6742005061146377
+D_000177,Rottweiler,4,Basic,Aggressive,Small,Medium,6.277004136007399,3,Middle Eastern,Rural,3.775288943134085
+D_000178,German Shepherd,47,Advanced,Energetic,Medium,Low,3.6790292528627564,2,White,Urban,3.8999064701302615
+D_000179,Bulldog,72,Advanced,Shy,Medium,Low,3.9295880663668226,1,Hispanic,Suburban,2.413754936898993
+D_000180,Siberian Husky,57,Basic,Calm,Large,Medium,0.7305864603278145,3,White,Suburban,2.644802002476458
+D_000181,Poodle,85,Advanced,Energetic,Small,High,1.8029013061564059,0,Middle Eastern,Suburban,3.1637113438861664
+D_000182,Labrador,17,Untrained,Energetic,Large,Low,4.903504410556608,4,White,Urban,1.3879389049853377
+D_000183,German Shepherd,97,Basic,Friendly,Large,Low,3.43707092135618,0,Hispanic,Rural,0.8507988982500949
+D_000184,Poodle,176,Basic,Calm,Large,High,0.367777927330899,2,Black,Urban,3.81778071232878
+D_000185,Beagle,54,Basic,Aggressive,Medium,Medium,0.23287079442581904,4,Asian,Suburban,2.82318357642595
+D_000186,Bulldog,144,Intermediate,Shy,Large,Low,9.6146745905101,0,Middle Eastern,Rural,2.3024293372692064
+D_000187,Labrador,32,Intermediate,Shy,Large,Low,9.499550093322041,1,Asian,Urban,3.619419271203894
+D_000188,Labrador,88,Intermediate,Aggressive,Medium,Low,8.384127311673709,3,Black,Urban,3.29637715886811
+D_000189,Siberian Husky,101,Basic,Energetic,Large,High,5.517792837256954,0,Hispanic,Rural,2.6064796291623145
+D_000190,Beagle,140,Intermediate,Energetic,Small,Medium,2.8157428585553026,2,Native American,Urban,0.5787231537243918
+D_000191,Poodle,40,Advanced,Shy,Medium,Low,1.2271044393018116,2,Native American,Suburban,0.8505926418306546
+D_000192,Rottweiler,76,Advanced,Calm,Medium,High,2.5214226066465226,2,Native American,Urban,0.7588711554483458
+D_000193,German Shepherd,95,Advanced,Shy,Medium,Low,9.502840501704856,1,Asian,Urban,3.348390650345465
+D_000194,Bulldog,161,Untrained,Friendly,Large,Medium,7.951407225115224,4,Hispanic,Suburban,1.5689368584003023
+D_000195,Bulldog,54,Untrained,Aggressive,Large,Low,0.28483810549271515,4,White,Rural,1.315402742273137
+D_000196,Labrador,16,Basic,Aggressive,Small,High,5.341016900858655,0,Middle Eastern,Suburban,3.6044547433316194
+D_000197,Rottweiler,11,Basic,Friendly,Small,Low,8.129048307527992,1,Hispanic,Urban,0.8434160586517936
+D_000198,Beagle,156,Untrained,Shy,Small,Medium,8.85119320907646,4,Asian,Rural,3.6548539988373
+D_000199,Beagle,87,Advanced,Aggressive,Small,High,1.066192728054235,1,Middle Eastern,Suburban,0.7442502440016266
