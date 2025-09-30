@@ -137,7 +137,7 @@ data/processed/
 models/*.pkl
 models/*.joblib
 reports/figures/
-*.csv
+# *.csv
 *.json
 !data/sample_data.json
 
@@ -153,6 +153,6 @@ reports/figures/
 Thumbs.db
 
 # Project specific
-# data/README.md
+data/README.md
 # models/
-# reports/
+reports/
