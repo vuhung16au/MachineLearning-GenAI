@@ -101,7 +101,7 @@ The-Bark-Bias-Cure/
 - Python 3.9+
 - `uv` package manager (recommended) or `pip`
 
-### Installation
+### Installation with uv (Recommended)
 
 1. **Clone the repository**
    ```bash
@@ -109,46 +109,91 @@ The-Bark-Bias-Cure/
    cd The-Bark-Bias-Cure
    ```
 
-2. **Install dependencies using uv (recommended)**
+2. **Create virtual environment and install dependencies**
    ```bash
-   uv venv
+   # Create virtual environment
+   uv venv .venv
+   
+   # Activate virtual environment
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   uv pip install -e .
+   
+   # Install all dependencies
+   uv sync
    ```
 
-   **Or using pip**
+3. **Install Jupyter kernel (for notebook support)**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -e .
+   # Make sure virtual environment is activated
+   source .venv/bin/activate
+   
+   # Install Jupyter kernel
+   python -m ipykernel install --user --name=the-bark-bias-cure --display-name="The Bark Bias Cure"
    ```
+
+### Alternative Installation with pip
+
+If you prefer using pip:
+
+```bash
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -e .
+```
 
 ### Quick Start
 
-1. **Generate the dataset**
+1. **Activate virtual environment** (if not already active)
+   ```bash
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. **Generate the dataset**
    ```bash
    python utils/generate_data.py
    ```
 
-2. **Train the model**
+3. **Train the model**
    ```bash
    python utils/train_model.py
    ```
 
-3. **Evaluate the model**
+4. **Evaluate the model**
    ```bash
    python utils/evaluate_model.py
    ```
 
-4. **Generate awareness content**
+5. **Generate awareness content**
    ```bash
    python utils/raise_awareness.py
    ```
 
-5. **Run the Jupyter notebook**
+6. **Run the Jupyter notebook**
    ```bash
-   jupyter notebook notebooks/dog_behavior_analysis.ipynb
+   # Start Jupyter Lab (recommended)
+   jupyter lab
+   
+   # Or start Jupyter Notebook
+   jupyter notebook
+   
+   # Then open: notebooks/dog_behavior_analysis.ipynb
+   # Make sure to select the "The Bark Bias Cure" kernel
    ```
+
+### Running the Notebook
+
+The notebook (`notebooks/dog_behavior_analysis.ipynb`) contains the complete analysis pipeline:
+
+1. **Data Generation**: Creates synthetic dog behavior dataset with bias patterns
+2. **Exploratory Data Analysis**: Visualizes bias patterns across different groups
+3. **Model Training**: Trains XGBoost classifier to predict dog behavior
+4. **Bias Analysis**: Evaluates model performance across demographic groups
+5. **Fairness Metrics**: Calculates statistical parity and equalized odds
+6. **Findings & Conclusions**: Summarizes key insights and implications
+
+**Important**: Make sure to select the "The Bark Bias Cure" kernel when running the notebook to ensure all dependencies are available.
 
 ## 🔬 Methodology
 
