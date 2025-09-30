@@ -57,5 +57,5 @@ venv/
 ENV/
 
 # Project specific
-results/
+# results/
 Prompt.md
