@@ -6,6 +6,9 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 RESULTS_CSV="$REPO_ROOT/results/benchmark_results.csv"
 LOG_DIR="$REPO_ROOT/results/logs"
 
+# Default number of iterations
+ITERATIONS="${ITERATIONS:-3}"
+
 # Default Python versions (Homebrew paths)
 PYTHONS=(
   "/opt/homebrew/bin/python3.9"
@@ -62,14 +65,23 @@ if [ ! -s "$RESULTS_CSV" ]; then
   echo "timestamp,manager,python,scenario,success,elapsed_seconds,log_path" >"$RESULTS_CSV"
 fi
 
+echo "Running benchmarks with $ITERATIONS iterations per Python version..."
+
 for py in "${PYTHONS[@]}"; do
   if [ ! -x "$py" ]; then
     echo "Skipping missing python: $py" >&2
     continue
   fi
-  for manager in pip uv; do
-    echo "Running $manager on $py ..."
-    run_case "$manager" "$py"
+  
+  py_id="$($py -c 'import sys; v=sys.version_info; print(f"{v.major}.{v.minor}")' 2>/dev/null || echo "unknown")"
+  echo "Testing Python $py_id ($py) with $ITERATIONS iterations..."
+  
+  for iteration in $(seq 1 $ITERATIONS); do
+    echo "  Iteration $iteration/$ITERATIONS"
+    for manager in pip uv; do
+      echo "    Running $manager on $py (iteration $iteration/$ITERATIONS)..."
+      run_case "$manager" "$py"
+    done
   done
 done
 
