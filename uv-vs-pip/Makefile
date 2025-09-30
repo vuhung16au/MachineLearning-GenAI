@@ -1,4 +1,4 @@
-.PHONY: help all bench benchmark gen generate-report clean python39 python310 python311 python312 python313
+.PHONY: help all bench benchmark gen generate-report clean clean-caches python39 python310 python311 python312 python313
 
 help:
 	@echo "Targets:"
@@ -6,13 +6,14 @@ help:
 	@echo "  make bench | benchmark        # Run benchmarks"
 	@echo "  make gen   | generate-report  # Generate Markdown report from CSV"
 	@echo "  make clean                    # Remove venvs and results"
+	@echo "  make clean-caches             # Clear pip and uv caches"
 	@echo "  make python39                 # Run benchmarks only on Python 3.9"
 	@echo "  make python310                # Run benchmarks only on Python 3.10"
 	@echo "  make python311                # Run benchmarks only on Python 3.11"
 	@echo "  make python312                # Run benchmarks only on Python 3.12"
 	@echo "  make python313                # Run benchmarks only on Python 3.13"
 
-all: clean python39 python310 python311 python312 python313 gen
+all: clean clean-caches python39 python310 python311 python312 python313 gen
 
 bench: 
 	@chmod +x scripts/run_benchmarks.sh
@@ -33,6 +34,13 @@ clean:
 	- rm -rf results/* 2>/dev/null || true
 	mkdir -p results/logs
 	[ -f results/logs/.gitkeep ] || echo "placeholder" > results/logs/.gitkeep
+
+clean-caches:
+	@echo "Clearing pip cache..."
+	- python3 -m pip cache purge 2>/dev/null || true
+	@echo "Clearing uv cache..."
+	- uv cache clean 2>/dev/null || true
+	@echo "Cache cleanup completed."
 
 python39:
 	@chmod +x scripts/run_benchmarks.sh

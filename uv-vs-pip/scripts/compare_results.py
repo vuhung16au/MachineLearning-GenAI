@@ -129,7 +129,7 @@ def make_markdown(rows):
     lines.append("")
     lines.append("## System Information")
     lines.append("")
-    lines.append(f"- **OS**: {os} {version}".format(os=platform.system(), version=platform.release()))
+    lines.append(f"- **OS**: {platform.system()} {platform.release()}")
     lines.append(f"- **Architecture**: {platform.machine()}")
     lines.append(f"- **Python**: {platform.python_version()}")
     
