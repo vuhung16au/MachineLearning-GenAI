@@ -217,13 +217,30 @@ def analyze_bias_patterns(df: pd.DataFrame, model_results: Dict[str, Any]):
     # Analyze by race
     print("\nBarking predictions by race:")
     race_analysis = df.groupby('human_race')['barks'].agg(['count', 'sum', 'mean'])
-    race_analysis['prediction_rate'] = df.groupby('human_race').apply(
-        lambda x: model_results['model'].predict_proba(
-            model_results['scaler'].transform(
-                model_results['model'].get_booster().get_dump()
-            )
-        )[:, 1].mean() if len(x) > 0 else 0
-    )
+
+    # Prepare features for a subgroup using the saved preprocessing artifacts
+    def _prepare_with_model_results(sub_df: pd.DataFrame):
+        X_sub = sub_df.copy()
+        feature_columns = model_results['feature_columns']
+        label_encoders: Dict[str, Any] = model_results['label_encoders']
+        # Encode with existing encoders
+        for col, enc in label_encoders.items():
+            if col in X_sub.columns:
+                X_sub[col] = enc.transform(X_sub[col].astype(str))
+        # Impute and order columns
+        X_sub[feature_columns] = X_sub[feature_columns].fillna(X_sub[feature_columns].median())
+        return model_results['scaler'].transform(X_sub[feature_columns])
+
+    prediction_rates: Dict[str, float] = {}
+    for race, group in df.groupby('human_race'):
+        if len(group) == 0:
+            prediction_rates[race] = 0.0
+            continue
+        X_group = _prepare_with_model_results(group)
+        proba = model_results['model'].predict_proba(X_group)[:, 1]
+        prediction_rates[race] = float((proba >= 0.5).mean())
+
+    race_analysis['prediction_rate'] = race_analysis.index.map(lambda r: prediction_rates.get(r, 0.0))
     
     for race in race_analysis.index:
         actual_rate = race_analysis.loc[race, 'mean']
