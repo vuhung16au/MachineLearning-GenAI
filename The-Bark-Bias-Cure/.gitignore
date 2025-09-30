@@ -137,7 +137,7 @@ data/processed/
 models/*.pkl
 models/*.joblib
 reports/figures/
-# *.csv
+*.csv
 *.json
 !data/sample_data.json
 
