@@ -151,3 +151,8 @@ reports/figures/
 # OS
 .DS_Store
 Thumbs.db
+
+# Project specific
+# data/README.md
+# models/
+reports/
