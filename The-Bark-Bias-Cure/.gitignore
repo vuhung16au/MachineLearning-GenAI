@@ -156,3 +156,10 @@ Thumbs.db
 data/README.md
 # models/
 reports/
+
+
+#Ignore cursor AI rules
+.cursor/rules/codacy.mdc
+data/
+reports/
+models/
