@@ -13,7 +13,7 @@
     "axios": "^1.6.2",
     "cookies-next": "^4.1.1",
     "js-cookie": "^3.0.5",
-    "next": "^14.2.28",
+    "next": "^15.5.18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -24,10 +24,9 @@
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.0.4",
-    "postcss": "^8.4.32",
-    "// tailwindcss: latest stable version": "",
-    "tailwindcss": "^3.4.1", 
+    "eslint-config-next": "^15.5.18",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
 }
