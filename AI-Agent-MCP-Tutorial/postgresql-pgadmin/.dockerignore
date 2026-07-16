@@ -1,0 +1,11 @@
+# Docker build context exclusions
+.git/
+.gitignore
+.gitattributes
+.env*
+*.md
+node_modules/
+__pycache__/
+*.pyc
+.venv*
+.DS_Store

@@ -7,7 +7,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 export async function POST(request: Request) {
   try {
     const requestData = await request.json();
-    console.log('Request data received:', requestData);
+    console.log('Translation request: sourceLanguage=%s, targetLanguage=%s, model=%s, textLength=%d',
+      sourceLanguage, targetLanguage, model, sourceText?.length || 0);
     
     const { 
       sourceText, 
@@ -37,15 +38,15 @@ export async function POST(request: Request) {
 Return ONLY the translated text without any additional explanations or quotation marks:
 "${sourceText}"`;
     
-    console.log('Sending prompt to Gemini:', prompt);
-    console.log('Using model:', model);
+    console.log('Sending prompt to Gemini: source=%s → target=%s, model=%s, length=%d',
+      sourceLanguage, targetLanguage, model, sourceText?.length || 0);
     
     const result = await modelInstance.generateContent(prompt);
     const response = await result.response;
     let translatedText = response.text().trim();
     
     // Log the raw response for debugging
-    console.log('Raw Gemini response:', translatedText);
+    console.log('Translation response received, length=%d', translatedText?.length || 0);
     
     // Clean up the response if needed (removing quotes or explanations)
     translatedText = translatedText
@@ -53,7 +54,7 @@ Return ONLY the translated text without any additional explanations or quotation
       .replace(/^Translation:?\s*/i, '') // Remove "Translation:" prefix if present
       .trim();
     
-    console.log('Final translated text:', translatedText);
+    console.log('Translation complete, output length=%d', translatedText?.length || 0);
 
     return NextResponse.json({ translatedText });
   } catch (error) {

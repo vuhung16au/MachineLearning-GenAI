@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove quantity from preferences
       };
       
-      document.cookie = `pwdGenPrefs=${JSON.stringify(preferences)}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/`;
+      document.cookie = `pwdGenPrefs=${encodeURIComponent(JSON.stringify(preferences))}; expires=${new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()}; path=/PasswordGenerator; SameSite=Strict; Secure`;
     }
   }
   
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const cookie = cookies[i].trim();
       if (cookie.startsWith('pwdGenPrefs=')) {
         try {
-          const preferences = JSON.parse(cookie.substring('pwdGenPrefs='.length));
+          const preferences = JSON.parse(decodeURIComponent(cookie.substring('pwdGenPrefs='.length)));
           
           passwordLengthSelect.value = preferences.passwordLength || 16;
           includeNumbersCheck.checked = preferences.includeNumbers !== false;

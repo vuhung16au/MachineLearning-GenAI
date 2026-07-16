@@ -1,7 +1,7 @@
-genai_processors
-google-genai
-streamlit
-httpx
-termcolor
-python-dotenv
-asyncio
+genai_processors>=0.1.0
+google-genai>=0.8.0
+streamlit>=1.28.0
+httpx>=0.25.0
+termcolor>=2.3.0
+python-dotenv>=1.0.0
+asyncio>=3.4.3

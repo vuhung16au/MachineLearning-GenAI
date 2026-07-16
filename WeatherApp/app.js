@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const suggestionsContainer = document.querySelector(".suggestions");
   const citiesContainer = document.querySelector(".cities-container");
   
-  const API_KEY = "REDACTED_API_KEY";
+  const API_KEY = (window.WEATHER_CONFIG && window.WEATHER_CONFIG.API_KEY) || '';
   const DEFAULT_CITY = "Sydney";
   const REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes in milliseconds
   
@@ -231,6 +231,13 @@ document.addEventListener("DOMContentLoaded", () => {
     return placeholder;
   };
   
+  // HTML-escape values from API responses before injecting into DOM
+  const escapeHtml = (str) => {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   // Create HTML for a weather card
   const createWeatherCard = (data, isNewCity = false) => {
     const card = document.createElement('div');
@@ -273,7 +280,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const uviDesc = getUVDescription(uvi);
     const aqi = data.airQuality?.list[0]?.main?.aqi || 0;
     const aqiDesc = getAQIDescription(aqi);
-    
+
+    const safeCityName = escapeHtml(data.cityName || data.name);
+    const safeCountry = escapeHtml(data.country || data.sys.country);
+    const safeDescription = escapeHtml(current.weather[0].description);
+
     // Use template literals for better readability and performance
     card.innerHTML = `
       <div class="card-actions">
@@ -285,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="time">${timeString}</div>
           <div class="date">${dateString}</div>
         </div>
-        <h2 class="city-name">${data.cityName || data.name}, ${data.country || data.sys.country}</h2>
+        <h2 class="city-name">${safeCityName}, ${safeCountry}</h2>
       </div>
       
       <div class="main-weather">
@@ -296,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="temp-details">
             <h2 class="temp">${Math.round(current.main.temp)}°C</h2>
             <div class="feels-like">Feels like ${feelsLike}°C</div>
-            <div class="weather-desc">${current.weather[0].description}</div>
+            <div class="weather-desc">${safeDescription}</div>
           </div>
         </div>
         

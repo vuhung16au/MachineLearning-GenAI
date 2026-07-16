@@ -4,7 +4,7 @@ setup(
     name='speech-recognition-project',
     version='0.1.0',
     author='Vu Hung',
-    author_email='vuhung16plus+python@gmail.com',
+    author_email='vuhung16plus+python@gmail.com',  # TODO: replace with project email
     description='A project for recognizing speech from audio files using pocketsphinx.',
     packages=find_packages(where='src'),
     package_dir={'': 'src'},

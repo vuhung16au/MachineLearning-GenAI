@@ -87,34 +87,27 @@ function initAnimation() {
     let currentFunction;
     
     function parseFunction(expression) {
-        // Replace LaTeX-style math with JavaScript syntax
-        let jsExpression = expression
-            .replace(/\\sqrt\{([^}]*)\}/g, 'Math.sqrt($1)')  // \sqrt{x} -> Math.sqrt(x)
-            .replace(/\\sqrt([a-z])/g, 'Math.sqrt($1)')     // \sqrt x -> Math.sqrt(x)
-            .replace(/\\sin\{([^}]*)\}/g, 'Math.sin($1)')    // \sin{x} -> Math.sin(x)
-            .replace(/\\sin([a-z])/g, 'Math.sin($1)')       // \sin x -> Math.sin(x)
-            .replace(/\\cos\{([^}]*)\}/g, 'Math.cos($1)')    // \cos{x} -> Math.cos(x)
-            .replace(/\\cos([a-z])/g, 'Math.cos($1)')       // \cos x -> Math.cos(x)
-            .replace(/\\tan\{([^}]*)\}/g, 'Math.tan($1)')    // \tan{x} -> Math.tan(x)
-            .replace(/\\tan([a-z])/g, 'Math.tan($1)')       // \tan x -> Math.tan(x)
-            .replace(/\\ln\{([^}]*)\}/g, 'Math.log($1)')     // \ln{x} -> Math.log(x)
-            .replace(/\\ln([a-z])/g, 'Math.log($1)')        // \ln x -> Math.log(x)
-            .replace(/(\d*|\))[ ]*\^[ ]*(\d+|[a-z]|\{[^}]*\})/g, 'Math.pow($1,$2)')  // x^2 -> Math.pow(x,2)
-            .replace(/([a-z])[ ]*\^[ ]*(\d+|[a-z]|\{[^}]*\})/g, 'Math.pow($1,$2)');  // x^y -> Math.pow(x,y)
-        
-        // Handle multiplication (implicit in math notation)
-        jsExpression = jsExpression.replace(/(\d+)([a-z])/g, '$1*$2');
-        
-        console.log('Parsed expression:', jsExpression);
-        
-        // Create a function that evaluates the expression
-        try {
-            return new Function('x', `return ${jsExpression};`);
-        } catch (error) {
-            console.error('Error parsing function:', error);
-            // Return default function
-            return function(x) { return x * x; };
+        const trimmed = expression.trim();
+        // Safe function lookup — no dynamic code execution
+        const safeFuncs = {
+            'x^2':  x => x * x,
+            'x^3':  x => x * x * x,
+            'x^4':  x => { const x2 = x * x; return x2 * x2; },
+            'x':    x => x,
+            'x^2 + 1': x => x * x + 1,
+            'x^3 + 1': x => x * x * x + 1,
+            '1':    () => 1,
+            '2':    () => 2,
+        };
+        if (safeFuncs[trimmed]) return safeFuncs[trimmed];
+        // For other simple polynomial patterns: x^n
+        const powMatch = trimmed.match(/^x\^(\d+)$/);
+        if (powMatch) {
+            const n = parseInt(powMatch[1], 10);
+            if (n >= 0 && n <= 10) return x => Math.pow(x, n);
         }
+        console.warn('Unsupported expression, using x^2 as fallback:', trimmed);
+        return function(x) { return x * x; };
     }
     
     // Try to calculate exact value for common functions
